@@ -1,0 +1,119 @@
+#########################
+##### Media Players #####
+#########################
+
+media_player.oled65:
+  icon: mdi:television
+  device_class: tv
+
+media_player.oled77:
+  icon: mdi:television
+  device_class: tv
+
+#############################  
+##### Room Light Groups #####
+#############################
+
+group.backyard_lights:
+  icon: mdi:tree
+
+group.family_room_lights:
+  icon: mdi:table-chair
+
+group.hallway_lights:
+  icon: mdi:ceiling-light
+
+group.jordans_room_lights:
+  icon: mdi:bed
+
+group.kitchen_lights:
+  icon: mdi:stove
+
+group.lorens_room_lights:
+  icon: mdi:bed
+
+group.ryans_bathroom_lights:
+  icon: mdi:toilet
+
+group.ryans_room_lights:
+  icon: mdi:bed
+
+group.upstairs_hallway_lights:
+  icon: mdi:ceiling-light 
+
+group.living_room_lights:
+  icon: mdi:sofa
+
+###################  
+##### Sensors #####
+###################
+
+##### Temperature Sensors #####
+
+sensor.ryans_room_temperature_aggregate:
+  icon: mdi:thermometer
+
+sensor.ryans_bathroomroom_temperature_aggregate:
+  icon: mdi:thermometer
+
+sensor.backyard_temperature_aggregate:
+  icon: mdi:thermometer
+
+sensor.family_room_temperature_aggregate:
+  icon: mdi:thermometer
+
+sensor.garage_temperature_aggregate:
+  icon: mdi:thermometer
+
+sensor.hallway_temperature_aggregate:
+  icon: mdi:thermometer
+
+sensor.kitchen_temperature_aggregate:
+  icon: mdi:thermometer
+
+sensor.livingroom_temperature_aggregate:
+  icon: mdi:thermometer
+
+sensor.upstairs_hallway_temperature_aggregate:
+  icon: mdi:thermometer
+
+
+##### Humidity Sensors #####
+
+sensor.ryans_room_humidity_aggregate:
+  icon: mdi:water-percent
+
+sensor.ryans_bathroom_humidity_aggregate:
+  icon: mdi:water-percent
+
+sensor.backyard_humidity_aggregate:
+  icon: mdi:water-percent
+
+sensor.family_room_humidity_aggregate:
+  icon: mdi:water-percent
+
+sensor.garage_humidity_aggregate:
+  icon: mdi:water-percent
+
+sensor.hallway_humidity_aggregate:
+  icon: mdi:water-percent
+
+sensor.kitchen_humidity_aggregate:
+  icon: mdi:water-percent
+
+sensor.livingroom_humidity_aggregate:
+  icon: mdi:water-percent
+
+sensor.upstairs_hallway_humidity_aggregate:
+  icon: mdi:water-percent
+
+################  
+##### Misc #####
+################
+
+group.bluetooth_scanners:
+   icon: mdi:bluetooth
+
+group.house:
+  icon: mdi:home-outline
+

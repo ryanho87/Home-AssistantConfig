@@ -1,0 +1,85 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+homeassistant:
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  name: !secret home_name
+  temperature_unit: F
+  time_zone: America/Los_Angeles
+  unit_system: imperial
+  customize: !include customize.yaml
+
+lovelace: !include lovelace.yaml
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+intent:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+
+################################
+##### GENERIC INTEGRATIONS #####
+################################
+
+vacuum: !include vacuums.yaml
+
+cover: !include covers.yaml
+
+light: !include lights.yaml
+
+sensor: !include sensors.yaml
+
+binary_sensor: !include binary_sensors.yaml
+
+device_tracker: !include device_trackers.yaml 
+
+mqtt:
+  discovery: true
+  broker: 10.0.0.7
+
+camera: !include cameras.yaml
+
+###############################
+##### VENDOR INTEGRATIONS #####
+###############################
+
+tplink: !include tplink.yaml
+
+ecobee:
+  api_key: !secret ecobee_api_key
+
+dyson: !include dyson.yaml
+
+eufy:
+  username: !secret eufy_user
+  password: !secret eufy_password
+
+influxdb: !include influxdb.yaml
+
+webostv: !include webostv.yaml
+
+wemo: !include wemo.yaml
+
+homekit: !include homekit.yaml
+
+sense:
+  email: !secret sense_user
+  password: !secret sense_password
+
+#hydrawise:
+  #access_token: !secret hydrawise_api_key
+
+ios: !include ios.yaml
+

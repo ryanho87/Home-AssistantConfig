@@ -1,0 +1,382 @@
+- id: '1604219828435'
+  alias: Turn on Ryan's Bathroom
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: b8de143b26ec540d58f194b1e8d515f5
+    entity_id: binary_sensor.ryans_bathroom_motion_sensor
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.ryans_bathroom_lights
+  mode: single
+- id: '1604219907607'
+  alias: Turn off Ryan's Bathroom
+  description: ''
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: b8de143b26ec540d58f194b1e8d515f5
+    entity_id: binary_sensor.ryans_bathroom_motion_sensor
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  - platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: TURN_OFF
+  - platform: state
+    entity_id: binary_sensor.ryans_bathroom_occupancy_aggregate
+    to: 'off'
+    for: 00:05:00
+  condition:
+  - condition: state
+    entity_id: binary_sensor.ryans_bathroom_occupancy_aggregate
+    state: 'off'
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.ryans_bathroom_lights
+  mode: single
+- id: '1604219970463'
+  alias: Turn on Ryan's Room
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 150545a2a90ecfe0270099275ca8acbe
+    entity_id: binary_sensor.ryans_room_motion_sensor
+    domain: binary_sensor
+  - platform: state
+    entity_id: binary_sensor.ryans_room_occupancy
+    to: 'on'
+    from: 'off'
+  condition:
+  - type: is_motion
+    condition: device
+    device_id: adee2ad14ebc69981746fab1e2460523
+    entity_id: binary_sensor.upstairs_hallway_motion_sensor
+    domain: binary_sensor
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: ' group.ryans_room'
+  mode: single
+- id: '1604220043149'
+  alias: Turn On Upstairs Hallway
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: adee2ad14ebc69981746fab1e2460523
+    entity_id: binary_sensor.upstairs_hallway_motion_sensor
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.upstairs_hallway_lights
+  mode: single
+- id: '1604220092908'
+  alias: Turn off Upstairs Hallway
+  description: ''
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: adee2ad14ebc69981746fab1e2460523
+    entity_id: binary_sensor.upstairs_hallway_motion_sensor
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.upstairs_hallway_lights
+  mode: single
+- id: '1604281809997'
+  alias: Turn off Snake Lights
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: switch.snake_lights
+  mode: single
+- id: '1604308005885'
+  alias: Tag Ryan’s Nightstand is scanned
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: fa39ea3c-2ccd-4625-bead-244109b7d2d6
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.ryans_room_lights
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.ryans_bathroom_lights
+  mode: single
+- id: '1604457926934'
+  alias: Turn off Ryan's Room
+  description: ''
+  trigger:
+  - platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: TURN_OFF
+  - platform: state
+    to: 'off'
+    entity_id: binary_sensor.ryans_room_occupancy_aggregate
+    for: 00:05
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.ryans_room_lights
+  - service: notify.mobile_app_icetray
+    data:
+      title: Auto-turning off Ryan's Room
+  mode: single
+- id: '1604474502214'
+  alias: Ryan's Room Energy Saver (Notify)
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: /5
+  condition:
+  - condition: state
+    entity_id: group.ryans_room
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.ryans_room_occupancy
+    state: 'off'
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Room On Alert
+      message: Ryan's Room is on
+      data:
+        push:
+          category: room_on
+        action_data:
+          entity_id: group.ryans_room_lights
+        apns_headers:
+          apns-collapse-id: ryans-room-on
+  mode: single
+- id: '1604564108494'
+  alias: Turn off OLED Lights
+  description: Turn off OLED Lights if OLED77 is turned off
+  trigger:
+  - platform: state
+    entity_id: media_player.oled77
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id:
+    - light.oled_right
+    - light.oled_left
+  mode: single
+- id: '1604564284068'
+  alias: Living Room On Alert
+  description: send a notification if the living room is on and there is no occupancy
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.living_room_occupancy
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: group.living_room_lights
+    state: 'on'
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Room On Alert
+      message: Living Room is on and there is no occupancy
+      data:
+        push:
+          category: room_on
+        action_data:
+          entity_id: group.living_room_lights
+  mode: single
+- id: '1604738750827'
+  alias: Turn off Bluetooth scanning
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.house
+    to: 'off'
+    from: 'on'
+    for: 15 minutes
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.bluetooth_scanners
+  mode: single
+- id: '1604738783049'
+  alias: Turn on Bluetooth scanning
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.house
+    to: 'on'
+    from: 'off'
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.bluetooth_scanners
+  mode: single
+- id: '1605033273785'
+  alias: Turn on Snake Lights
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: switch.snake_lights
+  mode: single
+- id: '1605142319756'
+  alias: Ryan's Room Energy Saver (Turn off)
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: /5
+  condition:
+  - condition: state
+    entity_id: group.ryans_room_lights
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.ryans_room_occupancy
+    state: 'off'
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id:
+    - group.ryans_room
+    - group.ryans_bathroom
+  - service: notify.mobile_app_icetray
+    data:
+      Title: Energy Saver is turning Ryan's Room off
+  mode: single
+- id: '1605149489800'
+  alias: Turn on Loren's Room
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: b5ae0a418d27091185a24eb686727b26
+    entity_id: binary_sensor.lorens_room_motion_sensor
+    domain: binary_sensor
+  condition:
+  - type: is_motion
+    condition: device
+    device_id: adee2ad14ebc69981746fab1e2460523
+    entity_id: binary_sensor.upstairs_hallway_motion_sensor
+    domain: binary_sensor
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.lorens_room_lights
+  mode: single
+- id: '1605149617014'
+  alias: Turn off Loren's Room
+  description: ''
+  trigger:
+  - platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: TURN_OFF
+  - platform: state
+    entity_id: binary_sensor.lorens_room_occupancy_aggregate
+    for: 15 minutes
+    to: 'off'
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.lorens_room_lights
+  mode: single
+- id: '1605737501228'
+  alias: Turn on Kitchen
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.kitchen_motion_sensor
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.kitchen_occupancy_aggregate
+    to: 'on'
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.kitchen_lights
+  mode: single
+- id: '1605761929577'
+  alias: Turn off Kitchen
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.kitchen_occupancy_aggregate
+    to: 'off'
+    for: 00:05:00
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.kitchen_lights
+  mode: single
+- id: '1609140878689'
+  alias: Turn On Hallway
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 732ebc2f84dd843117f458b838098a63
+    entity_id: binary_sensor.hallway_motion_sensor
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.hallway_lights
+  mode: single
+- id: '1609140904247'
+  alias: Turn Off Hallway
+  description: ''
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: 732ebc2f84dd843117f458b838098a63
+    entity_id: binary_sensor.hallway_motion_sensor
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.hallway_lights
+  mode: single

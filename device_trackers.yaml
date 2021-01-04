@@ -1,0 +1,9 @@
+- platform: mqtt
+  devices:
+    ryans_macbook: 'room-assistant/device_tracker/bluetooth-classic-a4-83-e7-4e-62-f2-tracker/state'
+    ryans_iphone: 'room-assistant/device_tracker/bluetooth-classic-98-60-ca-ac-3f-16-tracker/state'
+    lorens_iphone: 'room-assistant/device_tracker/bluetooth-classic-a4-83-e7-4e-62-f2-tracker/state'
+    #jordans_iphone: ''
+  payload_home: 'true'
+  payload_not_home: 'false'
+  source_type: bluetooth

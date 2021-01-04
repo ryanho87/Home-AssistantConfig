@@ -1,0 +1,36 @@
+- platform: decora_wifi
+  username: !secret leviton_user
+  password: !secret leviton_password
+
+- platform: group
+  name: Kitchen Light South
+  entities:
+  - light.kitchen_light_south_1
+  - light.kitchen_light_south_2
+
+- platform: group
+  name: Kitchen Light North
+  entities:
+    - light.kitchen_light_north_1
+    - light.kitchen_light_north_2
+
+- platform: group
+  name: Pendant Light
+  entities:
+    - light.family_room_pendant_light_1
+    - light.family_room_pendant_light_2
+    - light.family_room_pendant_light_3
+
+- platform: group
+  name: Ryans Bathroom Mirror Light
+  entities:
+    - light.ryans_bathroom_mirror_light_1
+    - light.ryans_bathroom_mirror_light_2
+    - light.ryans_bathroom_mirror_light_3
+
+- platform: group
+  name: Glass Light
+  entities:
+    - light.glass_light_1
+    - light.glass_light_2
+

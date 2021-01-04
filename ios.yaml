@@ -1,0 +1,10 @@
+push:
+  categories:
+    - name: Room On Alert
+      identifier: 'room_on'
+      actions:
+        - identifier: 'TURN_OFF'
+          title: 'Turn off'
+          activationMode: 'background'
+          behavior: 'default'
+          destructive: true

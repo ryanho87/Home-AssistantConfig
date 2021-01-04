@@ -1,0 +1,6 @@
+username: !secret dyson_user
+password: !secret dyson_password
+language: US
+devices:
+  - device_id: !secret ryans_dyson_serial
+    device_ip: 10.0.0.10

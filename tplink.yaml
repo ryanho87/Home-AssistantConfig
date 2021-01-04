@@ -1,0 +1,17 @@
+  discovery: false
+  switch:
+  - host: 10.0.0.20 #Bed Light
+  - host: 10.0.0.21 #Snake Lights
+  - host: 10.0.0.22 #Backyard Lights
+  - host: 10.0.0.23 #Backyard Lights
+  - host: 10.0.0.24 #Loren's Shop Light
+  - host: 10.0.0.60 #Desk Lamp
+  - host: 10.0.0.62 #Kitchen TV
+    # - host: 10.0.0.90 #Livingroom TV (Power Meter)
+    # - host: 10.0.0.93 #Air Mover (Power Meter)
+  - host: 10.0.0.96 #Upright Freezer (Power Meter)
+  - host: 10.0.0.102 #Christmas Tree
+  - host: 10.0.0.105 #Snakes (Power Meter)
+  strip:
+  - host: 10.0.0.49 #Cabana
+    

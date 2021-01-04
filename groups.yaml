@@ -1,0 +1,260 @@
+#######################
+##### Ryan's Room #####
+#######################
+
+ryans_room_lights:
+  name: Ryan's Room
+  entities:
+    - light.ryans_closet_light
+    - light.ryans_nightstand_light_left
+    - light.ryans_nightstand_light_right
+    - light.ryans_play_left
+    - light.ryans_play_right
+    - light.ryans_shelf_light
+    - light.ryans_tv_lightstrip
+    - switch.bed_light
+    - switch.desk_lamp
+  all: false
+  icon: mdi:bed-empty
+
+ryans_room_sensors:
+  name: Ryan's Room Sensors
+  entities:
+    - sensor.ryans_room_temperature_aggregate
+    - sensor.ryans_room_humidity_aggregate
+    - binary_sensor.ryans_room_occupancy_aggregate
+    - sensor.ryans_room_light_level
+
+###########################
+##### Ryan's Bathroom #####
+###########################
+
+ryans_bathroom_lights:
+  name: Ryan's Bathroom
+  entities:
+    - light.ryans_bathroom_closet_light
+    - light.ryans_bathroom_mirror_light
+  all: false
+  icon: mdi:toilet
+
+ryans_bathroom_sensors:
+  name: Ryan's Bathroom Sensors
+  entities:
+    - sensor.ryans_bathroom_temperature_aggregate
+    # - sensor.ryans_bathroom_humidity_aggregate
+    - sensor.ryans_bathroom_light_level
+    - binary_sensor.ryans_bathroom_occupancy_aggregate
+
+########################
+##### Loren's Room #####
+########################
+
+lorens_room_lights:
+  name: Loren's Room
+  entities:
+  - light.lorens_desk_light
+  - switch.corner_light
+  - switch.dresser_light
+  all: false
+
+lorens_room_sensors:
+  name: Loren's Room Sensors
+  entities:
+    # - sensor.lorens_room_temperature_aggregate
+    # - sensor.lorens_room_humidity_aggregate
+    - binary_sensor.lorens_room_occupancy_aggregate
+
+#########################
+##### Jordan's Room #####
+#########################
+
+jordans_room_lights:
+  name: Jordan's Room
+  entities:
+  - switch.jordans_shop_light
+  all: false
+
+jordans_room_sensors:
+  name: Jordan's Room Sensors
+  entities:
+    # - sensor.jordanss_room_temperature_aggregate
+    # - sensor.jordans_room_humidity_aggregate
+    # - binary_sensor.jordans_room_occupancy_aggregate
+
+#######################  
+##### Living Room #####
+#######################
+
+living_room_lights:
+  name: Living Room
+  entities:
+    - light.pyramid_light
+    - light.glass_light
+    - light.oled_left
+    - light.oled_right
+  all: false
+  #icon: 
+
+living_room_sensors:
+  name: Living Room Sensors
+  entities:
+    - sensor.livingroom_temperature_aggregate
+    - sensor.livingroom_humidity_aggregate
+    - binary_sensor.livingroom_occupancy_aggregate
+
+###################      
+##### Kitchen #####
+###################
+
+kitchen_lights:
+  name: Kitchen
+  entities: 
+    - light.kitchen_light_north
+    - light.kitchen_light_south
+  all: false
+
+kitchen_sensors:
+  name: Kitchen Sensors
+  entities:
+    - sensor.kitchen_temperature_aggregate
+    - sensor.kitchen_humidity_aggregate
+    - binary_sensor.kitchen_occupancy_aggregate
+
+####################
+##### Backyard #####
+####################
+
+backyard_lights:
+  name: Backyard
+  entities:
+  - switch.cabana
+  - switch.backyard_lights
+  - switch.backyard_lights_2
+  all: false
+
+backyard_sensors:
+  name: Backyard Sensors
+  entities:
+    - sensor.backyard_temperature_aggregate
+    - sensor.backyard_humidity_aggregate
+    # - binary_sensor.backyard_occupancy_aggregate
+    
+##### Family Room #####
+
+family_room_lights:
+  name: Family Room
+  entities:
+  - switch.mantle_light
+  - light.pendant_light
+  all: false
+
+family_room_sensors:
+  name: Family Room Sensors
+  entities:
+    # - sensor.family_room_temperature_aggregate
+    # - sensor.family_room_humidity_aggregate
+    # - binary.sensorfamily_room_occupancy_aggregate
+
+##################
+##### Garage #####
+##################
+
+garage_lights:
+  name: Garage
+  entities:
+
+garage_sensors:
+  name: Garage Sensors
+  entities:
+    - sensor.garage_temperature_aggregate
+    - sensor.garage_humidity_aggregate
+    # - binary_sensor.garage_occupancy_aggregate
+
+###################
+##### Hallway #####
+###################        
+
+hallway_lights:
+  name: Hallway
+  entities:
+  - light.hallway_light_north
+  - light.hallway_light_south
+  all: false
+
+hallway_sensors:
+  name: Hallway Sensors
+  entities:
+    - sensor.hallway_temperature_aggregate
+    # - sensor.hallway_humidity_aggregate
+    - binary_sensor.hallway_occupancy_aggregate
+
+############################
+##### Upstairs Hallway #####
+############################
+
+upstairs_hallway_lights:
+  name: Upstairs Hallway
+  entities:
+  - light.upstairs_hallway_light
+  all: false
+
+upstairs_hallway_sensors:
+  name: Upstairs Hallway Sensors
+  entities:
+    - sensor.upstairs_hallway_temperature_aggregate
+    # - sensor.upstairs_hallway_humidity_aggregate
+    - binary_sensor.upstairs_hallway_occupancy_aggregate
+ 
+#################
+##### House #####
+#################
+
+house_lights:
+  name: House
+  entities:
+  ##### People's Rooms #####
+  - group.ryans_room_lights
+  - group.ryans_bathroom_lights
+  - group.lorens_room_lights
+  - group.jordans_room_lights
+  # - group.jimmys_room_lights
+  # - group.civics_room_lights
+  ##### Shared Spaces #####
+  - group.living_room_lights
+  - group.kitchen_lights
+  - group.family_room_lights
+  - group.hallway_lights
+  - group.upstairs_hallway_lights
+  - group.garage_lights
+
+#################
+##### Misc #####
+#################
+
+bluetooth_scanners:
+  name: Bluetooth Scanners
+  entities:
+  - switch.kitchen_bluetooth_inquiries
+  - switch.livingroom_bluetooth_inquiries
+  - switch.loren_s_room_bluetooth_inquiries
+  - switch.ryan_s_bathroom_bluetooth_inquiries
+  - switch.ryan_s_room_bluetooth_inquiries
+  all: true
+
+grouped_lights:
+  name: Grouped Lights
+  entities:
+    - light.kitchen_light_south_1
+    - light.kitchen_light_south_2
+    - light.kitchen_light_north_1
+    - light.kitchen_light_north_2
+    - light.family_room_pendant_light_1
+    - light.family_room_pendant_light_2
+    - light.family_room_pendant_light_3
+    - light.ryans_bathroom_mirror_light_1
+    - light.ryans_bathroom_mirror_light_2
+    - light.ryans_bathroom_mirror_light_3
+    - light.glass_light_1
+    - light.glass_light_2
+
+

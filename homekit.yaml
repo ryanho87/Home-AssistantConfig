@@ -1,0 +1,45 @@
+- filter:
+    include_domains:
+      - light
+      - switch
+      - fan
+      - vacuum
+      - camera
+    include_entity_globs:
+      - binary_sensor.*_occupancy
+      - binary_sensor.*_motion*
+      - sensor.*_motion*
+    include_entities:
+      - media_player.oled65
+      - media_player.oled77
+      - cover.garage_door
+    exclude_entities:
+      - sensor.hue_dimmer_switch_1_battery_level
+      - switch.power_meter_livingroom_tv
+      - switch.power_meter_snakes
+      - switch.power_meter_upright_freezer
+      - switch.tp_link_smart_plug_eec0
+      - light.configuration_tool_1
+      - light.entertainment_area_1
+      - light.family_room
+      - light.hallway
+      - light.kitchen
+      - light.living_room #Both this one and the next one are needed because they both exist in hue
+      - light.livingroom
+      - camera.xiaomi_cloud_map_extractor
+        ##### Grouped Lights #####
+      - light.kitchen_light_south_1
+      - light.kitchen_light_south_2
+      - light.kitchen_light_north_1
+      - light.kitchen_light_north_2
+      - light.family_room_pendant_light_1
+      - light.family_room_pendant_light_2
+      - light.family_room_pendant_light_3
+      - light.ryans_bathroom_mirror_light_1
+      - light.ryans_bathroom_mirror_light_2
+      - light.ryans_bathroom_mirror_light_3
+      - light.glass_light_1
+      - light.glass_light_2
+    exclude_entity_globs:
+      - switch.*_inquiries
+
