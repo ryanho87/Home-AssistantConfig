@@ -48,7 +48,9 @@ group.living_room_lights:
 ##### Sensors #####
 ###################
 
+###############################
 ##### Temperature Sensors #####
+###############################
 
 sensor.ryans_room_temperature_aggregate:
   icon: mdi:thermometer
@@ -77,8 +79,9 @@ sensor.livingroom_temperature_aggregate:
 sensor.upstairs_hallway_temperature_aggregate:
   icon: mdi:thermometer
 
-
+############################
 ##### Humidity Sensors #####
+############################
 
 sensor.ryans_room_humidity_aggregate:
   icon: mdi:water-percent
