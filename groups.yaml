@@ -92,6 +92,7 @@ living_room_lights:
     - light.glass_light
     - light.oled_left
     - light.oled_right
+    - light.ceiling_light
   all: false
   #icon: 
 
