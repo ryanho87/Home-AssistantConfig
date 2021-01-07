@@ -1,0 +1,84 @@
+- id: '1609990592091'
+  name: Movie
+  entities:
+    light.ceiling_light:
+      brightness: 51
+      friendly_name: Ceiling Light
+      supported_features: 33
+      state: 'on'
+    light.glass_light:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      brightness: 51
+      color_temp: 428
+      entity_id:
+      - light.glass_light_1
+      - light.glass_light_2
+      friendly_name: Glass Light
+      icon: mdi:lightbulb-group
+      supported_features: 63
+      state: 'on'
+    light.pyramid_light:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      brightness: 51
+      color_temp: 474
+      is_deconz_group: false
+      friendly_name: Pyramid Light
+      supported_features: 63
+      state: 'on'
+    group.kitchen_lights:
+      entity_id:
+      - light.kitchen_light_north
+      - light.kitchen_light_south
+      order: 10
+      friendly_name: Kitchen
+      icon: mdi:stove
+      state: 'on'
+    group.hallway_lights:
+      entity_id:
+      - light.hallway_light_north
+      - light.hallway_light_south
+      order: 18
+      friendly_name: Hallway
+      icon: mdi:ceiling-light
+      state: 'off'
+  icon: mdi:movie
+- id: '1609990833034'
+  name: Living Room Bright
+  entities:
+    light.pyramid_light:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      brightness: 254
+      color_temp: 301
+      is_deconz_group: false
+      friendly_name: Pyramid Light
+      supported_features: 63
+      state: 'on'
+    light.ceiling_light:
+      brightness: 255
+      friendly_name: Ceiling Light
+      supported_features: 33
+      state: 'on'
+    light.glass_light:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      brightness: 254
+      color_temp: 300
+      entity_id:
+      - light.glass_light_1
+      - light.glass_light_2
+      friendly_name: Glass Light
+      icon: mdi:lightbulb-group
+      supported_features: 63
+      state: 'on'
+  icon: mdi:lightbulb
