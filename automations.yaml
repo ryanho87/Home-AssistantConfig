@@ -65,7 +65,7 @@
   action:
   - service: homeassistant.turn_on
     data: {}
-    entity_id: ' group.ryans_room'
+    entity_id: ' group.ryans_room_lights'
   mode: single
 - id: '1604220043149'
   alias: Turn On Upstairs Hallway
@@ -318,19 +318,21 @@
   mode: single
 - id: '1605737501228'
   alias: Turn on Kitchen
-  description: ''
+  description: Turn the Kitchen on to Bright
   trigger:
-  - platform: state
-    entity_id: binary_sensor.kitchen_motion_sensor
-    to: 'on'
   - platform: state
     entity_id: binary_sensor.kitchen_occupancy_aggregate
     to: 'on'
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: dimmer_switch
+      event: 1000
   condition: []
   action:
-  - service: homeassistant.turn_on
-    data: {}
-    entity_id: group.kitchen_lights
+  - service: scene.turn_on
+    data:
+      entity_id: scene.kitchen_bright
   mode: single
 - id: '1605761929577'
   alias: Turn off Kitchen
@@ -340,6 +342,11 @@
     entity_id: binary_sensor.kitchen_occupancy_aggregate
     to: 'off'
     for: 00:05:00
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: dimmer_switch
+      event: 4000
   condition: []
   action:
   - service: homeassistant.turn_off
