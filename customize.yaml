@@ -54,30 +54,39 @@ group.living_room_lights:
 
 sensor.ryans_room_temperature_aggregate:
   icon: mdi:thermometer
+  friendly_name: Ryan's Room Temperature
 
-sensor.ryans_bathroomroom_temperature_aggregate:
+sensor.ryans_bathroom_temperature_aggregate:
   icon: mdi:thermometer
+  friendly_name: Ryan's Bathroom Temperature
 
 sensor.backyard_temperature_aggregate:
   icon: mdi:thermometer
+  friendly_name: Backyard Temperature
 
 sensor.family_room_temperature_aggregate:
   icon: mdi:thermometer
+  friendly_name: Family Room Temperature
 
 sensor.garage_temperature_aggregate:
   icon: mdi:thermometer
+  friendly_name: Garage Temperature
 
 sensor.hallway_temperature_aggregate:
   icon: mdi:thermometer
+  friendly_name: Hallway Temperature
 
 sensor.kitchen_temperature_aggregate:
   icon: mdi:thermometer
+  friendly_name: Kitchen Temperature
 
 sensor.livingroom_temperature_aggregate:
   icon: mdi:thermometer
+  friendly_name: Livingroom Temperature
 
 sensor.upstairs_hallway_temperature_aggregate:
   icon: mdi:thermometer
+  friendly_name: Upstairs Hallway Temperature
 
 ############################
 ##### Humidity Sensors #####
