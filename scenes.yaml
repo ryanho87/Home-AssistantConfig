@@ -47,7 +47,7 @@
       friendly_name: Hallway
       icon: mdi:ceiling-light
       state: 'off'
-  icon: mdi:movie
+  icon: mdi:movie-open
 - id: '1609990833034'
   name: Living Room Bright
   entities:
@@ -81,4 +81,58 @@
       icon: mdi:lightbulb-group
       supported_features: 63
       state: 'on'
-  icon: mdi:lightbulb
+  icon: mdi:lightbulb-on
+- id: '1610082210028'
+  name: Kitchen Bright
+  entities:
+    light.kitchen_light_north:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      brightness: 254
+      color_temp: 365
+      entity_id:
+      - light.kitchen_light_north_1
+      - light.kitchen_light_north_2
+      friendly_name: Kitchen Light North
+      icon: mdi:lightbulb-group
+      supported_features: 63
+      state: 'on'
+    light.kitchen_light_south:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      brightness: 254
+      color_temp: 366
+      entity_id:
+      - light.kitchen_light_south_1
+      - light.kitchen_light_south_2
+      friendly_name: Kitchen Light South
+      icon: mdi:lightbulb-group
+      supported_features: 63
+      state: 'on'
+  icon: mdi:lightbulb-on
+- id: '1610084359048'
+  name: Family Room Bright
+  entities:
+    light.pendant_light:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      brightness: 254
+      color_temp: 366
+      entity_id:
+      - light.family_room_pendant_light_1
+      - light.family_room_pendant_light_2
+      - light.family_room_pendant_light_3
+      friendly_name: Pendant Light
+      icon: mdi:lightbulb-group
+      supported_features: 63
+      state: 'on'
+    switch.mantle_light:
+      friendly_name: Mantle Light
+      state: 'on'
+  icon: mdi:lightbulb-on
