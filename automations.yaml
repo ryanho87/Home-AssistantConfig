@@ -1,5 +1,5 @@
 - id: '1604219828435'
-  alias: Turn on Ryan's Bathroom
+  alias: '[Ryan''s Bathroom] Turn on'
   description: ''
   trigger:
   - type: motion
@@ -14,7 +14,7 @@
     entity_id: group.ryans_bathroom_lights
   mode: single
 - id: '1604219907607'
-  alias: Turn off Ryan's Bathroom
+  alias: '[Ryan''s Bathroom] Turn off'
   description: ''
   trigger:
   - type: no_motion
@@ -44,7 +44,7 @@
     entity_id: group.ryans_bathroom_lights
   mode: single
 - id: '1604219970463'
-  alias: Turn on Ryan's Room via Motion Sensor
+  alias: '[Ryan''s Room] Turn on via Motion Sensor'
   description: ''
   trigger:
   - type: motion
@@ -68,7 +68,7 @@
     entity_id: ' group.ryans_room_lights'
   mode: single
 - id: '1604220043149'
-  alias: Turn On Upstairs Hallway
+  alias: '[Upstairs Hallway] Turn On'
   description: ''
   trigger:
   - type: motion
@@ -83,7 +83,7 @@
     entity_id: group.upstairs_hallway_lights
   mode: single
 - id: '1604220092908'
-  alias: Turn off Upstairs Hallway
+  alias: '[Upstairs Hallway] Turn off'
   description: ''
   trigger:
   - type: no_motion
@@ -102,7 +102,7 @@
     entity_id: group.upstairs_hallway_lights
   mode: single
 - id: '1604281809997'
-  alias: Turn off Snake Lights
+  alias: '[Civic''s Room] Turn off Snake Lights'
   description: ''
   trigger:
   - platform: sun
@@ -114,7 +114,7 @@
     entity_id: switch.snake_lights
   mode: single
 - id: '1604308005885'
-  alias: Tag Ryan’s Nightstand is scanned
+  alias: '[Ryan''s Room] Tag Ryan’s Nightstand is scanned'
   description: ''
   trigger:
   - platform: tag
@@ -129,7 +129,7 @@
     entity_id: group.ryans_bathroom_lights
   mode: single
 - id: '1604457926934'
-  alias: Turn off Ryan's Room
+  alias: '[Ryan''s Room] Turn off'
   description: ''
   trigger:
   - platform: event
@@ -155,17 +155,17 @@
       title: Auto-turning off Ryan's Room
   mode: single
 - id: '1604474502214'
-  alias: Ryan's Room Energy Saver (Notify)
+  alias: '[Ryan''s Room] Energy Saver (Notify)'
   description: ''
   trigger:
   - platform: time_pattern
     minutes: /5
   condition:
   - condition: state
-    entity_id: group.ryans_room
+    entity_id: group.ryans_room_lights
     state: 'on'
   - condition: state
-    entity_id: binary_sensor.ryans_room_occupancy
+    entity_id: binary_sensor.ryans_room_occupancy_aggregate
     state: 'off'
   action:
   - service: notify.mobile_app_icetray
@@ -181,7 +181,7 @@
           apns-collapse-id: ryans-room-on
   mode: single
 - id: '1604564108494'
-  alias: Turn off OLED Lights
+  alias: '[Living Room] Turn off OLED Lights'
   description: Turn off OLED Lights if OLED77 is turned off
   trigger:
   - platform: state
@@ -197,7 +197,7 @@
     - light.oled_left
   mode: single
 - id: '1604564284068'
-  alias: Living Room On Alert
+  alias: '[Living Room] Room On Alert'
   description: send a notification if the living room is on and there is no occupancy
   trigger:
   - platform: state
@@ -220,7 +220,7 @@
           entity_id: group.living_room_lights
   mode: single
 - id: '1604738750827'
-  alias: Turn off Bluetooth scanning
+  alias: '[Global] Turn off Bluetooth scanning'
   description: ''
   trigger:
   - platform: state
@@ -235,7 +235,7 @@
     entity_id: group.bluetooth_scanners
   mode: single
 - id: '1604738783049'
-  alias: Turn on Bluetooth scanning
+  alias: '[Global] Turn on Bluetooth scanning'
   description: ''
   trigger:
   - platform: state
@@ -249,7 +249,7 @@
     entity_id: group.bluetooth_scanners
   mode: single
 - id: '1605033273785'
-  alias: Turn on Snake Lights
+  alias: '[Civic''s Room] Turn on Snake Lights'
   description: ''
   trigger:
   - platform: sun
@@ -261,7 +261,7 @@
     entity_id: switch.snake_lights
   mode: single
 - id: '1605142319756'
-  alias: Ryan's Room Energy Saver (Turn off)
+  alias: '[Ryan''s Room] Energy Saver (Auto Turn off)'
   description: ''
   trigger:
   - platform: time_pattern
@@ -284,7 +284,7 @@
       Title: Energy Saver is turning Ryan's Room off
   mode: single
 - id: '1605149489800'
-  alias: Turn on Loren's Room
+  alias: '[Loren''s Room] Turn on'
   description: ''
   trigger: []
   condition: []
@@ -294,7 +294,7 @@
     entity_id: group.lorens_room_lights
   mode: single
 - id: '1605149617014'
-  alias: Turn off Loren's Room
+  alias: '[Loren''s Room] Turn off'
   description: ''
   trigger:
   - platform: event
@@ -308,7 +308,7 @@
     entity_id: group.lorens_room_lights
   mode: single
 - id: '1605737501228'
-  alias: Turn on Kitchen
+  alias: '[Kitchen] Turn on'
   description: Turn the Kitchen on to Bright
   trigger:
   - platform: state
@@ -326,7 +326,7 @@
       entity_id: scene.kitchen_bright
   mode: single
 - id: '1605761929577'
-  alias: Turn off Kitchen
+  alias: '[Kitchen] Turn off'
   description: ''
   trigger:
   - platform: state
@@ -345,7 +345,7 @@
     entity_id: group.kitchen_lights
   mode: single
 - id: '1609140878689'
-  alias: Turn On Hallway
+  alias: '[Hallway] Turn on'
   description: ''
   trigger:
   - type: motion
@@ -360,7 +360,7 @@
     entity_id: group.hallway_lights
   mode: single
 - id: '1609140904247'
-  alias: Turn Off Hallway
+  alias: '[Hallway] Turn Off Hallway'
   description: ''
   trigger:
   - type: no_motion
@@ -379,7 +379,7 @@
     entity_id: group.hallway_lights
   mode: single
 - id: '1610428636962'
-  alias: Ryan's Mi Magic Cube
+  alias: '[Ryan''s Room] Mi Magic Cube'
   description: ''
   use_blueprint:
     path: bergstrom/mi-magic-cube-deconz-45-actions.yaml
@@ -431,7 +431,7 @@
         entity_id: group.ryans_room_lights
       slide_on_one: []
 - id: '1610441252820'
-  alias: Turn on Ryan's Room
+  alias: '[Ryan''s Room] Turn on'
   description: ''
   trigger: []
   condition: []
@@ -441,7 +441,7 @@
     entity_id: ' group.ryans_room_lights'
   mode: single
 - id: '1610481478911'
-  alias: Ryan's Room Switch
+  alias: '[Smart Switch 1] Ryan''s Room Switch'
   description: ''
   trigger:
   - platform: event
@@ -456,7 +456,7 @@
     entity_id: group.ryans_room_lights
   mode: single
 - id: '1610513561095'
-  alias: Snake Light Switch
+  alias: '[Smart Switch 3] Snake Light Switch'
   description: ''
   trigger:
   - platform: event
@@ -471,7 +471,7 @@
     entity_id: switch.snake_lights
   mode: single
 - id: '1610513660435'
-  alias: Loren's Room Switch
+  alias: '[Smart Switch 2] Loren''s Room Switch'
   description: ''
   trigger:
   - platform: event
@@ -484,4 +484,137 @@
   - service: homeassistant.toggle
     data: {}
     entity_id: group.lorens_room_lights
+  mode: single
+- id: '1610786216126'
+  alias: '[Garage] Garage Open Alert'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: cover.garage_door
+    attribute: door_state
+    to: closed
+  condition: []
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Garage Open Alert
+      message: Garage Door is Open
+      data:
+        push:
+          category: garage_open
+        action_data:
+          entity_id: cover.garage_door
+        apns_headers:
+          apns-collapse-id: garage-open
+  mode: single
+- id: '1610786686633'
+  alias: '[Garage] Close Garage'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: CLOSE_GARAGE
+  condition: []
+  action:
+  - service: cover.close_cover
+    data: {}
+    entity_id: cover.garage_door
+  mode: single
+- id: '1610787911438'
+  alias: '[Garage] Garage Open Alert (Time Based)'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: cover.garage_door
+    attribute: door_state
+    to: open
+    for: 01:00:00
+  - platform: state
+    entity_id: cover.garage_door
+    attribute: door_state
+    to: open
+    for: 02:00:00
+  condition:
+  - condition: state
+    entity_id: cover.garage_door
+    state: open
+    attribute: door_state
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Garage Open Alert
+      message: Garage Door has been open for a long time
+      data:
+        push:
+          category: garage_open
+        action_data:
+          entity_id: cover.garage_door
+        apns_headers:
+          apns-collapse-id: garage-open
+  mode: single
+- id: '1610788134603'
+  alias: '[Garage] Garage Open Alert (Critical)'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: cover.garage_door
+    attribute: door_state
+    to: closed
+  condition:
+  - condition: time
+    after: 02:00:00
+    before: 06:00:00
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Garage Open Alert
+      message: Garage Door is Open
+      data:
+        push:
+          category: garage_open
+        action_data:
+          entity_id: cover.garage_door
+        apns_headers:
+          apns-collapse-id: garage-open
+          sound:
+            name: default
+            critical: 1
+            volume: 0.5
+  mode: single
+- id: '1610789063269'
+  alias: '[Garage] Notify when getting home'
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: device_tracker.icetray
+    zone: zone.home
+    event: enter
+  condition: []
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Arriving Home
+      message: Would you like to open the garage?
+      data:
+        push:
+          category: garage_closed
+        action_data:
+          entity_id: cover.garage_door
+        apns_headers:
+          apns-collapse-id: garage-closed
+  mode: single
+- id: '1610789358422'
+  alias: '[Garage] Open Garage'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: OPEN_GARAGE
+  condition: []
+  action:
+  - service: cover.open_cover
+    data: {}
+    entity_id: cover.garage_door
   mode: single
