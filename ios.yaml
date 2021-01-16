@@ -8,3 +8,11 @@ push:
           activationMode: 'background'
           behavior: 'default'
           destructive: true
+    - name: Garage Door
+      identifier: 'garage_open'
+      actions:
+        - identifier: 'CLOSE_GARAGE'
+          title: 'Close Garage'
+          activationMode: 'background'
+          behavior: 'default'
+          destructive: true
