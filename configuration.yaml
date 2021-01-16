@@ -83,3 +83,5 @@ sense:
 
 ios: !include ios.yaml
 
+roomba: !include roomba.yaml
+

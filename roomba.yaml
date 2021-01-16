@@ -1,0 +1,3 @@
+- host: 10.0.0.37
+  blid: !secret braava_blid
+  password: !secret braava_password
