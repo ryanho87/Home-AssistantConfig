@@ -8,7 +8,7 @@
 
 - platform: min_max
   name: "Ryans Room Temperature Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.ryans_room_temperature_doorway
@@ -16,7 +16,7 @@
 
 - platform: min_max
   name: "Ryans Bathroom Temperature Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.ryans_bathroom_temperature
@@ -25,42 +25,42 @@
 
 - platform: min_max
   name: "Backyard Temperature Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.temp
 
 # - platform: min_max
 #  name: "Family Room Temperature Aggregate"
-#  round_digits: 0
+#  round_digits: 1
 #  type: mean
 #  entity_ids:
 #    #No sensors available yet
 
 - platform: min_max
   name: "Garage Temperature Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.garage_temperature #This is the value converted from sensor.temp1
 
 - platform: min_max
   name: "Hallway Temperature Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.hallway_temperature
 
 - platform: min_max
   name: "Kitchen Temperature Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.kitchen_temperature
 
 - platform: min_max
   name: "Livingroom Temperature Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.tempin
@@ -68,7 +68,7 @@
 
 - platform: min_max
   name: "Upstairs Hallway Temperature Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.upstairs_hallway_temperature
@@ -83,14 +83,14 @@
 
 - platform: min_max
   name: "Ryans Room Humidity Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.ryans_room_humidity
 
 # - platform: min_max
 #  name: "Ryans Bathroom Humidity Aggregate"
-#  round_digits: 0
+#  round_digits: 1
 #  type: mean
 #  entity_ids:
 #    #No sensors available yet
@@ -99,49 +99,49 @@
 
 - platform: min_max
   name: "Backyard Humidity Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.humidity
 
 # - platform: min_max
 #  name: "Family Room Humidity Aggregate"
-#  round_digits: 0
+#  round_digits: 1
 #  type: mean
 #  entity_ids:
 #    #No sensors available yet
 
 - platform: min_max
   name: "Garage Humidity Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.garage_humidity
 
 # - platform: min_max
 #  name: "Hallway Humidity Aggregate"
-#  round_digits: 0
+#  round_digits: 1
 #  type: mean
 #  entity_ids:
 #    #No sensors available yet
 
 - platform: min_max
   name: "Kitchen Humidity Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.kitchen_humidity
 
 - platform: min_max
   name: "Livingroom Humidity Aggregate"
-  round_digits: 0
+  round_digits: 1
   type: mean
   entity_ids:
     - sensor.livingroom_humidity
 
 # - platform: min_max
 #  name: "Upstairs Hallway Humidity Aggregate"
-#  round_digits: 0
+#  round_digits: 1
 #  type: mean
 #  entity_ids:
 #    #No sensors available yet
