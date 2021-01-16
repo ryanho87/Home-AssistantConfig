@@ -57,7 +57,7 @@
       device_class: occupancy
       value_template: >-
           {{ is_state('binary_sensor.kitchen_motion_sensor', 'on')
-             or is_state('binary_sensor.kitchen_occupancy', "on")
+          # or is_state('binary_sensor.kitchen_occupancy', "on")
              or is_state('binary_sensor.kitchen_bluetooth_device_present', "on") }}
 
     livingroom_occupancy_aggregate:
