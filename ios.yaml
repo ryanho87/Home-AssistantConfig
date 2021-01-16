@@ -16,3 +16,9 @@ push:
           activationMode: 'background'
           behavior: 'default'
           destructive: true
+        - identifier: 'OPEN_GARAGE'
+          title: 'Open Garage'
+          activationMode: 'background'
+          behavior: 'default'
+          destructive: true
+
