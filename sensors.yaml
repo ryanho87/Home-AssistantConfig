@@ -28,7 +28,7 @@
   round_digits: 0
   type: mean
   entity_ids:
-    - sensor.tempf
+    - sensor.temp
 
 # - platform: min_max
 #  name: "Family Room Temperature Aggregate"
@@ -42,7 +42,7 @@
   round_digits: 0
   type: mean
   entity_ids:
-    - sensor.garage_temperature #This is the value converted from sensor.temp1f
+    - sensor.garage_temperature #This is the value converted from sensor.temp1
 
 - platform: min_max
   name: "Hallway Temperature Aggregate"
@@ -63,7 +63,7 @@
   round_digits: 0
   type: mean
   entity_ids:
-    - sensor.tempinf
+    - sensor.tempin
     - sensor.living_room_temperature
 
 - platform: min_max
@@ -155,7 +155,7 @@
     garage_temperature:
       friendly_name: "Garage Temperature"
       unit_of_measurement: '°F'
-      value_template: "{{ states('sensor.temp1f') }}"
+      value_template: "{{ states('sensor.temp1') }}"
 
     garage_humidity:
       friendly_name: "Garage Humidity"
