@@ -9,9 +9,10 @@
   - host: 10.0.0.62 #Kitchen TV
     # - host: 10.0.0.90 #Livingroom TV (Power Meter)
     # - host: 10.0.0.93 #Air Mover (Power Meter)
-  - host: 10.0.0.96 #Upright Freezer (Power Meter)
+  - host: 10.0.0.96 #Coffee Table (Power Meter)
   - host: 10.0.0.102 #Christmas Tree
   - host: 10.0.0.105 #Snakes (Power Meter)
+  - host: 10.0.0.149 #Lorens Light Bar
   strip:
   - host: 10.0.0.49 #Cabana
     

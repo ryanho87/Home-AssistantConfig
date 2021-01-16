@@ -55,6 +55,8 @@ lorens_room_lights:
   - light.lorens_desk_light
   - switch.corner_light
   - switch.dresser_light
+  - switch.lorens_shop_light
+  - switch.lorens_light_bar
   all: false
 
 lorens_room_sensors:

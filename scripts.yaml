@@ -1,0 +1,29 @@
+fan_toggle_oscillation:
+  alias: toggle fan oscillation
+  sequence:
+  - service: fan.oscillate
+    data:
+      entity_id: '{{ fan }}'
+      oscillating: "{% if state_attr(fan, 'oscillating') == true %}\n  false\n{% else\
+        \ %}\n  true\n{% endif %}\n"
+  icon: mdi:cache
+  mode: single
+
+fan_speed_up:
+  alias: increase fan speed by 1
+  sequence:
+  - service: fan.set_speed
+    data:
+      entity_id: '{{ fan }}'
+      speed: "{{ state_attr('fan.ryans_room', 'speed') + 1 }}"
+  icon: mdi:arrow-up-bold
+  mode: single
+
+fan_speed_down:
+  alias: decrease fan speed by 1
+  sequence:
+  - service: fan.set_speed
+    data:
+      entity_id: '{{ fan }}'
+      speed: "{{ state_attr('fan.ryans_room', 'speed') - 1 }}"
+  icon: mdi:arrow-down-bold

@@ -38,7 +38,7 @@
       order: 10
       friendly_name: Kitchen
       icon: mdi:stove
-      state: 'on'
+      state: 'off'
     group.hallway_lights:
       entity_id:
       - light.hallway_light_north
@@ -136,3 +136,33 @@
       friendly_name: Mantle Light
       state: 'on'
   icon: mdi:lightbulb-on
+- id: '1610438441009'
+  name: House Off
+  entities:
+    group.kitchen_lights:
+      entity_id:
+      - light.kitchen_light_north
+      - light.kitchen_light_south
+      order: 10
+      friendly_name: Kitchen
+      icon: mdi:stove
+      state: 'off'
+    group.living_room_lights:
+      entity_id:
+      - light.pyramid_light
+      - light.glass_light
+      - light.oled_left
+      - light.oled_right
+      - light.ceiling_light
+      order: 8
+      friendly_name: Living Room
+      icon: mdi:sofa
+      state: 'off'
+    group.family_room_lights:
+      entity_id:
+      - switch.mantle_light
+      - light.pendant_light
+      order: 14
+      friendly_name: Family Room
+      icon: mdi:table-chair
+      state: 'off'

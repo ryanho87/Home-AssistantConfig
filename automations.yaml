@@ -44,7 +44,7 @@
     entity_id: group.ryans_bathroom_lights
   mode: single
 - id: '1604219970463'
-  alias: Turn on Ryan's Room
+  alias: Turn on Ryan's Room via Motion Sensor
   description: ''
   trigger:
   - type: motion
@@ -140,6 +140,11 @@
     to: 'off'
     entity_id: binary_sensor.ryans_room_occupancy_aggregate
     for: 00:05
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: smart_switch_1
+      event: 1001
   condition: []
   action:
   - service: homeassistant.turn_off
@@ -281,18 +286,8 @@
 - id: '1605149489800'
   alias: Turn on Loren's Room
   description: ''
-  trigger:
-  - type: motion
-    platform: device
-    device_id: b5ae0a418d27091185a24eb686727b26
-    entity_id: binary_sensor.lorens_room_motion_sensor
-    domain: binary_sensor
-  condition:
-  - type: is_motion
-    condition: device
-    device_id: adee2ad14ebc69981746fab1e2460523
-    entity_id: binary_sensor.upstairs_hallway_motion_sensor
-    domain: binary_sensor
+  trigger: []
+  condition: []
   action:
   - service: homeassistant.turn_on
     data: {}
@@ -306,10 +301,6 @@
     event_type: ios.notification_action_fired
     event_data:
       actionName: TURN_OFF
-  - platform: state
-    entity_id: binary_sensor.lorens_room_occupancy_aggregate
-    for: 15 minutes
-    to: 'off'
   condition: []
   action:
   - service: homeassistant.turn_off
@@ -386,4 +377,111 @@
   - service: homeassistant.turn_off
     data: {}
     entity_id: group.hallway_lights
+  mode: single
+- id: '1610428636962'
+  alias: Ryan's Mi Magic Cube
+  description: ''
+  use_blueprint:
+    path: bergstrom/mi-magic-cube-deconz-45-actions.yaml
+    input:
+      double_tap_any_side: false
+      cube_double_tap_any: []
+      remote: 24860be1858fed9f4c44d04315a76418
+      cube_shake:
+      - service: homeassistant.turn_off
+        data: {}
+        entity_id: group.ryans_room_lights
+      - service: homeassistant.turn_off
+        data: {}
+        entity_id: group.ryans_bathroom_lights
+      - service: media_player.turn_off
+        data: {}
+        entity_id: media_player.55_tcl_roku_tv
+      rotate_clockwise:
+      - service: media_player.volume_up
+        data: {}
+        entity_id: media_player.55_tcl_roku_tv
+      flip_180: false
+      cube_flip_180: []
+      cube_flip_90: []
+      flip_90: false
+      rotate_counter_clockwise:
+      - service: media_player.volume_down
+        data: {}
+        entity_id: media_player.55_tcl_roku_tv
+      one_to_one:
+      - service: homeassistant.turn_on
+        data: {}
+        entity_id: group.ryans_room_lights
+      three_to_three:
+      - service: media_player.turn_on
+        data: {}
+        entity_id: media_player.55_tcl_roku_tv
+      three_to_two:
+      - service: media_player.volume_mute
+        data: {}
+        entity_id: media_player.55_tcl_roku_tv
+      three_to_four:
+      - service: media_player.turn_off
+        data: {}
+        entity_id: media_player.55_tcl_roku_tv
+      one_to_six:
+      - service: homeassistant.turn_off
+        data: {}
+        entity_id: group.ryans_room_lights
+      slide_on_one: []
+- id: '1610441252820'
+  alias: Turn on Ryan's Room
+  description: ''
+  trigger: []
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: ' group.ryans_room_lights'
+  mode: single
+- id: '1610481478911'
+  alias: Ryan's Room Switch
+  description: ''
+  trigger:
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: smart_switch_1
+      event: 1002
+  condition: []
+  action:
+  - service: homeassistant.toggle
+    data: {}
+    entity_id: group.ryans_room_lights
+  mode: single
+- id: '1610513561095'
+  alias: Snake Light Switch
+  description: ''
+  trigger:
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: smart_switch_3
+      event: 1002
+  condition: []
+  action:
+  - service: homeassistant.toggle
+    data: {}
+    entity_id: switch.snake_lights
+  mode: single
+- id: '1610513660435'
+  alias: Loren's Room Switch
+  description: ''
+  trigger:
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: smart_switch_2
+      event: 1002
+  condition: []
+  action:
+  - service: homeassistant.toggle
+    data: {}
+    entity_id: group.lorens_room_lights
   mode: single
