@@ -1,0 +1,3 @@
+- platform: hydrawise
+  monitored_conditions: manual_watering
+  watering_minutes: 5

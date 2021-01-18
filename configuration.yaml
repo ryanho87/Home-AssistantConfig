@@ -26,7 +26,7 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
-
+switch: !include switch.yaml
 
 ################################
 ##### GENERIC INTEGRATIONS #####
@@ -77,8 +77,8 @@ sense:
   email: !secret sense_user
   password: !secret sense_password
 
-#hydrawise:
-  #access_token: !secret hydrawise_api_key
+hydrawise:
+  access_token: !secret hydrawise_api_key
 
 ios: !include ios.yaml
 

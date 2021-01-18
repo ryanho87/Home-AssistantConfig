@@ -172,3 +172,9 @@
       unit_of_measurement: '%'
       value_template: "{{ states('sensor.soilmoisture1') }}"
 
+#########################      
+##### Other Sensors #####
+#########################
+
+- platform: hydrawise
+
