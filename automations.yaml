@@ -115,89 +115,6 @@
   mode: single
 - id: '1604308005885'
   alias: '[Ryan''s Room] Tag Ryan’s Nightstand is scanned'
-  description: ''
-  trigger:
-  - platform: tag
-    tag_id: fa39ea3c-2ccd-4625-bead-244109b7d2d6
-  condition: []
-  action:
-  - service: homeassistant.turn_off
-    data: {}
-    entity_id: group.ryans_room_lights
-  - service: homeassistant.turn_off
-    data: {}
-    entity_id: group.ryans_bathroom_lights
-  mode: single
-- id: '1604457926934'
-  alias: '[Ryan''s Room] Turn off'
-  description: ''
-  trigger:
-  - platform: event
-    event_type: ios.notification_action_fired
-    event_data:
-      actionName: TURN_OFF
-  - platform: state
-    to: 'off'
-    entity_id: binary_sensor.ryans_room_occupancy_aggregate
-    for: 00:05
-  - platform: event
-    event_type: deconz_event
-    event_data:
-      id: smart_switch_1
-      event: 1001
-  condition: []
-  action:
-  - service: homeassistant.turn_off
-    data: {}
-    entity_id: group.ryans_room_lights
-  - service: notify.mobile_app_icetray
-    data:
-      title: Auto-turning off Ryan's Room
-  mode: single
-- id: '1604474502214'
-  alias: '[Ryan''s Room] Energy Saver (Notify)'
-  description: ''
-  trigger:
-  - platform: time_pattern
-    minutes: /5
-  condition:
-  - condition: state
-    entity_id: group.ryans_room_lights
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.ryans_room_occupancy_aggregate
-    state: 'off'
-  action:
-  - service: notify.mobile_app_icetray
-    data:
-      title: Room On Alert
-      message: Ryan's Room is on
-      data:
-        push:
-          category: room_on
-        action_data:
-          entity_id: group.ryans_room_lights
-        apns_headers:
-          apns-collapse-id: ryans-room-on
-  mode: single
-- id: '1604564108494'
-  alias: '[Living Room] Turn off OLED Lights'
-  description: Turn off OLED Lights if OLED77 is turned off
-  trigger:
-  - platform: state
-    entity_id: media_player.oled77
-    from: 'on'
-    to: 'off'
-  condition: []
-  action:
-  - service: homeassistant.turn_off
-    data: {}
-    entity_id:
-    - light.oled_right
-    - light.oled_left
-  mode: single
-- id: '1604564284068'
-  alias: '[Living Room] Room On Alert'
   description: send a notification if the living room is on and there is no occupancy
   trigger:
   - platform: state
@@ -360,7 +277,7 @@
     entity_id: group.hallway_lights
   mode: single
 - id: '1609140904247'
-  alias: '[Hallway] Turn Off Hallway'
+  alias: '[Hallway] Turn off'
   description: ''
   trigger:
   - type: no_motion
@@ -441,7 +358,7 @@
     entity_id: ' group.ryans_room_lights'
   mode: single
 - id: '1610481478911'
-  alias: '[Smart Switch 1] Ryan''s Room Switch'
+  alias: '[Ryan''s Room] Smart Switch'
   description: ''
   trigger:
   - platform: event
@@ -456,7 +373,7 @@
     entity_id: group.ryans_room_lights
   mode: single
 - id: '1610513561095'
-  alias: '[Smart Switch 3] Snake Light Switch'
+  alias: '[Civic''s Room] Snake Light Smart Switch'
   description: ''
   trigger:
   - platform: event
@@ -471,7 +388,7 @@
     entity_id: switch.snake_lights
   mode: single
 - id: '1610513660435'
-  alias: '[Smart Switch 2] Loren''s Room Switch'
+  alias: '[Loren''s Room]  Smart Switch'
   description: ''
   trigger:
   - platform: event
@@ -492,7 +409,8 @@
   - platform: state
     entity_id: cover.garage_door
     attribute: door_state
-    to: closed
+    to: open
+    from: closed
   condition: []
   action:
   - service: notify.mobile_app_icetray
@@ -530,11 +448,13 @@
     attribute: door_state
     to: open
     for: 01:00:00
+    from: closed
   - platform: state
     entity_id: cover.garage_door
     attribute: door_state
     to: open
     for: 02:00:00
+    from: closed
   condition:
   - condition: state
     entity_id: cover.garage_door
@@ -560,7 +480,8 @@
   - platform: state
     entity_id: cover.garage_door
     attribute: door_state
-    to: closed
+    from: closed
+    to: open
   condition:
   - condition: time
     after: 02:00:00
@@ -577,10 +498,10 @@
           entity_id: cover.garage_door
         apns_headers:
           apns-collapse-id: garage-open
-          sound:
-            name: default
-            critical: 1
-            volume: 0.5
+        sound:
+          name: default
+          critical: 1
+          volume: 0.5
   mode: single
 - id: '1610789063269'
   alias: '[Garage] Notify when getting home'
@@ -615,6 +536,18 @@
   condition: []
   action:
   - service: cover.open_cover
+    data: {}
+    entity_id: cover.garage_door
+  mode: single
+- id: '1610790920505'
+  alias: '[Garage] Tag Garage is scanned'
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: df190402-b92d-4c99-893a-861d9d1bc718
+  condition: []
+  action:
+  - service: cover.toggle
     data: {}
     entity_id: cover.garage_door
   mode: single
