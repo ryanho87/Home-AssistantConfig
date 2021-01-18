@@ -115,6 +115,89 @@
   mode: single
 - id: '1604308005885'
   alias: '[Ryan''s Room] Tag Ryan’s Nightstand is scanned'
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: fa39ea3c-2ccd-4625-bead-244109b7d2d6
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.ryans_room_lights
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.ryans_bathroom_lights
+  mode: single
+- id: '1604457926934'
+  alias: '[Ryan''s Room] Turn off'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: TURN_OFF
+  - platform: state
+    to: 'off'
+    entity_id: binary_sensor.ryans_room_occupancy_aggregate
+    for: 00:05
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: smart_switch_1
+      event: 1001
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.ryans_room_lights
+  - service: notify.mobile_app_icetray
+    data:
+      title: Auto-turning off Ryan's Room
+  mode: single
+- id: '1604474502214'
+  alias: '[Ryan''s Room] Energy Saver (Notify)'
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: /5
+  condition:
+  - condition: state
+    entity_id: group.ryans_room_lights
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.ryans_room_occupancy_aggregate
+    state: 'off'
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Room On Alert
+      message: Ryan's Room is on
+      data:
+        push:
+          category: room_on
+        action_data:
+          entity_id: group.ryans_room_lights
+        apns_headers:
+          apns-collapse-id: ryans-room-on
+  mode: single
+- id: '1604564108494'
+  alias: '[Living Room] Turn off OLED Lights'
+  description: Turn off OLED Lights if OLED77 is turned off
+  trigger:
+  - platform: state
+    entity_id: media_player.oled77
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id:
+    - light.oled_right
+    - light.oled_left
+  mode: single
+- id: '1604564284068'
+  alias: '[Living Room] Room On Alert'
   description: send a notification if the living room is on and there is no occupancy
   trigger:
   - platform: state
