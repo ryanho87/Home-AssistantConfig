@@ -1,0 +1,11 @@
+username: !secret arlo_username
+password: !secret arlo_password
+refresh_devices_every: 2
+stream_timeout: 120
+reconnect_every: 90
+tfa_source: imap
+tfa_type: email
+tfa_host: imap.gmail.com
+tfa_username: !secret arlo_username
+tfa_password: !secret arlo_gmail_app_password
+

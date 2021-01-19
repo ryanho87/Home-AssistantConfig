@@ -4,7 +4,6 @@
       - switch
       - fan
       - vacuum
-      - camera
     include_entity_globs:
       - binary_sensor.*_occupancy
       - binary_sensor.*_motion*

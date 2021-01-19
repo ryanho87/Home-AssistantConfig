@@ -26,11 +26,11 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
-switch: !include switch.yaml
+switch: !include switches.yaml
 
-################################
-##### GENERIC INTEGRATIONS #####
-################################
+###############################
+##### NATIVE INTEGRATIONS #####
+###############################
 
 vacuum: !include vacuums.yaml
 
@@ -50,9 +50,15 @@ mqtt:
 
 camera: !include cameras.yaml
 
+alarm_control_panel: !include alarm.yaml
+
+zone: !include zones.yaml
+
 ###############################
 ##### VENDOR INTEGRATIONS #####
 ###############################
+
+aarlo: !include aarlo.yaml
 
 tplink: !include tplink.yaml
 
