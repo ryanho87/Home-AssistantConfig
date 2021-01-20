@@ -13,19 +13,6 @@ push:
           activationMode: 'background'
           behavior: default
           destructive: false
-    - name: Garage Door Open
-      identifier: 'garage_open'
-      actions:
-        - identifier: 'CLOSE_GARAGE'
-          title: 'Close Garage'
-          activationMode: 'background'
-          behavior: 'default'
-          destructive: true
-        - identifier: 'DISMISS'
-          title: 'Dismiss'
-          activationMode: 'background'
-          behavior: default
-          destructive: false
     - name: Garage Door Closed
       identifier: 'garage_closed'
       actions:
@@ -39,4 +26,16 @@ push:
           activationMode: 'background'
           behavior: default
           destructive: false
-
+    - name: Garage Door Open
+      identifier: 'camera1' #This must be named camera1 in order to display a thumbnail of the garage cam in the notification
+      actions:
+        - identifier: 'CLOSE_GARAGE'
+          title: 'Close Garage'
+          activationMode: 'background'
+          behavior: 'default'
+          destructive: true
+        - identifier: 'DISMISS'
+          title: 'Dismiss'
+          activationMode: 'background'
+          behavior: default
+          destructive: false
