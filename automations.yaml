@@ -491,18 +491,23 @@
   trigger:
   - platform: state
     entity_id: cover.garage_door
-    attribute: door_state
     to: open
     from: closed
-  condition: []
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: disarmed
   action:
   - service: notify.mobile_app_icetray
     data:
       title: Garage Open Alert
-      message: Garage Door is Open
+      message: Garage Door was opened
       data:
+        attachment:
+          content-type: jpeg
         push:
-          category: garage_open
+          category: camera1
+        entity_id: camera.aarlo_garage
         action_data:
           entity_id: cover.garage_door
         apns_headers:
@@ -549,8 +554,11 @@
       title: Garage Open Alert
       message: Garage Door has been open for a long time
       data:
+        attachment:
+          content-type: jpeg
         push:
-          category: garage_open
+          category: camera1
+        entity_id: camera.aarlo_garage
         action_data:
           entity_id: cover.garage_door
         apns_headers:
@@ -562,21 +570,23 @@
   trigger:
   - platform: state
     entity_id: cover.garage_door
-    attribute: door_state
     from: closed
     to: open
   condition:
-  - condition: time
-    after: 02:00:00
-    before: 06:00:00
+  - condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: armed
   action:
   - service: notify.mobile_app_icetray
     data:
       title: Garage Open Alert
-      message: Garage Door is Open
+      message: Garage Door was opened
       data:
+        attachment:
+          content-type: jpeg
         push:
-          category: garage_open
+          category: camera1
+        entity_id: camera.aarlo_garage
         action_data:
           entity_id: cover.garage_door
         apns_headers:
@@ -594,7 +604,11 @@
     entity_id: device_tracker.icetray
     zone: zone.home
     event: enter
-  condition: []
+  condition:
+  - condition: state
+    entity_id: cover.garage_door
+    attribute: door_state
+    state: closed
   action:
   - service: notify.mobile_app_icetray
     data:
@@ -633,4 +647,46 @@
   - service: cover.toggle
     data: {}
     entity_id: cover.garage_door
+  mode: single
+- id: '1611040919001'
+  alias: '[Garage] Notify when leaving home'
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: device_tracker.icetray
+    zone: zone.home
+    event: leave
+  condition:
+  - condition: state
+    entity_id: cover.garage_door
+    attribute: door_state
+    state: open
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Leaving Home
+      message: The garage is still open, do you want to close it?
+      data:
+        attachment:
+          content-type: jpeg
+        push:
+          category: camera1
+        entity_id: camera.aarlo_garage
+        action_data:
+          entity_id: cover.garage_door
+        apns_headers:
+          apns-collapse-id: garage-open
+  mode: single
+- id: '1611113127114'
+  alias: '[Family Room] Turn off Apple TV after Small TV turns off'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: media_player.oled65
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: script.turn_off_small_tv_apple_tv
+    data: {}
   mode: single

@@ -8,22 +8,33 @@ fan_toggle_oscillation:
         \ %}\n  true\n{% endif %}\n"
   icon: mdi:cache
   mode: single
-
 fan_speed_up:
   alias: increase fan speed by 1
   sequence:
   - service: fan.set_speed
     data:
       entity_id: '{{ fan }}'
-      speed: "{{ state_attr('fan.ryans_room', 'speed') + 1 }}"
+      speed: '{{ state_attr(''fan.ryans_room'', ''speed'') + 1 }}'
   icon: mdi:arrow-up-bold
   mode: single
-
 fan_speed_down:
   alias: decrease fan speed by 1
   sequence:
   - service: fan.set_speed
     data:
       entity_id: '{{ fan }}'
-      speed: "{{ state_attr('fan.ryans_room', 'speed') - 1 }}"
+      speed: '{{ state_attr(''fan.ryans_room'', ''speed'') - 1 }}'
   icon: mdi:arrow-down-bold
+turn_off_small_tv_apple_tv:
+  alias: Turn off Small TV (Apple TV)
+  sequence:
+  - service: remote.send_command
+    data:
+      entity_id: remote.family_room
+      device: 32756745
+      command:
+      - home_hold
+      - select
+    entity_id: remote.oled_65
+  mode: single
+  icon: mdi:television
