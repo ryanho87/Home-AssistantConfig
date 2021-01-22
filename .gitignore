@@ -1,0 +1,27 @@
+# Ignored YAML Files #
+secrets.yaml
+known_devices.yaml
+ip_bans.yaml
+
+# Ignored system files #
+.HA_VERSION
+.cloud/
+.storage/
+home-assistant.log
+home-assistant_v2.db
+webostv.conf
+
+# Ignored git managed repos #
+www/custom_lovelace/
+www/lovelace-auto-entities/
+www/lovelace-card-mod/
+www/lovelace-card-tools/
+www/lovelace-swipe-navigation/
+www/lovelace-xiaomi-vacuum-card/
+
+# Ignored directories #
+blueprints/
+custom_components/
+
+# Ignored ? #
+.aarlo/
