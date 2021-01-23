@@ -50,7 +50,7 @@ mqtt:
 
 camera: !include cameras.yaml
 
-alarm_control_panel: !include alarm.yaml
+alarm_control_panel: !include alarms.yaml
 
 zone: !include zones.yaml
 

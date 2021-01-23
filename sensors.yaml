@@ -21,7 +21,30 @@
   entity_ids:
     - sensor.ryans_bathroom_temperature
 
+- platform: min_max
+  name: "Lorens Room Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.temperature_19
+
+- platform: min_max
+  name: "Jordans Room Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.temperature_25
+
+- platform: min_max
+  name: "Civics Room Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.temperature_34      
+
+########################      
 ##### Shared Rooms #####
+########################
 
 - platform: min_max
   name: "Backyard Temperature Aggregate"
@@ -30,12 +53,12 @@
   entity_ids:
     - sensor.temp
 
-# - platform: min_max
-#  name: "Family Room Temperature Aggregate"
-#  round_digits: 1
-#  type: mean
-#  entity_ids:
-#    #No sensors available yet
+- platform: min_max
+  name: "Family Room Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+   - sensor.temperature_31
 
 - platform: min_max
   name: "Garage Temperature Aggregate"
@@ -95,7 +118,30 @@
 #  entity_ids:
 #    #No sensors available yet
 
+- platform: min_max
+  name: "Lorens Room Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.humidity_20      
+
+- platform: min_max
+  name: "Jordans Room Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.humidity_26      
+
+- platform: min_max
+  name: "Civics Room Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.humidity_35
+
+########################      
 ##### Shared Rooms #####
+########################
 
 - platform: min_max
   name: "Backyard Humidity Aggregate"
@@ -104,12 +150,12 @@
   entity_ids:
     - sensor.humidity
 
-# - platform: min_max
-#  name: "Family Room Humidity Aggregate"
-#  round_digits: 1
-#  type: mean
-#  entity_ids:
-#    #No sensors available yet
+- platform: min_max
+  name: "Family Room Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.humidity_32 
 
 - platform: min_max
   name: "Garage Humidity Aggregate"
@@ -171,6 +217,11 @@
       friendly_name: "Japanese Maple Soil Moisture"
       unit_of_measurement: '%'
       value_template: "{{ states('sensor.soilmoisture1') }}"
+
+    front_yard_soil_moisture:
+      friendly_name: "Front Yard Soil Moisture"
+      unit_of_measurement: '%'
+      value_template: "{{ states('sensor.soilmoisture2') }}"
 
 #########################      
 ##### Other Sensors #####

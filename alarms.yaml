@@ -1,4 +1,5 @@
 - platform: manual
+  arming_time: 10
 
 - platform: aarlo
   away_mode_name: armed

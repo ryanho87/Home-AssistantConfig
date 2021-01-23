@@ -500,7 +500,7 @@
   action:
   - service: notify.mobile_app_icetray
     data:
-      title: Garage Open Alert
+      title: Garage Door Alert
       message: Garage Door was opened
       data:
         attachment:
@@ -511,7 +511,7 @@
         action_data:
           entity_id: cover.garage_door
         apns_headers:
-          apns-collapse-id: garage-open
+          apns-collapse-id: garage-door
   mode: single
 - id: '1610786686633'
   alias: '[Garage] Close Garage'
@@ -551,7 +551,7 @@
   action:
   - service: notify.mobile_app_icetray
     data:
-      title: Garage Open Alert
+      title: Garage Door Alert
       message: Garage Door has been open for a long time
       data:
         attachment:
@@ -562,7 +562,7 @@
         action_data:
           entity_id: cover.garage_door
         apns_headers:
-          apns-collapse-id: garage-open
+          apns-collapse-id: garage-door
   mode: single
 - id: '1610788134603'
   alias: '[Garage] Garage Open Alert (Critical)'
@@ -579,7 +579,7 @@
   action:
   - service: notify.mobile_app_icetray
     data:
-      title: Garage Open Alert
+      title: Garage Door Alert
       message: Garage Door was opened
       data:
         attachment:
@@ -590,7 +590,7 @@
         action_data:
           entity_id: cover.garage_door
         apns_headers:
-          apns-collapse-id: garage-open
+          apns-collapse-id: garage-door
         sound:
           name: default
           critical: 1
@@ -653,7 +653,7 @@
   description: ''
   trigger:
   - platform: zone
-    entity_id: device_tracker.icetray
+    entity_id: device_tracker.user_34a3b3e0_166d_4bf7_9e2d_bc253cecffe8
     zone: zone.home
     event: leave
   condition:
@@ -689,4 +689,138 @@
   action:
   - service: script.turn_off_small_tv_apple_tv
     data: {}
+  mode: single
+- id: '1611298496643'
+  alias: '[Global] Ryan arrived Home'
+  description: ''
+  trigger:
+  - platform: state
+    to: home
+    entity_id: device_tracker.user_34a3b3e0_166d_4bf7_9e2d_bc253cecffe8
+  condition: []
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Device Tracker Alert
+      message: Ryan arrived home
+      data:
+        data:
+        apns_headers:
+          apns-collapse-id: device-tracker-ryan
+  mode: single
+- id: '1611298518467'
+  alias: '[Global] Ryan left Home'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: device_tracker.user_34a3b3e0_166d_4bf7_9e2d_bc253cecffe8
+    from: home
+  condition: []
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Device Tracker Alert
+      message: Ryan left home
+      data:
+        data:
+        apns_headers:
+          apns-collapse-id: device-tracker-ryan
+  mode: single
+- id: '1611300866595'
+  alias: '[Garage] Garage Closed Alert'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: cover.garage_door
+    to: closed
+    from: open
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: disarmed
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Garage Door Alert
+      message: Garage Door was closed
+      data:
+        data:
+        apns_headers:
+          apns-collapse-id: garage-door
+  mode: single
+- id: '1611302147423'
+  alias: '[Global] Door Sensor Triggered'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.openclose_24
+    - binary_sensor.openclose_28
+    - binary_sensor.openclose_29
+    - binary_sensor.openclose_30
+    to: 'on'
+  - platform: state
+    entity_id:
+    - binary_sensor.openclose_24
+    - binary_sensor.openclose_28
+    - binary_sensor.openclose_29
+    - binary_sensor.openclose_30
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: disarmed
+  action:
+  - service: notify.mobile_app_icetray
+    data_template:
+      title: Door Sensor
+      message: '{{ trigger.to_state.attributes.friendly_name }} has been{% if trigger.to_state.state
+        == ''on'' %} opened {% else %} closed {% endif %}
+
+        '
+      data:
+        apns_headers:
+          apns-collapse-id: '{{ trigger.to_state.attributes.friendly_name }}
+
+            '
+  mode: single
+- id: '1611377555931'
+  alias: '[Global] Door Sensor Triggered (Critical)'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.openclose_24
+    - binary_sensor.openclose_28
+    - binary_sensor.openclose_29
+    - binary_sensor.openclose_30
+    to: 'on'
+  - platform: state
+    entity_id:
+    - binary_sensor.openclose_24
+    - binary_sensor.openclose_28
+    - binary_sensor.openclose_29
+    - binary_sensor.openclose_30
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: armed_home
+  action:
+  - service: notify.mobile_app_icetray
+    data_template:
+      title: Door Sensor
+      message: '{{ trigger.to_state.attributes.friendly_name }} has been{% if trigger.to_state.state
+        == ''on'' %} opened {% else %} closed {% endif %}
+
+        '
+      data:
+        sound:
+          name: default
+          critical: 1
+          volume: 0.5
+        apns_headers:
+          apns-collapse-id: '{{ trigger.to_state.attributes.friendly_name }}
+
+            '
   mode: single
