@@ -10,7 +10,7 @@ media_player.oled77:
   icon: mdi:television
   device_class: tv
 
-#############################  
+#############################
 ##### Room Light Groups #####
 #############################
 
@@ -39,12 +39,12 @@ group.ryans_room_lights:
   icon: mdi:bed
 
 group.upstairs_hallway_lights:
-  icon: mdi:ceiling-light 
+  icon: mdi:ceiling-light
 
 group.living_room_lights:
   icon: mdi:sofa
 
-###################  
+###################
 ##### Sensors #####
 ###################
 
@@ -59,6 +59,18 @@ sensor.ryans_room_temperature_aggregate:
 sensor.ryans_bathroom_temperature_aggregate:
   icon: mdi:thermometer
   friendly_name: Ryan's Bathroom Temperature
+
+sensor.lorens_room_temperature_aggregate:
+  icon: mdi:thermometer
+  friendly_name: Loren's Room Temperature
+
+sensor.jordans_room_temperature_aggregate:
+  icon: mdi:thermometer
+  friendly_name: Jordan's Room Temperature
+
+sensor.civics_room_temperature_aggregate:
+  icon: mdi:thermometer
+  friendly_name: Civic's Room Temperature
 
 sensor.backyard_temperature_aggregate:
   icon: mdi:thermometer
@@ -119,7 +131,7 @@ sensor.livingroom_humidity_aggregate:
 sensor.upstairs_hallway_humidity_aggregate:
   icon: mdi:water-percent
 
-################  
+################
 ##### Misc #####
 ################
 
