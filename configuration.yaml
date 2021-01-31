@@ -42,7 +42,7 @@ sensor: !include sensors.yaml
 
 binary_sensor: !include binary_sensors.yaml
 
-device_tracker: !include device_trackers.yaml 
+device_tracker: !include device_trackers.yaml
 
 mqtt:
   discovery: true
@@ -89,4 +89,6 @@ hydrawise:
 ios: !include ios.yaml
 
 roomba: !include roomba.yaml
+
+owntracks: !include owntracks.yaml
 

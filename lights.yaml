@@ -1,6 +1,16 @@
+###########################
+##### Light Platforms #####
+###########################
+
 - platform: decora_wifi
   username: !secret leviton_user
   password: !secret leviton_password
+
+- platform: aarlo
+
+########################
+##### Light Groups #####
+########################
 
 - platform: group
   name: Kitchen Light South
@@ -34,3 +44,66 @@
     - light.glass_light_1
     - light.glass_light_2
 
+##############################
+##### Switch Conversions #####
+##############################
+
+- platform: switch
+  name: Backyard Lights 1
+  entity_id: switch.backyard_lights
+
+- platform: switch
+  name: Backyard Lights 2
+  entity_id: switch.backyard_lights_2
+
+- platform: switch
+  name: Bed Light
+  entity_id: switch.bed_light
+
+- platform: switch
+  name: Cabana
+  entity_id: switch.cabana
+
+- platform: switch
+  name: Christmas Tree
+  entity_id: switch.christmas_tree
+
+- platform: switch
+  name: Corner Light
+  entity_id: switch.corner_light
+
+- platform: switch
+  name: Desk Lamp
+  entity_id: switch.desk_lamp
+
+- platform: switch
+  name: Dresser Light
+  entity_id: switch.dresser_light
+
+- platform: switch
+  name: Garage Light 1
+  entity_id: switch.on_off_light_27
+
+- platform: switch
+  name: Garage Light 2
+  entity_id: switch.on_off_light_28
+
+- platform: switch
+  name: Lorens Light Bar
+  entity_id: switch.lorens_light_bar
+
+- platform: switch
+  name: Lorens Shop Light
+  entity_id: switch.lorens_shop_light
+
+- platform: switch
+  name: Jordans Shop Light
+  entity_id: switch.jordans_shop_light
+
+- platform: switch
+  name: Mantle Light
+  entity_id: switch.mantle_light
+
+- platform: switch
+  name: Snake Lights
+  entity_id: switch.snake_lights

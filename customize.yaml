@@ -14,6 +14,12 @@ media_player.oled77:
 ##### Room Light Groups #####
 #############################
 
+group.living_room_lights:
+  icon: mdi:sofa
+
+group.garage_lights:
+  icon: mdi:garage
+
 group.backyard_lights:
   icon: mdi:tree
 
@@ -23,26 +29,26 @@ group.family_room_lights:
 group.hallway_lights:
   icon: mdi:ceiling-light
 
-group.jordans_room_lights:
-  icon: mdi:bed
+group.upstairs_hallway_lights:
+  icon: mdi:ceiling-light
 
 group.kitchen_lights:
   icon: mdi:stove
 
-group.lorens_room_lights:
+group.ryans_room_lights:
   icon: mdi:bed
 
 group.ryans_bathroom_lights:
   icon: mdi:toilet
 
-group.ryans_room_lights:
+group.lorens_room_lights:
   icon: mdi:bed
 
-group.upstairs_hallway_lights:
-  icon: mdi:ceiling-light
+group.jordans_room_lights:
+  icon: mdi:bed
 
-group.living_room_lights:
-  icon: mdi:sofa
+group.civics_room_lights:
+  icon: mdi:snake
 
 ###################
 ##### Sensors #####
@@ -141,3 +147,12 @@ group.bluetooth_scanners:
 group.house:
   icon: mdi:home-outline
 
+################
+##### Fans #####
+################
+
+fan.lorens_room:
+  friendly_name: Loren's Dyson
+
+fan.ryans_room:
+  friendly_name: Ryan's Dyson

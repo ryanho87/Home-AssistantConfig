@@ -824,3 +824,107 @@
 
             '
   mode: single
+- id: '1611560575495'
+  alias: '[Global] Arm Home'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: ARM_HOME
+  condition: []
+  action:
+  - service: alarm_control_panel.alarm_disarm
+    data: {}
+    entity_id: alarm_control_panel.ha_alarm
+  - service: alarm_control_panel.alarm_arm_home
+    data: {}
+    entity_id: alarm_control_panel.aarlo_smarhub
+  mode: single
+- id: '1611560689099'
+  alias: '[Global] Arm Away/Sleep'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: ARM_AWAY
+  condition: []
+  action:
+  - service: alarm_control_panel.alarm_arm_home
+    data: {}
+    entity_id: alarm_control_panel.ha_alarm
+  - service: alarm_control_panel.alarm_arm_night
+    data: {}
+    entity_id: alarm_control_panel.aarlo_smarhub
+  mode: single
+- id: '1611560830965'
+  alias: Tag Ryan’s Nightstand is scanned
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: fa39ea3c-2ccd-4625-bead-244109b7d2d6
+  condition: []
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Alarm
+      message: Manage the House Alarm
+      data:
+        push:
+          category: manage_alarm
+        apns_headers:
+          apns-collapse-id: manage-alarm
+  mode: single
+- id: '1611560997834'
+  alias: '[Global] House Turned off'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.house_lights
+    to: 'off'
+  condition: []
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Alarm
+      message: Manage the House Alarm
+      data:
+        push:
+          category: manage_alarm
+        apns_headers:
+          apns-collapse-id: manage-alarm
+  mode: single
+- id: '1611561056920'
+  alias: '[Global] House Turned on'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.house_lights
+    to: 'on'
+    from: 'off'
+  condition: []
+  action:
+  - service: notify.mobile_app_icetray
+    data:
+      title: Alarm
+      message: Manage the House Alarm
+      data:
+        push:
+          category: manage_alarm
+        apns_headers:
+          apns-collapse-id: manage-alarm
+  mode: single
+- id: '1612047468412'
+  alias: '[Garage] Motion Detected'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.aarlo_motion_garage
+    to: 'on'
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: switch.on_off_light_28
+  mode: single

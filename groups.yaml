@@ -12,8 +12,8 @@ ryans_room_lights:
     - light.ryans_play_right
     - light.ryans_shelf_light
     - light.ryans_tv_lightstrip
-    - switch.bed_light
-    - switch.desk_lamp
+    - light.bed_light
+    - light.desk_lamp
   all: false
   icon: mdi:bed-empty
 
@@ -53,17 +53,17 @@ lorens_room_lights:
   name: Loren's Room
   entities:
   - light.lorens_desk_light
-  - switch.corner_light
-  - switch.dresser_light
-  - switch.lorens_shop_light
-  - switch.lorens_light_bar
+  - light.corner_light
+  - light.dresser_light
+  - light.lorens_shop_light
+  - light.lorens_light_bar
   all: false
 
 lorens_room_sensors:
   name: Loren's Room Sensors
   entities:
-    # - sensor.lorens_room_temperature_aggregate
-    # - sensor.lorens_room_humidity_aggregate
+    - sensor.lorens_room_temperature_aggregate
+    - sensor.lorens_room_humidity_aggregate
     - binary_sensor.lorens_room_occupancy_aggregate
 
 #########################
@@ -73,17 +73,34 @@ lorens_room_sensors:
 jordans_room_lights:
   name: Jordan's Room
   entities:
-  - switch.jordans_shop_light
+  - light.jordans_shop_light
   all: false
 
 jordans_room_sensors:
   name: Jordan's Room Sensors
   entities:
-    # - sensor.jordanss_room_temperature_aggregate
-    # - sensor.jordans_room_humidity_aggregate
+     - sensor.jordans_room_temperature_aggregate
+     - sensor.jordans_room_humidity_aggregate
     # - binary_sensor.jordans_room_occupancy_aggregate
 
-#######################  
+#########################
+##### Civic's Room #####
+#########################
+
+civics_room_lights:
+  name: Civic's Room
+  entities:
+  - light.snake_lights
+  all: false
+
+civics_room_sensors:
+  name: Civic's Room Sensors
+  entities:
+    # - sensor.civics_room_temperature_aggregate
+    # - sensor.civics_room_humidity_aggregate
+    # - binary_sensor.civics_room_occupancy_aggregate
+
+#######################
 ##### Living Room #####
 #######################
 
@@ -96,7 +113,7 @@ living_room_lights:
     - light.oled_right
     - light.ceiling_light
   all: false
-  #icon: 
+  #icon:
 
 living_room_sensors:
   name: Living Room Sensors
@@ -105,13 +122,13 @@ living_room_sensors:
     - sensor.livingroom_humidity_aggregate
     - binary_sensor.livingroom_occupancy_aggregate
 
-###################      
+###################
 ##### Kitchen #####
 ###################
 
 kitchen_lights:
   name: Kitchen
-  entities: 
+  entities:
     - light.kitchen_light_north
     - light.kitchen_light_south
   all: false
@@ -130,9 +147,9 @@ kitchen_sensors:
 backyard_lights:
   name: Backyard
   entities:
-  - switch.cabana
-  - switch.backyard_lights
-  - switch.backyard_lights_2
+  - light.cabana
+  - light.backyard_lights_1
+  - light.backyard_lights_2
   all: false
 
 backyard_sensors:
@@ -141,13 +158,15 @@ backyard_sensors:
     - sensor.backyard_temperature_aggregate
     - sensor.backyard_humidity_aggregate
     # - binary_sensor.backyard_occupancy_aggregate
-    
+
+#######################
 ##### Family Room #####
+#######################
 
 family_room_lights:
   name: Family Room
   entities:
-  - switch.mantle_light
+  - light.mantle_light
   - light.pendant_light
   all: false
 
@@ -165,17 +184,19 @@ family_room_sensors:
 garage_lights:
   name: Garage
   entities:
+   - light.garage_light_1
+   - light.garage_light_2
 
 garage_sensors:
   name: Garage Sensors
   entities:
     - sensor.garage_temperature_aggregate
     - sensor.garage_humidity_aggregate
-    # - binary_sensor.garage_occupancy_aggregate
+    - binary_sensor.garage_occupancy_aggregate
 
 ###################
 ##### Hallway #####
-###################        
+###################
 
 hallway_lights:
   name: Hallway
@@ -207,7 +228,7 @@ upstairs_hallway_sensors:
     - sensor.upstairs_hallway_temperature_aggregate
     # - sensor.upstairs_hallway_humidity_aggregate
     - binary_sensor.upstairs_hallway_occupancy_aggregate
- 
+
 #################
 ##### House #####
 #################
@@ -221,7 +242,7 @@ house_lights:
   - group.lorens_room_lights
   - group.jordans_room_lights
   # - group.jimmys_room_lights
-  # - group.civics_room_lights
+  - group.civics_room_lights
   ##### Shared Spaces #####
   - group.living_room_lights
   - group.kitchen_lights

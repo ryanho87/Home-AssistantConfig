@@ -39,3 +39,27 @@ push:
           activationMode: 'background'
           behavior: default
           destructive: false
+    - name: Manage Alarm
+      identifier: 'manage_alarm'
+      actions:
+       - identifier: 'ARM_HOME'
+         title: 'Arm Home'
+         activation<ode: 'background'
+         behavior: 'default'
+         destructive: true
+       - identifier: 'ARM_AWAY'
+         title: 'Arm Away/Sleep'
+         activation<ode: 'background'
+         behavior: 'default'
+         destructive: true
+       - identifier: 'DISARM'
+         title: 'Disarm'
+         activation<ode: 'background'
+         behavior: 'default'
+         destructive: false         
+       - identifier: 'DISMISS'
+         title: 'Dismiss'
+         activation<ode: 'background'
+         behavior: 'default'
+         destructive: false
+

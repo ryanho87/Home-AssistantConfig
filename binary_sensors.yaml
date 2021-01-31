@@ -27,7 +27,7 @@
       device_class: occupancy
       value_template: >-
           {{ is_state('binary_sensor.ryans_bathroom_motion_sensor', 'on')
-             or is_state('binary_sensor.ryans_bathroom_bluetooth_device_present', "on") }} 
+             or is_state('binary_sensor.ryans_bathroom_bluetooth_device_present', "on") }}
 
 ##### Shared Rooms #####
 
@@ -81,7 +81,7 @@
       device_class: presence
       value_template: >-
           {{ is_state('sensor.icetray_room_presence', 'Livingroom')
-            or is_state('sensor.jordans_iphone_room_presence', "Livingroom")   
+            or is_state('sensor.jordans_iphone_room_presence', "Livingroom")
             or is_state('sensor.88_a4_79_b5_d2_a6_room_presence', "Livingroom") }}
     ryans_room_bluetooth_device_present:
       friendly_name: "Ryan's Room Bluetooth Device Present"
@@ -112,9 +112,9 @@
             or is_state('sensor.jordans_iphone_room_presence', "Kitchen")
             or is_state('sensor.88_a4_79_b5_d2_a6_room_presence', "Kitchen") }}
 
-################################            
-##### Other Binary Sensors #####
-################################
+###################################
+##### Binary Sensor Platforms #####
+###################################
 
 - platform: hydrawise
 
@@ -122,4 +122,3 @@
   monitored_conditions:
   - motion
   - sound
-
