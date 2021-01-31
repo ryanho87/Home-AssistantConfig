@@ -111,7 +111,7 @@
   action:
   - service: homeassistant.turn_off
     data: {}
-    entity_id: switch.snake_lights
+    entity_id: light.snake_lights
   mode: single
 - id: '1604308005885'
   alias: '[Ryan''s Room] Tag Ryan’s Nightstand is scanned'
@@ -468,7 +468,7 @@
   action:
   - service: homeassistant.toggle
     data: {}
-    entity_id: switch.snake_lights
+    entity_id: light.snake_lights
   mode: single
 - id: '1610513660435'
   alias: '[Loren''s Room]  Smart Switch'
@@ -926,5 +926,71 @@
   action:
   - service: homeassistant.turn_on
     data: {}
-    entity_id: switch.on_off_light_28
+    entity_id: light.garage_light_1
+  mode: single
+- id: '1612061439595'
+  alias: '[Kitchen] Increase Brightness'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: dimmer_switch
+      event: 2000
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: dimmer_switch
+      event: 2001
+  condition: []
+  action:
+  - type: brightness_increase
+    device_id: a92e44a55d769ce4d672e860bc78ea45
+    entity_id: light.kitchen_light_north_1
+    domain: light
+  - type: brightness_increase
+    device_id: 7d7da21de1c6594fd8f070b4d4a0ec5e
+    entity_id: light.kitchen_light_north_2
+    domain: light
+  - type: brightness_increase
+    device_id: eb1d2026ab922cf30004cf96393c250d
+    entity_id: light.kitchen_light_south_1
+    domain: light
+  - type: brightness_increase
+    device_id: 2bc4bd08c96b99888adc76f853b8726b
+    entity_id: light.kitchen_light_south_2
+    domain: light
+  mode: single
+- id: '1612061542257'
+  alias: '[Kitchen] Decrease Brightness'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: dimmer_switch
+      event: 3000
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      id: dimmer_switch
+      event: 3001
+  condition: []
+  action:
+  - type: brightness_decrease
+    device_id: a92e44a55d769ce4d672e860bc78ea45
+    entity_id: light.kitchen_light_north_1
+    domain: light
+  - type: brightness_decrease
+    device_id: 7d7da21de1c6594fd8f070b4d4a0ec5e
+    entity_id: light.kitchen_light_north_2
+    domain: light
+  - type: brightness_decrease
+    device_id: eb1d2026ab922cf30004cf96393c250d
+    entity_id: light.kitchen_light_south_1
+    domain: light
+  - type: brightness_decrease
+    device_id: 2bc4bd08c96b99888adc76f853b8726b
+    entity_id: light.kitchen_light_south_2
+    domain: light
   mode: single
