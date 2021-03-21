@@ -36,15 +36,17 @@
   #    device_class: occupancy
   #    value_template: #No sensors available yet
 
-  # family_room_occupancy_aggregate:
-  #   friendly_name: "Family Room Occupancy Sensor"
-  #    device_class: occupancy
-  #    value_template: #No sensors available yet
+    family_room_occupancy_aggregate:
+      friendly_name: "Family Room Occupancy Sensor"
+      device_class: occupancy
+      value_template: >-
+         {{ is_state('binary_sensor.binary_sensor.presence_44', 'on') }}
 
-  # garage_occupancy_aggregate:
-  #    friendly_name: "Garage Occupancy Sensor"
-  #    device_class: occupancy
-  #    value_template: #No sensors available yet
+    garage_occupancy_aggregate:
+      friendly_name: "Garage Occupancy Sensor"
+      device_class: occupancy
+      value_template: >-
+         {{ is_state('binary_sensor.binary_sensor.presence_46', 'on') }}
 
     hallway_occupancy_aggregate:
       friendly_name: "Hallway Occupancy Sensor"
@@ -56,8 +58,7 @@
       friendly_name: "Kitchen Occupancy Sensor"
       device_class: occupancy
       value_template: >-
-          {{ is_state('binary_sensor.kitchen_motion_sensor', 'on')
-             or is_state('binary_sensor.kitchen_bluetooth_device_present', "on") }}
+          {{ is_state('binary_sensor.presence_38', 'on') }}
 
     livingroom_occupancy_aggregate:
       friendly_name: "Living Room Occupancy Sensor"

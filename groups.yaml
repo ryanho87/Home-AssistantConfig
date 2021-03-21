@@ -150,6 +150,7 @@ backyard_lights:
   - light.cabana
   - light.backyard_lights_1
   - light.backyard_lights_2
+  - light.backyard_wall_lights
   all: false
 
 backyard_sensors:
@@ -168,13 +169,14 @@ family_room_lights:
   entities:
   - light.mantle_light
   - light.pendant_light
+  - light.spotlight
   all: false
 
 family_room_sensors:
   name: Family Room Sensors
   entities:
-    # - sensor.family_room_temperature_aggregate
-    # - sensor.family_room_humidity_aggregate
+     - sensor.family_room_temperature_aggregate
+     - sensor.family_room_humidity_aggregate
     # - binary.sensorfamily_room_occupancy_aggregate
 
 ##################
@@ -232,6 +234,14 @@ upstairs_hallway_sensors:
 #################
 ##### House #####
 #################
+
+downstairs_lights:
+  entities:
+  - group.living_room_lights
+  - group.kitchen_lights
+  - group.family_room_lights
+  - group.hallway_lights
+  - group.garage_lights
 
 house_lights:
   name: House

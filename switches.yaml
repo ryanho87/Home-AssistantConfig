@@ -1,3 +1,9 @@
 - platform: hydrawise
   monitored_conditions: manual_watering
   watering_minutes: 5
+
+- platform: aarlo
+  siren: True
+  all_sirens: True
+  siren_volume: 1
+  siren_duration: 10

@@ -1,18 +1,19 @@
   discovery: false
   switch:
-  - host: 10.0.0.20 #Bed Light
-  - host: 10.0.0.21 #Snake Lights
-  - host: 10.0.0.22 #Backyard Lights
-  - host: 10.0.0.23 #Backyard Lights
-  - host: 10.0.0.24 #Loren's Shop Light
-  - host: 10.0.0.60 #Desk Lamp
-  - host: 10.0.0.62 #Kitchen TV
-    # - host: 10.0.0.90 #Livingroom TV (Power Meter)
-    # - host: 10.0.0.93 #Air Mover (Power Meter)
-  - host: 10.0.0.96 #Coffee Table (Power Meter)
-  - host: 10.0.0.102 #Christmas Tree
-  - host: 10.0.0.105 #Snakes (Power Meter)
-  - host: 10.0.0.149 #Lorens Light Bar
+  - host: 10.0.0.20 # 50:C7:BF:68:1E:B9 - Bed Light
+  - host: 10.0.0.21 # B0:BE:76:B1:32:E0 - Snake Lights
+  - host: 10.0.0.22 # 50:C7:BF:68:1E:9B - Backyard Lights
+  - host: 10.0.0.23 # 50:C7:BF:59:1A:A3 - Backyard Lights
+  - host: 10.0.0.24 # 50:C7:BF:68:19:28 - Loren's Shop Light
+  - host: 10.0.0.32 # 50:C7:BF:84:1C:04 - Ryan's Desk (Power Meter)
+  - host: 10.0.0.60 # 3C:84:6A:B4:6E:B4 - Desk Lamp
+  - host: 10.0.0.62 # 3C:84:6A:B4:5A:72 - Kitchen TV
+  - host: 10.0.0.90 # 50:C7:BF:84:18:C2 - Jordy's PC (Power Meter)
+  - host: 10.0.0.93 # 50:C7:BF:78:E2:66 - Living Room TV (Power Meter)
+  - host: 10.0.0.96 # 68:FF:7B:B8:7F:1F - Coffee Table (Power Meter)
+  - host: 10.0.0.102 # 3C:84:6A:B4:67:90 - Spotlight
+  - host: 10.0.0.105 # 50:C7:BF:84:32:4A - Snakes (Power Meter)
+  - host: 10.0.0.149 # 3C:84:6A:B4:67:A4 - Lorens Light Bar
   strip:
-  - host: 10.0.0.49 #Cabana
+  - host: 10.0.0.49 # 1C:3B:F3:4C:EE:C0 - Cabana
     

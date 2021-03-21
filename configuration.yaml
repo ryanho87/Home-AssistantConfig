@@ -28,6 +28,10 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 switch: !include switches.yaml
 
+discovery:
+  ignore:
+   - philips_hue
+
 ###############################
 ##### NATIVE INTEGRATIONS #####
 ###############################
@@ -44,9 +48,7 @@ binary_sensor: !include binary_sensors.yaml
 
 device_tracker: !include device_trackers.yaml
 
-mqtt:
-  discovery: true
-  broker: 10.0.0.7
+mqtt: !include mqtt.yaml
 
 camera: !include cameras.yaml
 
@@ -71,7 +73,7 @@ eufy:
   username: !secret eufy_user
   password: !secret eufy_password
 
-influxdb: !include influxdb.yaml
+  #influxdb: !include influxdb.yaml
 
 webostv: !include webostv.yaml
 
@@ -83,6 +85,8 @@ sense:
   email: !secret sense_user
   password: !secret sense_password
 
+sonos: !include sonos.yaml
+
 hydrawise:
   access_token: !secret hydrawise_api_key
 
@@ -92,3 +96,15 @@ roomba: !include roomba.yaml
 
 owntracks: !include owntracks.yaml
 
+logger:
+  default: info
+  logs:
+    custom_components.aarlo: debug
+    custom_components.aarlo.alarm_control_panel: debug
+    custom_components.aarlo.binary_sensor: debug
+    custom_components.aarlo.camera: debug
+    custom_components.aarlo.light: debug
+    custom_components.aarlo.media_player: debug
+    custom_components.aarlo.sensor: debug
+    custom_components.aarlo.switch: debug
+    pyaarlo: debug

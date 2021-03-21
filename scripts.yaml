@@ -38,3 +38,14 @@ turn_off_small_tv_apple_tv:
     entity_id: remote.oled_65
   mode: single
   icon: mdi:television
+toggle_rain_mode:
+  alias: toggle rain mode
+  sequence:
+  - service: aarlo.alarm_set_mode
+    data:
+      entity_id: '{{ alarm }}'
+      mode: "{% if is_state(alarm,'armed_home') %}\n  Home-Rain\n{% elif is_state(alarm,'Home-Rain')\
+        \ %}\n  armed_home\n{% elif is_state(alarm,'Away-Night') %}\n  Away-Night-Rain\n\
+        {% elif is_state(alarm,'Away-Night-Rain') %}\n  Away-Night\n{% endif %}\n"
+  icon: mdi:rain
+  mode: single

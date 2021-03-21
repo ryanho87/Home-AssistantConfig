@@ -1,0 +1,2 @@
+discovery: true
+broker: !secret mqtt_broker

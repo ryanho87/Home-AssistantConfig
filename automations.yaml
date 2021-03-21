@@ -1,12 +1,10 @@
 - id: '1604219828435'
-  alias: '[Ryan''s Bathroom] Turn on'
+  alias: '[Ryan''s Bathroom] Turn on Lights'
   description: ''
   trigger:
-  - type: motion
-    platform: device
-    device_id: b8de143b26ec540d58f194b1e8d515f5
-    entity_id: binary_sensor.ryans_bathroom_motion_sensor
-    domain: binary_sensor
+  - platform: state
+    entity_id: binary_sensor.ryans_bathroom_occupancy_aggregate
+    to: 'on'
   condition: []
   action:
   - service: homeassistant.turn_on
@@ -14,18 +12,9 @@
     entity_id: group.ryans_bathroom_lights
   mode: single
 - id: '1604219907607'
-  alias: '[Ryan''s Bathroom] Turn off'
+  alias: '[Ryan''s Bathroom] Turn off Lights'
   description: ''
   trigger:
-  - type: no_motion
-    platform: device
-    device_id: b8de143b26ec540d58f194b1e8d515f5
-    entity_id: binary_sensor.ryans_bathroom_motion_sensor
-    domain: binary_sensor
-    for:
-      hours: 0
-      minutes: 5
-      seconds: 0
   - platform: event
     event_type: ios.notification_action_fired
     event_data:
@@ -83,7 +72,7 @@
     entity_id: group.upstairs_hallway_lights
   mode: single
 - id: '1604220092908'
-  alias: '[Upstairs Hallway] Turn off'
+  alias: '[Upstairs Hallway] Turn off Lights'
   description: ''
   trigger:
   - type: no_motion
@@ -129,7 +118,7 @@
     entity_id: group.ryans_bathroom_lights
   mode: single
 - id: '1604457926934'
-  alias: '[Ryan''s Room] Turn off'
+  alias: '[Ryan''s Room] Turn off Lights'
   description: ''
   trigger:
   - platform: event
@@ -204,6 +193,7 @@
     entity_id: binary_sensor.living_room_occupancy
     from: 'on'
     to: 'off'
+    for: 5 minutes
   condition:
   - condition: state
     entity_id: group.living_room_lights
@@ -260,41 +250,8 @@
     data: {}
     entity_id: switch.snake_lights
   mode: single
-- id: '1605142319756'
-  alias: '[Ryan''s Room] Energy Saver (Auto Turn off)'
-  description: ''
-  trigger:
-  - platform: time_pattern
-    minutes: /5
-  condition:
-  - condition: state
-    entity_id: group.ryans_room_lights
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.ryans_room_occupancy
-    state: 'off'
-  action:
-  - service: homeassistant.turn_off
-    data: {}
-    entity_id:
-    - group.ryans_room
-    - group.ryans_bathroom
-  - service: notify.mobile_app_icetray
-    data:
-      Title: Energy Saver is turning Ryan's Room off
-  mode: single
-- id: '1605149489800'
-  alias: '[Loren''s Room] Turn on'
-  description: ''
-  trigger: []
-  condition: []
-  action:
-  - service: homeassistant.turn_on
-    data: {}
-    entity_id: group.lorens_room_lights
-  mode: single
 - id: '1605149617014'
-  alias: '[Loren''s Room] Turn off'
+  alias: '[Loren''s Room] Turn off Lights'
   description: ''
   trigger:
   - platform: event
@@ -308,7 +265,7 @@
     entity_id: group.lorens_room_lights
   mode: single
 - id: '1605737501228'
-  alias: '[Kitchen] Turn on'
+  alias: '[Kitchen] Turn on Lights'
   description: Turn the Kitchen on to Bright
   trigger:
   - platform: state
@@ -326,7 +283,7 @@
       entity_id: scene.kitchen_bright
   mode: single
 - id: '1605761929577'
-  alias: '[Kitchen] Turn off'
+  alias: '[Kitchen] Turn off Lights'
   description: ''
   trigger:
   - platform: state
@@ -345,7 +302,7 @@
     entity_id: group.kitchen_lights
   mode: single
 - id: '1609140878689'
-  alias: '[Hallway] Turn on'
+  alias: '[Hallway] Turn on Lights'
   description: ''
   trigger:
   - type: motion
@@ -360,7 +317,7 @@
     entity_id: group.hallway_lights
   mode: single
 - id: '1609140904247'
-  alias: '[Hallway] Turn off'
+  alias: '[Hallway] Turn off Lights'
   description: ''
   trigger:
   - type: no_motion
@@ -430,31 +387,10 @@
         data: {}
         entity_id: group.ryans_room_lights
       slide_on_one: []
-- id: '1610441252820'
-  alias: '[Ryan''s Room] Turn on'
-  description: ''
-  trigger: []
-  condition: []
-  action:
-  - service: homeassistant.turn_on
-    data: {}
-    entity_id: ' group.ryans_room_lights'
-  mode: single
-- id: '1610481478911'
-  alias: '[Ryan''s Room] Smart Switch'
-  description: ''
-  trigger:
-  - platform: event
-    event_type: deconz_event
-    event_data:
-      id: smart_switch_1
-      event: 1002
-  condition: []
-  action:
-  - service: homeassistant.toggle
-    data: {}
-    entity_id: group.ryans_room_lights
-  mode: single
+      six_to_six:
+      - service: switch.toggle
+        data: {}
+        entity_id: switch.power_meter_ryans_desk
 - id: '1610513561095'
   alias: '[Civic''s Room] Snake Light Smart Switch'
   description: ''
@@ -597,7 +533,7 @@
           volume: 0.5
   mode: single
 - id: '1610789063269'
-  alias: '[Garage] Notify when getting home'
+  alias: '[Garage] Ask to open garage if arriving home'
   description: ''
   trigger:
   - platform: zone
@@ -649,7 +585,7 @@
     entity_id: cover.garage_door
   mode: single
 - id: '1611040919001'
-  alias: '[Garage] Notify when leaving home'
+  alias: '[Garage] Reminder to close garage when leaving home'
   description: ''
   trigger:
   - platform: zone
@@ -677,26 +613,13 @@
         apns_headers:
           apns-collapse-id: garage-open
   mode: single
-- id: '1611113127114'
-  alias: '[Family Room] Turn off Apple TV after Small TV turns off'
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: media_player.oled65
-    from: 'on'
-    to: 'off'
-  condition: []
-  action:
-  - service: script.turn_off_small_tv_apple_tv
-    data: {}
-  mode: single
 - id: '1611298496643'
   alias: '[Global] Ryan arrived Home'
   description: ''
   trigger:
   - platform: state
     to: home
-    entity_id: device_tracker.user_34a3b3e0_166d_4bf7_9e2d_bc253cecffe8
+    entity_id: device_tracker.ryan_34a3b3e0_166d_4bf7_9e2d_bc253cecffe8
   condition: []
   action:
   - service: notify.mobile_app_icetray
@@ -707,14 +630,23 @@
         data:
         apns_headers:
           apns-collapse-id: device-tracker-ryan
+  - service: notify.mobile_app_icetray
+    data:
+      title: Alarm
+      message: Manage the House Alarm
+      data:
+        push:
+          category: manage_alarm
+        apns_headers:
+          apns-collapse-id: manage-alarm
   mode: single
 - id: '1611298518467'
   alias: '[Global] Ryan left Home'
   description: ''
   trigger:
   - platform: state
-    entity_id: device_tracker.user_34a3b3e0_166d_4bf7_9e2d_bc253cecffe8
     from: home
+    entity_id: device_tracker.ryan_34a3b3e0_166d_4bf7_9e2d_bc253cecffe8
   condition: []
   action:
   - service: notify.mobile_app_icetray
@@ -725,6 +657,15 @@
         data:
         apns_headers:
           apns-collapse-id: device-tracker-ryan
+  - service: notify.mobile_app_icetray
+    data:
+      title: Alarm
+      message: Manage the House Alarm
+      data:
+        push:
+          category: manage_alarm
+        apns_headers:
+          apns-collapse-id: manage-alarm
   mode: single
 - id: '1611300866595'
   alias: '[Garage] Garage Closed Alert'
@@ -859,7 +800,7 @@
     entity_id: alarm_control_panel.aarlo_smarhub
   mode: single
 - id: '1611560830965'
-  alias: Tag Ryan’s Nightstand is scanned
+  alias: '[Ryan''s Room] Ryan’s Nightstand NFC Tag is scanned'
   description: ''
   trigger:
   - platform: tag
@@ -875,6 +816,9 @@
           category: manage_alarm
         apns_headers:
           apns-collapse-id: manage-alarm
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: switch.power_meter_ryans_desk
   mode: single
 - id: '1611560997834'
   alias: '[Global] House Turned off'
@@ -914,19 +858,6 @@
           category: manage_alarm
         apns_headers:
           apns-collapse-id: manage-alarm
-  mode: single
-- id: '1612047468412'
-  alias: '[Garage] Motion Detected'
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.aarlo_motion_garage
-    to: 'on'
-  condition: []
-  action:
-  - service: homeassistant.turn_on
-    data: {}
-    entity_id: light.garage_light_1
   mode: single
 - id: '1612061439595'
   alias: '[Kitchen] Increase Brightness'
@@ -993,4 +924,141 @@
     device_id: 2bc4bd08c96b99888adc76f853b8726b
     entity_id: light.kitchen_light_south_2
     domain: light
+  mode: single
+- id: '1613017477343'
+  alias: '[Living Room] Mi Magic Cube'
+  description: ''
+  use_blueprint:
+    path: bergstrom/mi-magic-cube-deconz-45-actions.yaml
+    input:
+      remote: f7456b532cb4c6a084a781fb1a6da0e9
+      one_to_one:
+      - service: media_player.toggle
+        data: {}
+        entity_id: media_player.oled77
+      rotate_clockwise:
+      - service: media_player.volume_up
+        data: {}
+        entity_id: media_player.oled77
+      rotate_counter_clockwise:
+      - service: media_player.volume_down
+        data: {}
+        entity_id: media_player.oled77
+      cube_shake:
+      - service: homeassistant.turn_off
+        data: {}
+        entity_id: group.downstairs_lights
+      one_to_six:
+      - service: media_player.volume_mute
+        data: {}
+        entity_id: media_player.oled77
+- id: '1613023531157'
+  alias: '[Backyard] Turn on Lights'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.on_off_light_27_2
+    to: 'on'
+    from: 'off'
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.backyard_lights
+  mode: single
+- id: '1613023545876'
+  alias: '[Backyard] Turn off Lights'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.on_off_light_27_2
+    to: 'off'
+    from: 'on'
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.backyard_lights
+  mode: single
+- id: '1613026054028'
+  alias: '[Ryan''s Room] Smart Switch'
+  description: ''
+  use_blueprint:
+    path: sp3cialck/deconz-xiaomi-aqara-wxkg11lm-smart-wireless-mini-switch.yaml
+    input:
+      remote: 9163609c7d6022039203115435fcc341
+      button_press_in:
+      - service: homeassistant.toggle
+        data: {}
+        entity_id: group.ryans_room_lights
+      button_hold:
+      - service: homeassistant.toggle
+        data: {}
+        entity_id: switch.power_meter_ryans_desk
+- id: '1616365408411'
+  alias: '[Garage] Turn on Lights'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.garage_occupancy_aggregate
+    to: 'on'
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.garage_lights
+  mode: single
+- id: '1616365457461'
+  alias: '[Family Room] Turn on Lights'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.family_room_occupancy_aggregate
+    to: 'on'
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.family_room_lights
+  mode: single
+- id: '1616367967205'
+  alias: '[Family Room] Turn off Lights'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.family_room_occupancy_aggregate
+    to: 'off'
+    for: 5 minutes
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.family_room_lights
+  mode: single
+- id: '1616368051935'
+  alias: '[Garage] Turn off Lights'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.garage_occupancy_aggregate
+    to: 'off'
+    for: 5 minutes
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.garage_lights
+  mode: single
+- id: '1616368285551'
+  alias: '[Living Room] Turn on Lights'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.livingroom_occupancy_aggregate
+    to: 'on'
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.living_room_lights
   mode: single

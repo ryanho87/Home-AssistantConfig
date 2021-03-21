@@ -2,6 +2,43 @@
 ###### Aggregate Room Temperature Sensors ######
 ################################################
 
+- platform: min_max
+  name: "Upstairs Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.ryans_room_temperature_aggregate
+    - sensor.ryans_bathroom_temperature_aggregate
+    - sensor.lorens_room_temperature_aggregate
+    - sensor.upstairs_hallway_temperature_aggregate
+
+- platform: min_max
+  name: "Downstairs Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.jordans_room_temperature_aggregate
+    - sensor.civicss_room_temperature_aggregate
+    - sensor.living_room_temperature_aggregate
+    - sensor.family_room_temperature_aggregate
+    - sensor.kitchen_temperature_aggregate
+    - sensor.hallway_temperature_aggregate
+
+- platform: min_max
+  name: "House Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.upstairs_temperature_aggregate
+    - sensor.downstairs_temperature_aggregate
+
+- platform: min_max
+  name: "Outside Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.backyard_temperature_aggregate
+
 ##########################
 ##### People's Rooms #####
 ##########################
@@ -82,7 +119,7 @@
     - sensor.kitchen_temperature
 
 - platform: min_max
-  name: "Livingroom Temperature Aggregate"
+  name: "Living Room Temperature Aggregate"
   round_digits: 1
   type: mean
   entity_ids:

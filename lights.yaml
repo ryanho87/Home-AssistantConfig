@@ -65,8 +65,8 @@
   entity_id: switch.cabana
 
 - platform: switch
-  name: Christmas Tree
-  entity_id: switch.christmas_tree
+  name: Spotlight
+  entity_id: switch.spotlight
 
 - platform: switch
   name: Corner Light
@@ -107,3 +107,8 @@
 - platform: switch
   name: Snake Lights
   entity_id: switch.snake_lights
+
+- platform: switch
+  name: Backyard Wall Lights
+  entity_id: switch.on_off_light_27_2
+

@@ -7,7 +7,7 @@ push:
           title: 'Turn off'
           activationMode: 'background'
           behavior: 'default'
-          destructive: true
+          destructive: false
         - identifier: 'DISMISS'
           title: 'Dismiss'
           activationMode: 'background'
@@ -20,7 +20,7 @@ push:
           title: 'Open Garage'
           activationMode: 'background'
           behavior: 'default'
-          destructive: true
+          destructive: false
         - identifier: 'DISMISS'
           title: 'Dismiss'
           activationMode: 'background'
@@ -33,7 +33,7 @@ push:
           title: 'Close Garage'
           activationMode: 'background'
           behavior: 'default'
-          destructive: true
+          destructive: false
         - identifier: 'DISMISS'
           title: 'Dismiss'
           activationMode: 'background'
@@ -46,12 +46,12 @@ push:
          title: 'Arm Home'
          activation<ode: 'background'
          behavior: 'default'
-         destructive: true
+         destructive: false
        - identifier: 'ARM_AWAY'
          title: 'Arm Away/Sleep'
          activation<ode: 'background'
          behavior: 'default'
-         destructive: true
+         destructive: false
        - identifier: 'DISARM'
          title: 'Disarm'
          activation<ode: 'background'
