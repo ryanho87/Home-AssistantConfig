@@ -426,9 +426,9 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: cover.garage_door
-    to: open
-    from: closed
+    entity_id: binary_sensor.openclose_49
+    to: 'on'
+    from: 'off'
   condition:
   - condition: state
     entity_id: alarm_control_panel.ha_alarm
@@ -468,21 +468,21 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: cover.garage_door
+    entity_id: binary_sensor.openclose_49
     attribute: door_state
-    to: open
+    to: 'on'
     for: 01:00:00
-    from: closed
+    from: 'off'
   - platform: state
-    entity_id: cover.garage_door
+    entity_id: binary_sensor.openclose_49
     attribute: door_state
-    to: open
+    to: 'on'
     for: 02:00:00
-    from: closed
+    from: 'off'
   condition:
   - condition: state
-    entity_id: cover.garage_door
-    state: open
+    entity_id: binary_sensor.openclose_49
+    state: 'on'
     attribute: door_state
   action:
   - service: notify.mobile_app_icetray
@@ -505,9 +505,9 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: cover.garage_door
-    from: closed
-    to: open
+    entity_id: binary_sensor.openclose_49
+    from: 'off'
+    to: 'on'
   condition:
   - condition: state
     entity_id: alarm_control_panel.ha_alarm
@@ -594,9 +594,9 @@
     event: leave
   condition:
   - condition: state
-    entity_id: cover.garage_door
+    entity_id: binary_sensor.openclose_49
     attribute: door_state
-    state: open
+    state: 'on'
   action:
   - service: notify.mobile_app_icetray
     data:
@@ -672,9 +672,9 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: cover.garage_door
-    to: closed
-    from: open
+    entity_id: binary_sensor.openclose_49
+    to: 'off'
+    from: 'on'
   condition:
   - condition: state
     entity_id: alarm_control_panel.ha_alarm
@@ -694,18 +694,10 @@
   description: ''
   trigger:
   - platform: state
-    entity_id:
-    - binary_sensor.openclose_24
-    - binary_sensor.openclose_28
-    - binary_sensor.openclose_29
-    - binary_sensor.openclose_30
+    entity_id: binary_sensor.openclose_24,binary_sensor.openclose_28,binary_sensor.openclose_29,binary_sensor.openclose_30
     to: 'on'
   - platform: state
-    entity_id:
-    - binary_sensor.openclose_24
-    - binary_sensor.openclose_28
-    - binary_sensor.openclose_29
-    - binary_sensor.openclose_30
+    entity_id: binary_sensor.openclose_24,binary_sensor.openclose_28,binary_sensor.openclose_29,binary_sensor.openclose_30
     to: 'off'
   condition:
   - condition: state
