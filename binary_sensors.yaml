@@ -13,6 +13,8 @@
       value_template: >-
           {{ is_state('binary_sensor.lorens_room_motion_sensor', 'on')
              or is_state('binary_sensor.lorens_room_bluetooth_device_present', "on") }}
+      delay_off:
+        minutes: 5
 
     ryans_room_occupancy_aggregate:
       friendly_name: "Ryan's Room Occupancy Sensor"
@@ -21,6 +23,8 @@
           {{ is_state('binary_sensor.ryans_desk_motion_sensor', 'on')
              or is_state('binary_sensor.ryans_room_motion_sensor', 'on')
              or is_state('binary_sensor.ryans_room_bluetooth_device_present', "on") }}
+      delay_off:
+        minutes: 5
 
     ryans_bathroom_occupancy_aggregate:
       friendly_name: "Ryan's Bathroom Occupancy Sensor"
@@ -28,6 +32,8 @@
       value_template: >-
           {{ is_state('binary_sensor.ryans_bathroom_motion_sensor', 'on')
              or is_state('binary_sensor.ryans_bathroom_bluetooth_device_present', "on") }}
+      delay_off:
+        minutes: 5
 
 ##### Shared Rooms #####
 
@@ -41,24 +47,32 @@
       device_class: occupancy
       value_template: >-
          {{ is_state('binary_sensor.presence_44', 'on') }}
+      delay_off:
+        minutes: 5
 
     garage_occupancy_aggregate:
       friendly_name: "Garage Occupancy Sensor"
       device_class: occupancy
       value_template: >-
          {{ is_state('binary_sensor.presence_46', 'on') }}
+      delay_off:
+        minutes: 5
 
     hallway_occupancy_aggregate:
       friendly_name: "Hallway Occupancy Sensor"
       device_class: occupancy
       value_template: >-
           {{ is_state('binary_sensor.hallway_motion_sensor', 'on') }}
+      delay_off:
+        minutes: 2
 
     kitchen_occupancy_aggregate:
       friendly_name: "Kitchen Occupancy Sensor"
       device_class: occupancy
       value_template: >-
           {{ is_state('binary_sensor.presence_38', 'on') }}
+      delay_off:
+        minutes: 5
 
     livingroom_occupancy_aggregate:
       friendly_name: "Living Room Occupancy Sensor"
@@ -67,12 +81,16 @@
           {{ is_state('binary_sensor.living_room_occupancy', "on")
              or is_state('binary_sensor.livingroom_bluetooth_device_present', "on")
              or is_state('binary_sensor.presence_48', "on" ) }}
+      delay_off:
+        minutes: 5
 
     upstairs_hallway_occupancy_aggregate:
       friendly_name: "Upstairs Hallway Occupancy Sensor"
       device_class: occupancy
       value_template: >-
           {{ is_state('binary_sensor.upstairs_hallway_motion_sensor', 'on') }}
+      delay_off:
+        minutes: 2
 
 ###########################################################
 ###### Aggregate Bluetooth Presence Detector Sensors ######

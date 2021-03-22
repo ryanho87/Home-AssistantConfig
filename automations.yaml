@@ -22,11 +22,7 @@
   - platform: state
     entity_id: binary_sensor.ryans_bathroom_occupancy_aggregate
     to: 'off'
-    for: 00:05:00
-  condition:
-  - condition: state
-    entity_id: binary_sensor.ryans_bathroom_occupancy_aggregate
-    state: 'off'
+  condition: []
   action:
   - service: homeassistant.turn_off
     data: {}
@@ -82,8 +78,9 @@
     domain: binary_sensor
     for:
       hours: 0
-      minutes: 0
-      seconds: 30
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
   condition: []
   action:
   - service: homeassistant.turn_off
@@ -128,7 +125,6 @@
   - platform: state
     to: 'off'
     entity_id: binary_sensor.ryans_room_occupancy_aggregate
-    for: 00:05
   - platform: event
     event_type: deconz_event
     event_data:
@@ -137,7 +133,8 @@
   condition: []
   action:
   - service: homeassistant.turn_off
-    data: {}
+    data:
+      entity_id: group.ryans_room_lights
     entity_id: group.ryans_room_lights
   - service: notify.mobile_app_icetray
     data:
@@ -289,7 +286,6 @@
   - platform: state
     entity_id: binary_sensor.kitchen_occupancy_aggregate
     to: 'off'
-    for: 00:05:00
   - platform: event
     event_type: deconz_event
     event_data:
@@ -1020,8 +1016,14 @@
   - platform: state
     entity_id: binary_sensor.family_room_occupancy_aggregate
     to: 'off'
-    for: 5 minutes
-  condition: []
+  - platform: state
+    entity_id: binary_sensor.family_room_lights
+    to: 'on'
+    for: 00:05:00
+  condition:
+  - condition: state
+    entity_id: binary_sensor.family_room_occupancy_aggregate
+    state: 'off'
   action:
   - service: homeassistant.turn_off
     data: {}
@@ -1034,8 +1036,14 @@
   - platform: state
     entity_id: binary_sensor.garage_occupancy_aggregate
     to: 'off'
-    for: 5 minutes
-  condition: []
+  - platform: state
+    entity_id: group.garage_lights
+    to: 'on'
+    for: 00:05:00
+  condition:
+  - condition: state
+    entity_id: binary_sensor.garage_occupancy_aggregate
+    state: 'off'
   action:
   - service: homeassistant.turn_off
     data: {}
@@ -1049,6 +1057,26 @@
     entity_id: binary_sensor.livingroom_occupancy_aggregate
     to: 'on'
   condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.living_room_lights
+  mode: single
+- id: '1616392366078'
+  alias: '[Living Room] Turn off Lights'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.livingroom_occupancy_aggregate
+    to: 'off'
+  - platform: state
+    entity_id: group.living_room_lights
+    to: 'on'
+    for: 00:05:00
+  condition:
+  - condition: state
+    entity_id: binary_sensor.livingroom_occupancy_aggregate
+    state: 'off'
   action:
   - service: homeassistant.turn_on
     data: {}
