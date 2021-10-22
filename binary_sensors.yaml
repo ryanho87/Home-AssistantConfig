@@ -2,10 +2,13 @@
 ###### Aggregate Room Occupancy Sensors ######
 ##############################################
 
+#
+## These binary sensors aggregate all sensors in a room that signal occupancy.
+## Occupancy expires x minutes after the delay_off defined for the sensor.
+#
+
 - platform: template
   sensors:
-
-##### People's Rooms #####
 
     lorens_room_occupancy_aggregate:
       friendly_name: "Loren's Room Occupancy Sensor"
@@ -14,7 +17,7 @@
           {{ is_state('binary_sensor.lorens_room_motion_sensor', 'on')
              or is_state('binary_sensor.lorens_room_bluetooth_device_present', "on") }}
       delay_off:
-        minutes: 5
+        minutes: 15
 
     ryans_room_occupancy_aggregate:
       friendly_name: "Ryan's Room Occupancy Sensor"
@@ -24,7 +27,7 @@
              or is_state('binary_sensor.ryans_room_motion_sensor', 'on')
              or is_state('binary_sensor.ryans_room_bluetooth_device_present', "on") }}
       delay_off:
-        minutes: 5
+        minutes: 15
 
     ryans_bathroom_occupancy_aggregate:
       friendly_name: "Ryan's Bathroom Occupancy Sensor"
@@ -33,9 +36,7 @@
           {{ is_state('binary_sensor.ryans_bathroom_motion_sensor', 'on')
              or is_state('binary_sensor.ryans_bathroom_bluetooth_device_present', "on") }}
       delay_off:
-        minutes: 5
-
-##### Shared Rooms #####
+        minutes: 10
 
   # backyard_occupancy_aggregate:
   #    friendly_name: "Backyard Occupancy Sensor"
@@ -46,17 +47,17 @@
       friendly_name: "Family Room Occupancy Sensor"
       device_class: occupancy
       value_template: >-
-         {{ is_state('binary_sensor.presence_44', 'on') }}
+         {{ is_state('binary_sensor.family_room_motion_sensor', 'on') }}
       delay_off:
-        minutes: 5
+        minutes: 15
 
     garage_occupancy_aggregate:
       friendly_name: "Garage Occupancy Sensor"
       device_class: occupancy
       value_template: >-
-         {{ is_state('binary_sensor.presence_46', 'on') }}
+         {{ is_state('binary_sensor.garage_motion_sensor', 'on') }}
       delay_off:
-        minutes: 5
+        minutes: 15
 
     hallway_occupancy_aggregate:
       friendly_name: "Hallway Occupancy Sensor"
@@ -70,9 +71,9 @@
       friendly_name: "Kitchen Occupancy Sensor"
       device_class: occupancy
       value_template: >-
-          {{ is_state('binary_sensor.presence_38', 'on') }}
+          {{ is_state('binary_sensor.kitchen_motion_sensor', 'on') }}
       delay_off:
-        minutes: 5
+        minutes: 15
 
     livingroom_occupancy_aggregate:
       friendly_name: "Living Room Occupancy Sensor"
@@ -80,9 +81,9 @@
       value_template: >-
           {{ is_state('binary_sensor.living_room_occupancy', "on")
              or is_state('binary_sensor.livingroom_bluetooth_device_present', "on")
-             or is_state('binary_sensor.presence_48', "on" ) }}
+             or is_state('binary_sensor.living_room_motion_sensor', "on" ) }}
       delay_off:
-        minutes: 5
+        minutes: 25
 
     upstairs_hallway_occupancy_aggregate:
       friendly_name: "Upstairs Hallway Occupancy Sensor"
@@ -91,6 +92,86 @@
           {{ is_state('binary_sensor.upstairs_hallway_motion_sensor', 'on') }}
       delay_off:
         minutes: 2
+
+######################################
+###### Aggregate Motion Sensors ######
+######################################
+
+#
+## These binary sensors aggregate all motion sensors in a room into a single sensor for use in automations
+#
+
+##########################
+##### People's Rooms #####
+##########################
+
+    lorens_room_motion_sensor_aggregate:
+      friendly_name: "Loren's Room Motion Sensor"
+      device_class: motion
+      value_template: >-
+          {{ is_state('binary_sensor.lorens_room_motion_sensor', 'on') }}
+
+    ryans_room_motion_sensor_aggregate:
+      friendly_name: "Ryan's Room Motion Sensor"
+      device_class: motion
+      value_template: >-
+          {{ is_state('binary_sensor.ryans_desk_motion_sensor', 'on')
+             or is_state('binary_sensor.ryans_room_motion_sensor', 'on') }}
+
+    ryans_bathroom_motion_sensor_aggregate:
+      friendly_name: "Ryan's Bathroom Motion Sensor"
+      device_class: motion
+      value_template: >-
+          {{ is_state('binary_sensor.ryans_bathroom_motion_sensor', 'on') }}
+
+########################
+##### Shared Rooms #####
+########################
+
+  # backyard_motion_sensor_aggregate:
+  #    friendly_name: "Backyard Motion Sensor"
+  #    device_class: occupancy
+  #    value_template: #No sensors available yet
+
+    family_room_motion_sensor_aggregate:
+      friendly_name: "Family Room Motion Sensor"
+      device_class: motion
+      value_template: >-
+         {{ is_state('binary_sensor.family_room_motion_sensor', 'on')
+            or is_state('binary_sensor.family_room_motion_sensor_2', 'on') }}
+
+    garage_motion_sensor_aggregate:
+      friendly_name: "Garage Motion Sensor"
+      device_class: motion
+      value_template: >-
+         {{ is_state('binary_sensor.garage_motion_sensor', 'on') }}
+
+    hallway_motion_sensor_aggregate:
+      friendly_name: "Hallway Motion Sensor"
+      device_class: motion
+      value_template: >-
+          {{ is_state('binary_sensor.hallway_motion_sensor', 'on') }}
+
+    kitchen_motion_sensor_aggregate:
+      friendly_name: "Kitchen Motion Sensor"
+      device_class: motion
+      value_template: >-
+          {{ is_state('binary_sensor.kitchen_motion_sensor', 'on')
+              or is_state('binary_sensor.kitchen_motion_sensor_2', 'on') }}
+
+    livingroom_motion_sensor_aggregate:
+      friendly_name: "Living Room Motion Sensor"
+      device_class: motion
+      value_template: >-
+          {{  is_state('binary_sensor.living_room_motion_sensor', "on" )
+            or is_state('binary_sensor.living_room_motion_sensor_2', 'on') }}
+
+
+    upstairs_hallway_motion_sensor_aggregate:
+      friendly_name: "Upstairs Hallway Motion Sensor"
+      device_class: motion
+      value_template: >-
+          {{ is_state('binary_sensor.upstairs_hallway_motion_sensor', 'on') }}
 
 ###########################################################
 ###### Aggregate Bluetooth Presence Detector Sensors ######
@@ -132,6 +213,18 @@
             or is_state('sensor.jordans_iphone_room_presence', "Kitchen")
             or is_state('sensor.88_a4_79_b5_d2_a6_room_presence', "Kitchen") }}
 
+###############################
+##### Low Battery Sensors #####
+###############################
+    
+    ryans_roam_battery_low:
+      friendly_name: "Ryan's Roam Battery Low"
+      value_template: "{{ state('sensor.ryans_roam_battery') < 20 }}"
+  
+    lorens_roam_battery_low:
+      friendly_name: "Loren's Roam Battery Low"
+      value_template: "{{ state('sensor.lorens_roam_battery') < 20 }}"
+
 ###################################
 ##### Binary Sensor Platforms #####
 ###################################
@@ -142,3 +235,4 @@
   monitored_conditions:
   - motion
   - sound
+      

@@ -2,9 +2,9 @@
 ##### Light Platforms #####
 ###########################
 
-- platform: decora_wifi
-  username: !secret leviton_user
-  password: !secret leviton_password
+#- platform: decora_wifi
+#  username: !secret leviton_user
+#  password: !secret leviton_password
 
 - platform: aarlo
 
@@ -61,10 +61,6 @@
   entity_id: switch.bed_light
 
 - platform: switch
-  name: Cabana
-  entity_id: switch.cabana
-
-- platform: switch
   name: Spotlight
   entity_id: switch.spotlight
 
@@ -82,11 +78,11 @@
 
 - platform: switch
   name: Garage Light 1
-  entity_id: switch.on_off_light_27
+  entity_id: switch.garage_light_1
 
 - platform: switch
   name: Garage Light 2
-  entity_id: switch.on_off_light_28
+  entity_id: switch.garage_light_2
 
 - platform: switch
   name: Lorens Light Bar
@@ -110,5 +106,9 @@
 
 - platform: switch
   name: Backyard Wall Lights
-  entity_id: switch.on_off_light_27_2
+  entity_id: switch.backyard_wall_lights
+
+- platform: switch
+  name: Ceiling Light Temporary
+  entity_id: switch.cabana
 

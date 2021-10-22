@@ -11,7 +11,6 @@ ryans_room_lights:
     - light.ryans_play_left
     - light.ryans_play_right
     - light.ryans_shelf_light
-    - light.ryans_tv_lightstrip
     - light.bed_light
     - light.desk_lamp
   all: false
@@ -111,7 +110,8 @@ living_room_lights:
     - light.glass_light
     - light.oled_left
     - light.oled_right
-    - light.ceiling_light
+      # - light.ceiling_lighti
+    - light.ceiling_light_temporary
   all: false
   #icon:
 
@@ -170,6 +170,7 @@ family_room_lights:
   - light.mantle_light
   - light.pendant_light
   - light.spotlight
+  - light.family_room_tv_lightstrip
   all: false
 
 family_room_sensors:
@@ -186,8 +187,8 @@ family_room_sensors:
 garage_lights:
   name: Garage
   entities:
-   - light.garage_light_1
-   - light.garage_light_2
+    - light.garage_light_1
+    # - light.garage_light_2
 
 garage_sensors:
   name: Garage Sensors
@@ -291,4 +292,22 @@ grouped_lights:
     - light.glass_light_1
     - light.glass_light_2
 
-
+switches_converted_to_lights:
+  name: Switches converted to Lights
+  entities:
+    - switch.backyard_lights
+    - switch.backyard_lights_2
+    - switch.bed_light
+    - switch.spotlight
+    - switch.corner_light
+    - switch.desk_lamp
+    - switch.dresser_light
+    - switch.garage_light_1
+    - switch.garage_light_2
+    - switch.lorens_light_bar
+    - switch.lorens_shop_light
+    - switch.jordans_shop_light
+    - switch.mantle_light
+    - switch.snake_lights
+    - switch.backyard_wall_lights
+    - switch.cabana

@@ -1,10 +1,10 @@
-- platform: xiaomi_cloud_map_extractor
-  host: 10.0.0.73
-  token: !secret xiaomi_token
-  username: !secret xiaomi_cloud_username
-  password: !secret xiaomi_cloud_password
-  draw: ['all']
-  attributes:
-    - calibration_points
+#- platform: xiaomi_cloud_map_extractor
+#  host: 10.0.0.73
+#  token: !secret xiaomi_token
+#  username: !secret xiaomi_cloud_username
+#  password: !secret xiaomi_cloud_password
+#  draw: ['all']
+#  attributes:
+#    - calibration_points
 
 - platform: aarlo

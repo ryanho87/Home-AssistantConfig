@@ -22,11 +22,14 @@ tts:
 
 intent:
 
+python_script:
+
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 switch: !include switches.yaml
+alert: !include alerts.yaml
 
 discovery:
   ignore:
@@ -56,6 +59,10 @@ alarm_control_panel: !include alarms.yaml
 
 zone: !include zones.yaml
 
+timer: !include timers.yaml
+
+input_boolean: !include input_booleans.yaml
+
 ###############################
 ##### VENDOR INTEGRATIONS #####
 ###############################
@@ -67,11 +74,9 @@ tplink: !include tplink.yaml
 ecobee:
   api_key: !secret ecobee_api_key
 
-dyson: !include dyson.yaml
-
-eufy:
-  username: !secret eufy_user
-  password: !secret eufy_password
+#eufy:
+#  username: !secret eufy_user
+#  password: !secret eufy_password
 
   #influxdb: !include influxdb.yaml
 
@@ -85,8 +90,6 @@ sense:
   email: !secret sense_user
   password: !secret sense_password
 
-sonos: !include sonos.yaml
-
 hydrawise:
   access_token: !secret hydrawise_api_key
 
@@ -95,6 +98,9 @@ ios: !include ios.yaml
 roomba: !include roomba.yaml
 
 owntracks: !include owntracks.yaml
+
+# samsungtv: !include samsungtv.yaml
+
 
 logger:
   default: info

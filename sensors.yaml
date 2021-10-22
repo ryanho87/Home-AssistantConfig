@@ -1,6 +1,60 @@
-################################################
-###### Aggregate Room Temperature Sensors ######
-################################################
+###########################
+###### House Sensors ######
+###########################
+
+- platform: min_max
+  name: "House Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.ryans_room_temperature_aggregate
+    - sensor.ryans_bathroom_temperature_aggregate
+    - sensor.lorens_room_temperature_aggregate
+    - sensor.upstairs_hallway_temperature_aggregate
+    - sensor.jordans_room_temperature_aggregate
+    - sensor.civics_room_temperature_aggregate
+    - sensor.living_room_temperature_aggregate
+    - sensor.family_room_temperature_aggregate
+    - sensor.kitchen_temperature_aggregate
+    - sensor.hallway_temperature_aggregate
+
+- platform: min_max
+  name: "House Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.ryans_room_humidity_aggregate
+    - sensor.ryans_bathroom_humidity_aggregate
+    - sensor.lorens_room_humidity_aggregate
+    - sensor.upstairs_hallway_humidity_aggregate
+    - sensor.jordans_room_humidity_aggregate
+    - sensor.civics_room_humidity_aggregate
+    - sensor.living_room_humidity_aggregate
+    - sensor.family_room_humdity_aggregate
+    - sensor.kitchen_humidity_aggregate
+    - sensor.hallway_humidity_aggregate
+
+- platform: min_max
+  name: "House Air Quality"
+  type: mean
+  entity_ids:
+    - air_quality.lorens_room_air_quality
+    - air_quality.ryans_room_air_quality
+
+###########################
+###### Outside Sensors ######
+###########################
+
+- platform: min_max
+  name: "Outside Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.backyard_temperature_aggregate
+
+##############################
+###### Upstairs Sensors ######
+##############################
 
 - platform: min_max
   name: "Upstairs Temperature Aggregate"
@@ -12,104 +66,71 @@
     - sensor.lorens_room_temperature_aggregate
     - sensor.upstairs_hallway_temperature_aggregate
 
+#################@@#############
+###### Downstairs Sensors ######
+###################@@###########
+
 - platform: min_max
   name: "Downstairs Temperature Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
     - sensor.jordans_room_temperature_aggregate
-    - sensor.civicss_room_temperature_aggregate
+    - sensor.civics_room_temperature_aggregate
     - sensor.living_room_temperature_aggregate
     - sensor.family_room_temperature_aggregate
     - sensor.kitchen_temperature_aggregate
     - sensor.hallway_temperature_aggregate
 
+#################################
+###### Living Room Sensors ######
+#################################
+
 - platform: min_max
-  name: "House Temperature Aggregate"
+  name: "Living Room Temperature Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.upstairs_temperature_aggregate
-    - sensor.downstairs_temperature_aggregate
+    - sensor.tempin                                   #ecowitt
+    - sensor.living_room_temperature                  #ecobee
+    - sensor.living_room_motion_sensor_temperature    #aqara
+    - sensor.living_room_motion_sensor_temperature_2  #aqara
 
 - platform: min_max
-  name: "Outside Temperature Aggregate"
+  name: "Livingroom Humidity Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.backyard_temperature_aggregate
-
-##########################
-##### People's Rooms #####
-##########################
+    - sensor.livingroom_humidity
 
 - platform: min_max
-  name: "Ryans Room Temperature Aggregate"
+  name: "Livingroom Light Sensor Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.ryans_room_temperature_doorway
-    - sensor.ryans_room_temperature
+    - sensor.livingroom_humidity
 
-- platform: min_max
-  name: "Ryans Bathroom Temperature Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.ryans_bathroom_temperature
-
-- platform: min_max
-  name: "Lorens Room Temperature Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.temperature_19
-
-- platform: min_max
-  name: "Jordans Room Temperature Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.temperature_25
-
-- platform: min_max
-  name: "Civics Room Temperature Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.temperature_34      
-
-########################      
-##### Shared Rooms #####
-########################
-
-- platform: min_max
-  name: "Backyard Temperature Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.temp
+#################################
+###### Family Room Sensors ######
+#################################
 
 - platform: min_max
   name: "Family Room Temperature Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-   - sensor.temperature_31
+   - sensor.family_room_temperature
 
 - platform: min_max
-  name: "Garage Temperature Aggregate"
+  name: "Family Room Humidity Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.garage_temperature #This is the value converted from sensor.temp1
+    - sensor.family_room_humidity
 
-- platform: min_max
-  name: "Hallway Temperature Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.hallway_temperature
+#############################
+###### Kitchen Sensors ######
+#############################
 
 - platform: min_max
   name: "Kitchen Temperature Aggregate"
@@ -119,80 +140,22 @@
     - sensor.kitchen_temperature
 
 - platform: min_max
-  name: "Living Room Temperature Aggregate"
+  name: "Kitchen Humidity Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.tempin
-    - sensor.living_room_temperature
+    - sensor.kitchen_humidity
+
+#############################
+###### Garage Sensors #######
+#############################
 
 - platform: min_max
-  name: "Upstairs Hallway Temperature Aggregate"
+  name: "Garage Temperature Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.upstairs_hallway_temperature
-
-#############################################
-###### Aggregate Room Humidity Sensors ######
-#############################################
-
-##########################      
-##### People's Rooms #####
-##########################
-
-- platform: min_max
-  name: "Ryans Room Humidity Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.ryans_room_humidity
-
-# - platform: min_max
-#  name: "Ryans Bathroom Humidity Aggregate"
-#  round_digits: 1
-#  type: mean
-#  entity_ids:
-#    #No sensors available yet
-
-- platform: min_max
-  name: "Lorens Room Humidity Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.humidity_20      
-
-- platform: min_max
-  name: "Jordans Room Humidity Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.humidity_26      
-
-- platform: min_max
-  name: "Civics Room Humidity Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.humidity_35
-
-########################      
-##### Shared Rooms #####
-########################
-
-- platform: min_max
-  name: "Backyard Humidity Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.humidity
-
-- platform: min_max
-  name: "Family Room Humidity Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.humidity_32 
+    - sensor.garage_temperature #This is the value converted from sensor.temp1
 
 - platform: min_max
   name: "Garage Humidity Aggregate"
@@ -201,6 +164,40 @@
   entity_ids:
     - sensor.garage_humidity
 
+#############################
+###### Backyard Sensors #####
+#############################
+
+- platform: min_max
+  name: "Backyard Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.temp
+
+
+- platform: min_max
+  name: "Backyard Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.humidity
+
+##############################
+###### Frontyard Sensors #####
+##############################
+
+#############################
+###### Hallway Sensors ######
+#############################
+
+- platform: min_max
+  name: "Hallway Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.hallway_temperature
+
 # - platform: min_max
 #  name: "Hallway Humidity Aggregate"
 #  round_digits: 1
@@ -208,19 +205,16 @@
 #  entity_ids:
 #    #No sensors available yet
 
-- platform: min_max
-  name: "Kitchen Humidity Aggregate"
-  round_digits: 1
-  type: mean
-  entity_ids:
-    - sensor.kitchen_humidity
+######################################
+###### Upstairs Hallway Sensors ######
+######################################
 
 - platform: min_max
-  name: "Livingroom Humidity Aggregate"
+  name: "Upstairs Hallway Temperature Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.livingroom_humidity
+    - sensor.upstairs_hallway_temperature
 
 # - platform: min_max
 #  name: "Upstairs Hallway Humidity Aggregate"
@@ -229,12 +223,121 @@
 #  entity_ids:
 #    #No sensors available yet
 
+#################################
+###### Ryan's Room Sensors ######
+#################################
+
+- platform: min_max
+  name: "Ryans Room Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.ryans_room_temperature_doorway
+    - sensor.ryans_room_temperature
+    - sensor.ryans_room_temperature_dyson
+
+- platform: min_max
+  name: "Ryans Room Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.ryans_room_humidity
+
+##########################################
+###### Ryan's Bathroom Room Sensors ######
+##########################################
+
+- platform: min_max
+  name: "Ryans Bathroom Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.ryans_bathroom_temperature
+
+# - platform: min_max
+#  name: "Ryans Bathroom Humidity Aggregate"
+#  round_digits: 1
+#  type: mean
+#  entity_ids:
+#    #No sensors available yet
+
+##################################
+###### Loren's Room Sensors ######
+##################################
+
+- platform: min_max
+  name: "Lorens Room Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.lorens_room_temperature
+
+- platform: min_max
+  name: "Lorens Room Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.lorens_room_humidity
+
+###################################
+###### Jordan's Room Sensors ######
+###################################
+
+- platform: min_max
+  name: "Jordans Room Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.jordans_room_temperature
+
+- platform: min_max
+  name: "Jordans Room Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.jordans_room_humidity
+
+##################################
+###### Jimmy's Room Sensors ######
+##################################
+
+##################################
+###### Civic's Room Sensors ######
+##################################
+
+- platform: min_max
+  name: "Civics Room Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.civics_room_temperature
+
+- platform: min_max
+  name: "Civics Room Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.civics_room_humidity
+
+
+
+
+
+
+
+
+
+
+#  Utilities #
+
+
+
 ##############################
 ###### Unit Conversions ######
 ##############################
 
 - platform: template
-  sensors:          
+  sensors:
     garage_temperature:
       friendly_name: "Garage Temperature"
       unit_of_measurement: '°F'
@@ -260,7 +363,7 @@
       unit_of_measurement: '%'
       value_template: "{{ states('sensor.soilmoisture2') }}"
 
-#########################      
+#########################
 ##### Other Sensors #####
 #########################
 

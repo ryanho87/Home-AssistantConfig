@@ -1,0 +1,92 @@
+
+# ryans_sonos_low_battery:
+#   name: Ryan's Sonos Roam's Battery level is Low
+#   done_message: Ryan's Sonos Roam's Battery level is Ok
+#   entity_id: ryans_roam_battery_low
+#   state: "on"
+#   repeat: 15
+#   can_acknowledge: false
+#   skip_first: false
+#   notifiers:
+#     - mobile_app_icetray
+
+# lorens_sonos_low_battery:
+#   name: Loren's Sonos Roam's Battery level is Low
+#   done_message: Loren's Sonos Roam's Battery level is Ok
+#   entity_id: lorens_roam_battery_low
+#   state: "on"
+#   repeat: 15
+#   can_acknowledge: false
+#   skip_first: false
+#   notifiers:
+#     - mobile_app_icetray   
+
+# backyard_lights_on:
+#   name: Backyard Lights are on
+#   done_message: Backyard Lights were turned off
+#   entity_id: group.backyard_lights
+#   state: "on"
+#   repeat: 10
+#   can_acknowledge: true
+#   skip_first: false
+#   notifiers:
+#     - mobile_app_icetray   
+
+##########################
+#### Open Door Alerts ####
+##########################
+
+garage_door_open:
+  name: Garage is open
+  done_message: Garage is closed
+  entity_id: binary_sensor.garage_door_sensor
+  state: "on"
+  repeat: 15
+  can_acknowledge: true
+  skip_first: false
+  notifiers:
+    - mobile_app_icetray
+
+backyard_door_open:
+  name: Backyard Door is open
+  done_message: Backyard Door was closed
+  entity_id: binary_sensor.backyard_door_sensor
+  state: "on"
+  repeat: 10
+  can_acknowledge: true
+  skip_first: false
+  notifiers:
+    - mobile_app_icetray
+
+front_door_open:
+  name: Front Door is open
+  done_message: Front Door was closed
+  entity_id: binary_sensor.front_door_sensor
+  state: "on"
+  repeat: 5
+  can_acknowledge: true
+  skip_first: false
+  notifiers:
+    - mobile_app_icetray       
+
+upstairs_hallways_door_open:
+  name: Upstairs Hallways Door is open
+  done_message: Upstairs Hallway Door was closed
+  entity_id: binary_sensor.upstairs_hallway_door_sensor
+  state: "on"
+  repeat: 5
+  can_acknowledge: true
+  skip_first: false
+  notifiers:
+    - mobile_app_icetray    
+
+garage_side_door_open:
+  name: Garage Side Door is open
+  done_message: Garage Side Door was closed
+  entity_id: binary_sensor.garage_side_door_sensor
+  state: "on"
+  repeat: 5
+  can_acknowledge: true
+  skip_first: false
+  notifiers:
+    - mobile_app_icetray  
