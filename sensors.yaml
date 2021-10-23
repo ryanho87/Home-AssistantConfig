@@ -297,27 +297,41 @@
   entity_ids:
     - sensor.jordans_room_humidity
 
-##################################
-###### Jimmy's Room Sensors ######
-##################################
-
-##################################
-###### Civic's Room Sensors ######
-##################################
+################################
+###### Snake Room Sensors ######
+################################
 
 - platform: min_max
-  name: "Civics Room Temperature Aggregate"
+  name: "Snake Room Temperature Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.civics_room_temperature
+    - sensor.snake_room_temperature
 
 - platform: min_max
-  name: "Civics Room Humidity Aggregate"
+  name: "Snake Room Humidity Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.civics_room_humidity
+    - sensor.snake_room_humidity
+
+############################
+###### Office Sensors ######
+############################
+
+- platform: min_max
+  name: "Office Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.office_temperature
+
+- platform: min_max
+  name: "Office Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.office_humidity
 
 
 

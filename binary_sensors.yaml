@@ -23,8 +23,8 @@
       friendly_name: "Ryan's Room Occupancy Sensor"
       device_class: occupancy
       value_template: >-
-          {{ is_state('binary_sensor.ryans_desk_motion_sensor', 'on')
-             or is_state('binary_sensor.ryans_room_motion_sensor', 'on')
+          {{ is_state('binary_sensor.ryans_room_motion_sensor', 'on')
+             or is_state('binary_sensor.ryans_room_motion_sensor_2', 'on')
              or is_state('binary_sensor.ryans_room_bluetooth_device_present', "on") }}
       delay_off:
         minutes: 15
@@ -115,8 +115,8 @@
       friendly_name: "Ryan's Room Motion Sensor"
       device_class: motion
       value_template: >-
-          {{ is_state('binary_sensor.ryans_desk_motion_sensor', 'on')
-             or is_state('binary_sensor.ryans_room_motion_sensor', 'on') }}
+          {{ is_state('binary_sensor.ryans_room_motion_sensor', 'on')
+             or is_state('binary_sensor.ryans_room_motion_sensor_2', 'on') }}
 
     ryans_bathroom_motion_sensor_aggregate:
       friendly_name: "Ryan's Bathroom Motion Sensor"
@@ -216,14 +216,18 @@
 ###############################
 ##### Low Battery Sensors #####
 ###############################
-    
+
     ryans_roam_battery_low:
       friendly_name: "Ryan's Roam Battery Low"
-      value_template: "{{ state('sensor.ryans_roam_battery') < 20 }}"
-  
+      value_template: >-
+          {{ state('sensor.lorens_roam_battery') < 20
+          or state('sensor.lorens_roam_battery') == "unavailable" }}
+
     lorens_roam_battery_low:
       friendly_name: "Loren's Roam Battery Low"
-      value_template: "{{ state('sensor.lorens_roam_battery') < 20 }}"
+      value_template: >-
+          {{ state('sensor.lorens_roam_battery') < 20
+          or state('sensor.lorens_roam_battery') == "unavailable" }}
 
 ###################################
 ##### Binary Sensor Platforms #####
@@ -235,4 +239,3 @@
   monitored_conditions:
   - motion
   - sound
-      

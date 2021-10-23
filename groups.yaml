@@ -11,8 +11,8 @@ ryans_room_lights:
     - light.ryans_play_left
     - light.ryans_play_right
     - light.ryans_shelf_light
-    - light.bed_light
-    - light.desk_lamp
+    - light.ryans_floor_lamp
+    - light.ryans_desk_lamp
   all: false
   icon: mdi:bed-empty
 
@@ -51,12 +51,10 @@ ryans_bathroom_sensors:
 lorens_room_lights:
   name: Loren's Room
   entities:
-  - light.lorens_desk_light
-  - light.corner_light
-  - light.dresser_light
+  - light.lorens_floor_lamp
   - light.lorens_shop_light
-  - light.lorens_light_bar
   all: false
+  icon: mdi:bed-empty
 
 lorens_room_sensors:
   name: Loren's Room Sensors
@@ -74,6 +72,7 @@ jordans_room_lights:
   entities:
   - light.jordans_shop_light
   all: false
+  icon: mdi:bed-empty
 
 jordans_room_sensors:
   name: Jordan's Room Sensors
@@ -82,22 +81,41 @@ jordans_room_sensors:
      - sensor.jordans_room_humidity_aggregate
     # - binary_sensor.jordans_room_occupancy_aggregate
 
-#########################
-##### Civic's Room #####
-#########################
+##################
+##### Office #####
+##################
 
-civics_room_lights:
-  name: Civic's Room
+office_lights:
+  name: Office
+  entities:
+  - light.office_desk_lamp
+  all: false
+  icon: mdi:desk
+
+office_sensors:
+  name: Office Sensors
+  entities:
+     - sensor.office_temperature_aggregate
+     - sensor.office_humidity_aggregate
+     - binary_sensor.office_occupancy_aggregate
+
+######################
+##### Snake Room #####
+######################
+
+snake_room_lights:
+  name: Snake Room
   entities:
   - light.snake_lights
   all: false
+  icon: mdi:snake
 
-civics_room_sensors:
-  name: Civic's Room Sensors
+snake_room_sensors:
+  name: Snake Room Sensors
   entities:
-    # - sensor.civics_room_temperature_aggregate
-    # - sensor.civics_room_humidity_aggregate
-    # - binary_sensor.civics_room_occupancy_aggregate
+     - sensor.snake_room_temperature_aggregate
+     - sensor.snake_room_humidity_aggregate
+     - binary_sensor.snake_room_occupancy_aggregate
 
 #######################
 ##### Living Room #####
@@ -110,8 +128,7 @@ living_room_lights:
     - light.glass_light
     - light.oled_left
     - light.oled_right
-      # - light.ceiling_lighti
-    - light.ceiling_light_temporary
+    - light.ceiling_lights
   all: false
   #icon:
 
@@ -147,7 +164,6 @@ kitchen_sensors:
 backyard_lights:
   name: Backyard
   entities:
-  - light.cabana
   - light.backyard_lights_1
   - light.backyard_lights_2
   - light.backyard_wall_lights
@@ -167,9 +183,9 @@ backyard_sensors:
 family_room_lights:
   name: Family Room
   entities:
-  - light.mantle_light
+  - light.family_room_shop_light
   - light.pendant_light
-  - light.spotlight
+  - switch.family_room_spotlight
   - light.family_room_tv_lightstrip
   all: false
 
@@ -286,28 +302,31 @@ grouped_lights:
     - light.family_room_pendant_light_1
     - light.family_room_pendant_light_2
     - light.family_room_pendant_light_3
+    - light.family_room_pendant_light_4
     - light.ryans_bathroom_mirror_light_1
     - light.ryans_bathroom_mirror_light_2
     - light.ryans_bathroom_mirror_light_3
     - light.glass_light_1
     - light.glass_light_2
 
+## TODO: This needs to be updated
 switches_converted_to_lights:
   name: Switches converted to Lights
   entities:
     - switch.backyard_lights
     - switch.backyard_lights_2
-    - switch.bed_light
-    - switch.spotlight
-    - switch.corner_light
-    - switch.desk_lamp
-    - switch.dresser_light
+    - switch.ryans_floor_lamp
+    - switch.family_room_spotlight
+    - switch.lorens_floor_lamp
+    - switch.ryans_desk_lamp
+    - switch.lorens_shop_light
     - switch.garage_light_1
     - switch.garage_light_2
-    - switch.lorens_light_bar
-    - switch.lorens_shop_light
+    - switch.office_desk_lamp
     - switch.jordans_shop_light
-    - switch.mantle_light
+    - switch.family_room_shop_light
     - switch.snake_lights
     - switch.backyard_wall_lights
+    - switch.backyard_wall_light_1
+    - switch.backyard_wall_light_2
     - switch.cabana

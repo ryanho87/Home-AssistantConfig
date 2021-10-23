@@ -19,18 +19,18 @@
 #   can_acknowledge: false
 #   skip_first: false
 #   notifiers:
-#     - mobile_app_icetray   
+#     - mobile_app_icetray
 
-# backyard_lights_on:
-#   name: Backyard Lights are on
-#   done_message: Backyard Lights were turned off
-#   entity_id: group.backyard_lights
-#   state: "on"
-#   repeat: 10
-#   can_acknowledge: true
-#   skip_first: false
-#   notifiers:
-#     - mobile_app_icetray   
+backyard_lights_on:
+  name: Backyard Lights are on
+  done_message: Backyard Lights were turned off
+  entity_id: group.backyard_lights
+  state: "on"
+  repeat: 10
+  can_acknowledge: true
+  skip_first: true
+  notifiers:
+    - mobile_app_icetray
 
 ##########################
 #### Open Door Alerts ####
@@ -43,7 +43,7 @@ garage_door_open:
   state: "on"
   repeat: 15
   can_acknowledge: true
-  skip_first: false
+  skip_first: true
   notifiers:
     - mobile_app_icetray
 
@@ -54,7 +54,7 @@ backyard_door_open:
   state: "on"
   repeat: 10
   can_acknowledge: true
-  skip_first: false
+  skip_first: true
   notifiers:
     - mobile_app_icetray
 
@@ -65,9 +65,9 @@ front_door_open:
   state: "on"
   repeat: 5
   can_acknowledge: true
-  skip_first: false
+  skip_first: true
   notifiers:
-    - mobile_app_icetray       
+    - mobile_app_icetray
 
 upstairs_hallways_door_open:
   name: Upstairs Hallways Door is open
@@ -76,9 +76,9 @@ upstairs_hallways_door_open:
   state: "on"
   repeat: 5
   can_acknowledge: true
-  skip_first: false
+  skip_first: true
   notifiers:
-    - mobile_app_icetray    
+    - mobile_app_icetray
 
 garage_side_door_open:
   name: Garage Side Door is open
@@ -87,6 +87,6 @@ garage_side_door_open:
   state: "on"
   repeat: 5
   can_acknowledge: true
-  skip_first: false
+  skip_first: true
   notifiers:
-    - mobile_app_icetray  
+    - mobile_app_icetray

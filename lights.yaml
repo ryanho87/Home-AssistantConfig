@@ -30,6 +30,7 @@
     - light.family_room_pendant_light_1
     - light.family_room_pendant_light_2
     - light.family_room_pendant_light_3
+    - light.family_room_pendant_light_4
 
 - platform: group
   name: Ryans Bathroom Mirror Light
@@ -57,24 +58,24 @@
   entity_id: switch.backyard_lights_2
 
 - platform: switch
-  name: Bed Light
-  entity_id: switch.bed_light
+  name: Ryan's Floor Lamp
+  entity_id: switch.ryans_floor_lamp
 
 - platform: switch
-  name: Spotlight
-  entity_id: switch.spotlight
+  name: Family Room Spotlight
+  entity_id: switch.family_room_spotlight
 
 - platform: switch
-  name: Corner Light
-  entity_id: switch.corner_light
+  name: Loren's Floor Lamp
+  entity_id: switch.lorens_floor_lamp
 
 - platform: switch
-  name: Desk Lamp
-  entity_id: switch.desk_lamp
+  name: Ryan's Desk Lamp
+  entity_id: switch.ryans_desk_lamp
 
 - platform: switch
-  name: Dresser Light
-  entity_id: switch.dresser_light
+  name: Loren's Shop Light
+  entity_id: switch.lorens_shop_light
 
 - platform: switch
   name: Garage Light 1
@@ -85,30 +86,29 @@
   entity_id: switch.garage_light_2
 
 - platform: switch
-  name: Lorens Light Bar
-  entity_id: switch.lorens_light_bar
-
-- platform: switch
-  name: Lorens Shop Light
-  entity_id: switch.lorens_shop_light
-
-- platform: switch
   name: Jordans Shop Light
   entity_id: switch.jordans_shop_light
 
 - platform: switch
-  name: Mantle Light
-  entity_id: switch.mantle_light
+  name: Family Room Shop Light
+  entity_id: switch.family_room_shop_light
 
 - platform: switch
   name: Snake Lights
   entity_id: switch.snake_lights
 
 - platform: switch
-  name: Backyard Wall Lights
-  entity_id: switch.backyard_wall_lights
+  name: Backyard Wall Light 1
+  entity_id: switch.backyard_wall_light_1
 
 - platform: switch
-  name: Ceiling Light Temporary
-  entity_id: switch.cabana
+  name: Backyard Wall Light 2
+  entity_id: switch.backyard_wall_light_2
 
+- platform: switch
+  name: Ceiling Lights
+  entity_id: switch.ceiling_lights
+
+- platform: switch
+  name: Office Desk Lamp
+  entity_id: switch.office_desk_lamp

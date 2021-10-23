@@ -1080,7 +1080,7 @@
     entity_id: binary_sensor.ryans_room_motion_sensor
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.ryans_desk_motion_sensor
+    entity_id: binary_sensor.ryans_room_motion_sensor_2
     to: 'on'
   - platform: state
     entity_id: group.ryans_room_lights
