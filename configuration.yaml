@@ -95,9 +95,6 @@ roomba: !include roomba.yaml
 
 owntracks: !include owntracks.yaml
 
-# samsungtv: !include samsungtv.yaml
-
-
 logger:
   default: info
   logs:
