@@ -78,12 +78,16 @@
   entity_id: switch.lorens_shop_light
 
 - platform: switch
-  name: Garage Light 1
-  entity_id: switch.garage_light_1
+  name: Loren's Bathroom Lights 1
+  entity_id: switch.lorens_bathroom_lights_1
 
 - platform: switch
-  name: Garage Light 2
-  entity_id: switch.garage_light_2
+  name: Loren's Bathroom Lights 2
+  entity_id: switch.lorens_bathroom_lights_2
+
+- platform: switch
+  name: Garage Lights
+  entity_id: switch.garage_lights
 
 - platform: switch
   name: Jordans Shop Light

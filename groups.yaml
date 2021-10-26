@@ -63,6 +63,25 @@ lorens_room_sensors:
     - sensor.lorens_room_humidity_aggregate
     - binary_sensor.lorens_room_occupancy_aggregate
 
+############################
+##### Loren's Bathroom #####
+############################
+
+lorens_bathroom_lights:
+  name: Loren's Bathroom
+  entities:
+  - light.lorens_bathroom_lights_1
+  - light.lorens_bathroom_lights_2
+  all: false
+  icon: mdi:toilet
+
+lorens_room_sensors:
+  name: Loren's Bathroom Sensors
+  entities:
+    #- sensor.lorens_room_temperature_aggregate
+    #- sensor.lorens_room_humidity_aggregate
+    #- binary_sensor.lorens_room_occupancy_aggregate
+
 #########################
 ##### Jordan's Room #####
 #########################
@@ -203,8 +222,7 @@ family_room_sensors:
 garage_lights:
   name: Garage
   entities:
-    - light.garage_light_1
-    # - light.garage_light_2
+    - light.garage_lights
 
 garage_sensors:
   name: Garage Sensors
@@ -330,3 +348,5 @@ switches_converted_to_lights:
     - switch.backyard_wall_light_1
     - switch.backyard_wall_light_2
     - switch.cabana
+    - switch.lorens_bathroom_lights_1
+    - switch.lorens_bathroom_lights_2

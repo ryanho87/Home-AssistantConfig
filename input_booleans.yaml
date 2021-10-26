@@ -5,5 +5,8 @@
 living_room_on_motion_sensor_override:
   name: Disable Living Room auto-on Motion Sensor
 
+family_room_on_motion_sensor_override:
+  name: Disable Family Room auto-on Motion Sensor
+
 ryans_room_on_motion_sensor_override:
   name: Disable Ryan's Room auto-on Motion Sensor

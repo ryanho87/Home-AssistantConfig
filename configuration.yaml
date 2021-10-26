@@ -69,8 +69,6 @@ input_boolean: !include input_booleans.yaml
 
 aarlo: !include aarlo.yaml
 
-tplink: !include tplink.yaml
-
 ecobee:
   api_key: !secret ecobee_api_key
 
@@ -81,8 +79,6 @@ ecobee:
   #influxdb: !include influxdb.yaml
 
 webostv: !include webostv.yaml
-
-wemo: !include wemo.yaml
 
 homekit: !include homekit.yaml
 

@@ -109,7 +109,7 @@
       entity_id: input_boolean.ryans_room_on_motion_sensor_override
   - type: turn_off
     device_id: 90f12fbd22f69cdb1d4550d618f7a073
-    entity_id: switch.power_meter_ryans_desk
+    entity_id: switch.ryans_desk_pm
     domain: switch
   mode: single
 - id: '1604457926934'
@@ -186,7 +186,7 @@
     entity_id: group.bluetooth_scanners
   mode: single
 - id: '1605033273785'
-  alias: '[Civic''s Room] Turn on Snake Lights'
+  alias: '[Snake Room] Turn on Snake Lights'
   description: ''
   trigger:
   - platform: sun
@@ -195,7 +195,8 @@
   action:
   - service: homeassistant.turn_on
     data: {}
-    entity_id: switch.snake_lights
+    target:
+      entity_id: light.snake_lights
   mode: single
 - id: '1605149617014'
   alias: '[Loren''s Room] Turn off Lights'
@@ -316,18 +317,9 @@
       - service: homeassistant.turn_on
         data: {}
         entity_id: group.ryans_room_lights
-      three_to_three:
-      - service: media_player.turn_on
-        data: {}
-        entity_id: media_player.55_tcl_roku_tv
-      three_to_two:
-      - service: media_player.volume_mute
-        data: {}
-        entity_id: media_player.55_tcl_roku_tv
-      three_to_four:
-      - service: media_player.turn_off
-        data: {}
-        entity_id: media_player.55_tcl_roku_tv
+      three_to_three: []
+      three_to_two: []
+      three_to_four: []
       one_to_six:
       - service: homeassistant.turn_off
         data: {}
@@ -336,9 +328,10 @@
       six_to_six:
       - service: switch.toggle
         data: {}
-        entity_id: switch.power_meter_ryans_desk
+        target:
+          entity_id: switch.ryans_desk_pm
 - id: '1610513561095'
-  alias: '[Civic''s Room] Snake Light Smart Switch'
+  alias: '[Snake Room] Snake Light Smart Switch'
   description: ''
   trigger:
   - platform: event
