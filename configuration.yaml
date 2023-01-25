@@ -85,8 +85,6 @@ ecobee:
 
 influxdb: !include influxdb.yaml
 
-webostv: !include webostv.yaml
-
 homekit: !include homekit.yaml
 
 sense:
