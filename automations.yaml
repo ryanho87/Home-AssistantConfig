@@ -2,9 +2,11 @@
   alias: '[Ryan''s Bathroom] Turn on Lights'
   description: ''
   trigger:
-  - platform: state
-    entity_id: binary_sensor.ryans_bathroom_occupancy_aggregate
-    to: 'on'
+  - type: motion
+    platform: device
+    device_id: b8de143b26ec540d58f194b1e8d515f5
+    entity_id: binary_sensor.ryans_bathroom_motion_sensor
+    domain: binary_sensor
   condition: []
   action:
   - service: homeassistant.turn_on
@@ -12,7 +14,7 @@
     entity_id: group.ryans_bathroom_lights
   mode: single
 - id: '1604219907607'
-  alias: '[Ryan''s Bathroom] Turn off Lights'
+  alias: '[Ryan''s Bathroom] Auto Turn off Lights'
   description: ''
   trigger:
   - platform: event
@@ -23,31 +25,41 @@
     event_type: timer.finished
     event_data:
       entity_id: timer.ryans_bathroom
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.ryans_bathroom_occupancy_aggregate
+    state: 'off'
+  - condition: state
+    entity_id: input_boolean.ryans_bathroom_energy_saver_override
+    state: 'off'
   action:
   - service: homeassistant.turn_off
     data: {}
     entity_id: group.ryans_bathroom_lights
-  - service: notify.mobile_app_icetray
-    data:
-      message: Ryan's Bathroom was turned off automatically
-      title: Automation Triggered
   mode: single
 - id: '1604219970463'
   alias: '[Ryan''s Room] Turn on Lights'
   description: ''
   trigger:
-  - platform: state
-    to: 'on'
-    entity_id: binary_sensor.ryans_room_motion_sensor_aggregate
+  - type: motion
+    platform: device
+    device_id: 150545a2a90ecfe0270099275ca8acbe
+    entity_id: binary_sensor.ryans_room_motion_sensor
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: 3c6920a1267671539e4dabbcd8e66bd7
+    entity_id: binary_sensor.ryans_room_motion_sensor_2
+    domain: binary_sensor
   condition:
   - condition: state
-    entity_id: input_boolean.ryans_room_on_motion_sensor_override
+    entity_id: input_boolean.ryans_room_motion_sensor_override
     state: 'off'
   action:
   - service: homeassistant.turn_on
     data: {}
-    entity_id: ' group.ryans_room_lights'
+    target:
+      entity_id: group.ryans_room_lights
   mode: single
 - id: '1604220043149'
   alias: '[Upstairs Hallway] Turn On'
@@ -58,6 +70,11 @@
     device_id: adee2ad14ebc69981746fab1e2460523
     entity_id: binary_sensor.upstairs_hallway_motion_sensor
     domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: e12a7b5a9816f23c6877148bfed629d9
+    entity_id: binary_sensor.presence_73
+    domain: binary_sensor
   condition: []
   action:
   - service: homeassistant.turn_on
@@ -65,21 +82,27 @@
     entity_id: group.upstairs_hallway_lights
   mode: single
 - id: '1604220092908'
-  alias: '[Upstairs Hallway] Turn off Lights'
+  alias: '[Upstairs Hallway] Auto Turn off Lights'
   description: ''
   trigger:
   - platform: event
     event_type: timer.finished
     event_data:
       entity_id: timer.upstairs_hallway
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.upstairs_hallway_occupancy_aggregate
+    state: 'off'
+  - condition: state
+    entity_id: input_boolean.upstairs_hallway_energy_saver_override
+    state: 'off'
   action:
   - service: homeassistant.turn_off
     data: {}
     entity_id: group.upstairs_hallway_lights
   mode: single
 - id: '1604281809997'
-  alias: '[Civic''s Room] Turn off Snake Lights'
+  alias: '[Office] Turn off Snake Lights'
   description: ''
   trigger:
   - platform: sun
@@ -113,7 +136,7 @@
     domain: switch
   mode: single
 - id: '1604457926934'
-  alias: '[Ryan''s Room] Turn off Lights'
+  alias: '[Ryan''s Room] Auto Turn off Lights'
   description: ''
   trigger:
   - platform: event
@@ -129,16 +152,18 @@
     event_data:
       id: smart_switch_1
       event: 1001
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.ryans_room_occupancy_aggregate
+    state: 'off'
+  - condition: state
+    entity_id: input_boolean.ryans_room_energy_saver_override
+    state: 'off'
   action:
   - service: homeassistant.turn_off
     data:
       entity_id: group.ryans_room_lights
     entity_id: group.ryans_room_lights
-  - service: notify.mobile_app_icetray
-    data:
-      title: Automation Triggered
-      message: Ryan's Room was turned off automatically
   mode: single
 - id: '1604564108494'
   alias: '[Living Room] Turn off OLED Lights'
@@ -186,7 +211,7 @@
     entity_id: group.bluetooth_scanners
   mode: single
 - id: '1605033273785'
-  alias: '[Snake Room] Turn on Snake Lights'
+  alias: '[Office] Turn on Snake Lights'
   description: ''
   trigger:
   - platform: sun
@@ -216,22 +241,27 @@
   alias: '[Kitchen] Turn on Lights'
   description: Turn the Kitchen on to Bright
   trigger:
-  - platform: state
-    entity_id: binary_sensor.kitchen_motion_sensor_aggregate
-    to: 'on'
-  - platform: event
-    event_type: deconz_event
-    event_data:
-      id: dimmer_switch
-      event: 1000
-  condition: []
+  - type: motion
+    platform: device
+    device_id: bd9d31d0eb430dad75cb11252779cfe5
+    entity_id: binary_sensor.kitchen_motion_sensor
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: dc14c68536cf52db19e05634a8437825
+    entity_id: binary_sensor.kitchen_motion_sensor_2
+    domain: binary_sensor
+  condition:
+  - condition: state
+    entity_id: input_boolean.kitchen_motion_sensor_override
+    state: 'off'
   action:
-  - service: scene.turn_on
-    data:
-      entity_id: scene.kitchen_bright
+  - service: homeassistant.turn_on
+    target:
+      entity_id: group.kitchen_lights
   mode: single
 - id: '1605761929577'
-  alias: '[Kitchen] Turn off Lights'
+  alias: '[Kitchen] Auto Turn off Lights'
   description: ''
   trigger:
   - platform: event
@@ -243,15 +273,17 @@
     event_data:
       id: dimmer_switch
       event: 4000
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.kitchen_occupancy_aggregate
+    state: 'off'
+  - condition: state
+    entity_id: input_boolean.kitchen_energy_saver_override
+    state: 'off'
   action:
   - service: homeassistant.turn_off
     data: {}
     entity_id: group.kitchen_lights
-  - service: notify.mobile_app_icetray
-    data:
-      message: Kitchen was turned off automatically
-      title: Automation Triggered
   mode: single
 - id: '1609140878689'
   alias: '[Hallway] Turn on Lights'
@@ -260,23 +292,30 @@
   - type: motion
     platform: device
     device_id: 732ebc2f84dd843117f458b838098a63
-    entity_id: binary_sensor.motion_sensor
+    entity_id: binary_sensor.hallway_motion_sensor
     domain: binary_sensor
   condition: []
   action:
   - service: homeassistant.turn_on
     data: {}
-    entity_id: group.hallway_lights
+    target:
+      entity_id: group.hallway_lights
   mode: single
 - id: '1609140904247'
-  alias: '[Hallway] Turn off Lights'
+  alias: '[Hallway] Auto Turn off Lights'
   description: ''
   trigger:
   - platform: event
     event_type: timer.finished
     event_data:
       entity_id: timer.hallway
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.hallway_occupancy_aggregate
+    state: 'off'
+  - condition: state
+    entity_id: input_boolean.hallway_energy_saver_override
+    state: 'off'
   action:
   - service: homeassistant.turn_off
     data: {}
@@ -298,21 +337,12 @@
       - service: homeassistant.turn_off
         data: {}
         entity_id: group.ryans_bathroom_lights
-      - service: media_player.turn_off
-        data: {}
-        entity_id: media_player.55_tcl_roku_tv
-      rotate_clockwise:
-      - service: media_player.volume_up
-        data: {}
-        entity_id: media_player.55_tcl_roku_tv
+      rotate_clockwise: []
       flip_180: false
       cube_flip_180: []
       cube_flip_90: []
       flip_90: false
-      rotate_counter_clockwise:
-      - service: media_player.volume_down
-        data: {}
-        entity_id: media_player.55_tcl_roku_tv
+      rotate_counter_clockwise: []
       one_to_one:
       - service: homeassistant.turn_on
         data: {}
@@ -330,36 +360,6 @@
         data: {}
         target:
           entity_id: switch.ryans_desk_pm
-- id: '1610513561095'
-  alias: '[Snake Room] Snake Light Smart Switch'
-  description: ''
-  trigger:
-  - platform: event
-    event_type: deconz_event
-    event_data:
-      id: smart_switch_3
-      event: 1002
-  condition: []
-  action:
-  - service: homeassistant.toggle
-    data: {}
-    entity_id: light.snake_lights
-  mode: single
-- id: '1610513660435'
-  alias: '[Loren''s Room]  Smart Switch'
-  description: ''
-  trigger:
-  - platform: event
-    event_type: deconz_event
-    event_data:
-      id: smart_switch_2
-      event: 1002
-  condition: []
-  action:
-  - service: homeassistant.toggle
-    data: {}
-    entity_id: group.lorens_room_lights
-  mode: single
 - id: '1610786216126'
   alias: '[Garage] Garage Open Alert'
   description: ''
@@ -772,10 +772,7 @@
     path: bergstrom/mi-magic-cube-deconz-45-actions.yaml
     input:
       remote: f7456b532cb4c6a084a781fb1a6da0e9
-      one_to_one:
-      - service: media_player.toggle
-        data: {}
-        entity_id: media_player.oled77
+      one_to_one: []
       rotate_clockwise:
       - service: media_player.volume_up
         data: {}
@@ -788,18 +785,16 @@
       - service: homeassistant.turn_off
         data: {}
         entity_id: group.downstairs_lights
-      one_to_six:
-      - service: media_player.volume_mute
-        data: {}
-        entity_id: media_player.oled77
+      one_to_six: []
       flip_180: false
       cube_flip_180: []
-      six_to_six:
-      - service: scene.turn_on
-        data:
-          transition: 5
+      six_to_six: []
+      double_tap_any_side: true
+      cube_double_tap_any:
+      - scene: scene.movie
+      - service: homeassistant.turn_on
         target:
-          entity_id: scene.movie
+          entity_id: input_boolean.living_room_motion_sensor_override
 - id: '1613023531157'
   alias: '[Backyard] Turn on Lights'
   description: ''
@@ -849,16 +844,15 @@
   alias: '[Garage] Turn on Lights'
   description: ''
   trigger:
-  - platform: state
-    entity_id: binary_sensor.garage_motion_sensor_aggregate
-    to: 'on'
-  condition:
-  - type: is_illuminance
-    condition: device
+  - type: motion
+    platform: device
     device_id: d1089890644318589a32e883d0efc8d5
-    entity_id: sensor.garage_light_sensor
-    domain: sensor
-    below: 100
+    entity_id: binary_sensor.garage_motion_sensor
+    domain: binary_sensor
+  condition:
+  - condition: state
+    entity_id: input_boolean.garage_motion_sensor_override
+    state: 'off'
   action:
   - service: homeassistant.turn_on
     data: {}
@@ -866,58 +860,64 @@
       entity_id: group.garage_lights
   mode: single
 - id: '1616367967205'
-  alias: '[Family Room] Turn off Lights'
+  alias: '[Family Room] Auto Turn off Lights'
   description: ''
   trigger:
   - platform: event
     event_type: timer.finished
     event_data:
       entity_id: timer.family_room
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.family_room_occupancy_aggregate
+    state: 'off'
+  - condition: state
+    entity_id: input_boolean.family_room_energy_saver_override
+    state: 'off'
   action:
   - service: homeassistant.turn_off
     data: {}
     entity_id: group.family_room_lights
-  - service: notify.mobile_app_icetray
-    data:
-      message: Family Room was turned off automatically
-      title: Automation Triggered
   mode: single
 - id: '1616368051935'
-  alias: '[Garage] Turn off Lights'
+  alias: '[Garage] Auto Turn off Lights'
   description: ''
   trigger:
   - platform: event
     event_type: timer.finished
     event_data:
       entity_id: timer.garage
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.garage_occupancy_aggregate
+    state: 'off'
+  - condition: state
+    entity_id: input_boolean.garage_energy_saver_override
+    state: 'off'
   action:
   - service: homeassistant.turn_off
     data: {}
     entity_id: group.garage_lights
-  - service: notify.mobile_app_icetray
-    data:
-      message: Garage was turned off automatically
-      title: Automation Triggered
   mode: single
 - id: '1616392366078'
-  alias: '[Living Room] Turn off Lights'
+  alias: '[Living Room] Auto Turn off Lights'
   description: ''
   trigger:
   - platform: event
     event_type: timer.finished
     event_data:
       entity_id: timer.living_room
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.livingroom_occupancy_aggregate
+    state: 'off'
+  - condition: state
+    entity_id: input_boolean.living_room_energy_saver_override
+    state: 'off'
   action:
   - service: homeassistant.turn_off
     target:
       entity_id: group.living_room_lights
-  - service: notify.mobile_app_icetray
-    data:
-      message: Living Room was turned off automatically
-      title: Automation Triggered
   mode: single
 - id: '1627448974133'
   alias: '[Living Room] Clear motion sensor override when lights turn on'
@@ -930,7 +930,9 @@
   action:
   - service: input_boolean.turn_off
     target:
-      entity_id: input_boolean.living_room_on_motion_sensor_override
+      entity_id:
+      - input_boolean.living_room_bedtime
+      - input_boolean.living_room_motion_sensor_override
   mode: single
 - id: '1627451895109'
   alias: '[Ryan''s Room] Clear motion sensor override when lights turn on'
@@ -943,7 +945,9 @@
   action:
   - service: input_boolean.turn_off
     target:
-      entity_id: input_boolean.ryans_room_on_motion_sensor_override
+      entity_id:
+      - input_boolean.ryan_bedtime
+      - input_boolean.ryans_room_motion_sensor_override
   mode: single
 - id: '1627967422589'
   alias: '[Ryan''s Room] Turned off'
@@ -957,6 +961,9 @@
   - service: timer.cancel
     target:
       entity_id: timer.ryans_room
+  - service: homeassistant.turn_off
+    target:
+      entity_id: input_boolean.ryans_room_energy_saver_override
   mode: single
 - id: '1627967453542'
   alias: '[Ryan''s Bathroom] Turned off'
@@ -970,6 +977,9 @@
   - service: timer.cancel
     target:
       entity_id: timer.ryans_bathroom
+  - service: homeassistant.turn_off
+    target:
+      entity_id: input_boolean.ryans_bathroom_energy_saver_override
   mode: single
 - id: '1627967477197'
   alias: '[Living Room] Turned off'
@@ -983,6 +993,9 @@
   - service: timer.cancel
     target:
       entity_id: timer.living_room
+  - service: homeassistant.turn_off
+    target:
+      entity_id: input_boolean.living_room_energy_saver_override
   mode: single
 - id: '1627967497915'
   alias: '[Family Room] Turned off'
@@ -996,6 +1009,9 @@
   - service: timer.cancel
     target:
       entity_id: timer.family_room
+  - service: homeassistant.turn_off
+    target:
+      entity_id: input_boolean.family_room_energy_saver_override
   mode: single
 - id: '1627967521921'
   alias: '[Kitchen] Turned off'
@@ -1009,6 +1025,9 @@
   - service: timer.cancel
     target:
       entity_id: timer.kitchen
+  - service: homeassistant.turn_off
+    target:
+      entity_id: input_boolean.kitchen_energy_saver_override
   mode: single
 - id: '1627967540337'
   alias: '[Garage] Turned off'
@@ -1022,20 +1041,37 @@
   - service: timer.cancel
     target:
       entity_id: timer.garage
+  - service: homeassistant.turn_off
+    target:
+      entity_id: input_boolean.garage_energy_saver_override
   mode: single
 - id: '1628045663855'
   alias: '[Living Room] Increase auto-off timer'
   description: ''
   trigger:
-  - platform: state
+  - type: motion
+    platform: device
+    device_id: 5137ee9c6ccfb0f82a895f53209d3003
     entity_id: binary_sensor.living_room_motion_sensor
-    to: 'on'
-  - platform: state
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: d00cc21379cc9752c019a30c2b04a3bb
     entity_id: binary_sensor.living_room_motion_sensor_2
-    to: 'on'
+    domain: binary_sensor
   - platform: state
     entity_id: group.living_room_lights
     to: 'on'
+  - type: motion
+    platform: device
+    device_id: bebdc724a58fbd40e46660e6c8b9d41d
+    entity_id: binary_sensor.living_room_motion_sensor_3
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: 558bd8bd33421a9ac27791211ede8fa6
+    entity_id: binary_sensor.living_room_presence
+    domain: binary_sensor
   condition: []
   action:
   - service: timer.start
@@ -1048,15 +1084,24 @@
   alias: '[Family Room] Increase auto-off timer'
   description: ''
   trigger:
-  - platform: state
+  - type: motion
+    platform: device
+    device_id: 230c74d181db13af2c5e06e5cb69bdeb
     entity_id: binary_sensor.family_room_motion_sensor
-    to: 'on'
-  - platform: state
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: 33b13707b70a4a13a890a6ca314fab93
     entity_id: binary_sensor.family_room_motion_sensor_2
-    to: 'on'
+    domain: binary_sensor
   - platform: state
     entity_id: group.family_room_lights
     to: 'on'
+  - type: motion
+    platform: device
+    device_id: 04d0acff2d6db74dbd2b1500750e9c07
+    entity_id: binary_sensor.family_room_presence
+    domain: binary_sensor
   condition: []
   action:
   - service: timer.start
@@ -1069,12 +1114,16 @@
   alias: '[Ryan''s Room] Increase auto-off timer'
   description: ''
   trigger:
-  - platform: state
+  - type: motion
+    platform: device
+    device_id: 150545a2a90ecfe0270099275ca8acbe
     entity_id: binary_sensor.ryans_room_motion_sensor
-    to: 'on'
-  - platform: state
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: 3c6920a1267671539e4dabbcd8e66bd7
     entity_id: binary_sensor.ryans_room_motion_sensor_2
-    to: 'on'
+    domain: binary_sensor
   - platform: state
     entity_id: group.ryans_room_lights
     to: 'on'
@@ -1090,9 +1139,11 @@
   alias: '[Garage] Increase auto-off timer'
   description: ''
   trigger:
-  - platform: state
+  - type: motion
+    platform: device
+    device_id: d1089890644318589a32e883d0efc8d5
     entity_id: binary_sensor.garage_motion_sensor
-    to: 'on'
+    domain: binary_sensor
   - platform: state
     entity_id: group.garage_lights
     to: 'on'
@@ -1108,12 +1159,16 @@
   alias: '[Kitchen] Increase auto-off timer'
   description: ''
   trigger:
-  - platform: state
+  - type: motion
+    platform: device
+    device_id: bd9d31d0eb430dad75cb11252779cfe5
     entity_id: binary_sensor.kitchen_motion_sensor
-    to: 'on'
-  - platform: state
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: dc14c68536cf52db19e05634a8437825
     entity_id: binary_sensor.kitchen_motion_sensor_2
-    to: 'on'
+    domain: binary_sensor
   - platform: state
     entity_id: group.kitchen_lights
     to: 'on'
@@ -1129,9 +1184,11 @@
   alias: '[Ryan''s Bathroom] Increase auto-off timer'
   description: ''
   trigger:
-  - platform: state
+  - type: motion
+    platform: device
+    device_id: b8de143b26ec540d58f194b1e8d515f5
     entity_id: binary_sensor.ryans_bathroom_motion_sensor
-    to: 'on'
+    domain: binary_sensor
   - platform: state
     entity_id: group.ryans_bathroom_lights
     to: 'on'
@@ -1147,19 +1204,30 @@
   alias: '[Living Room] Turn on Lights'
   description: ''
   trigger:
-  - platform: state
-    entity_id: binary_sensor.livingroom_motion_sensor_aggregate
-    to: 'on'
-  condition:
-  - type: is_illuminance
-    condition: device
+  - type: motion
+    platform: device
     device_id: 5137ee9c6ccfb0f82a895f53209d3003
-    entity_id: sensor.living_room_light_sensor
-    domain: sensor
-    below: 100
+    entity_id: binary_sensor.living_room_motion_sensor
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: d00cc21379cc9752c019a30c2b04a3bb
+    entity_id: binary_sensor.living_room_motion_sensor_2
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: bebdc724a58fbd40e46660e6c8b9d41d
+    entity_id: binary_sensor.living_room_motion_sensor_3
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: 558bd8bd33421a9ac27791211ede8fa6
+    entity_id: binary_sensor.living_room_presence
+    domain: binary_sensor
+  condition:
   - condition: state
-    entity_id: input_boolean.living_room_on_motion_sensor_override
     state: 'off'
+    entity_id: input_boolean.living_room_motion_sensor_override
   action:
   - service: homeassistant.turn_on
     data: {}
@@ -1170,16 +1238,25 @@
   alias: '[Family Room] Turn on Lights'
   description: ''
   trigger:
-  - platform: state
-    entity_id: binary_sensor.family_room_motion_sensor_aggregate
-    to: 'on'
-  condition:
-  - type: is_illuminance
-    condition: device
+  - type: motion
+    platform: device
+    device_id: 230c74d181db13af2c5e06e5cb69bdeb
+    entity_id: binary_sensor.family_room_motion_sensor
+    domain: binary_sensor
+  - type: motion
+    platform: device
     device_id: 33b13707b70a4a13a890a6ca314fab93
-    entity_id: sensor.family_room_light_level_2
-    domain: sensor
-    below: 100
+    entity_id: binary_sensor.family_room_motion_sensor_2
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: 04d0acff2d6db74dbd2b1500750e9c07
+    entity_id: binary_sensor.family_room_presence
+    domain: binary_sensor
+  condition:
+  - condition: state
+    entity_id: input_boolean.family_room_motion_sensor_override
+    state: 'off'
   action:
   - service: homeassistant.turn_on
     data: {}
@@ -1214,9 +1291,11 @@
   alias: '[Hallway] Increase auto-off timer'
   description: ''
   trigger:
-  - platform: state
-    entity_id: binary_sensor.motion_sensor
-    to: 'on'
+  - type: motion
+    platform: device
+    device_id: 732ebc2f84dd843117f458b838098a63
+    entity_id: binary_sensor.hallway_motion_sensor
+    domain: binary_sensor
   - platform: state
     entity_id: group.hallway_lights
     to: 'on'
@@ -1232,9 +1311,11 @@
   alias: '[Upstairs Hallway] Increase auto-off timer'
   description: ''
   trigger:
-  - platform: state
+  - type: motion
+    platform: device
+    device_id: adee2ad14ebc69981746fab1e2460523
     entity_id: binary_sensor.upstairs_hallway_motion_sensor
-    to: 'on'
+    domain: binary_sensor
   - platform: state
     entity_id: group.upstairs_hallway_lights
     to: 'on'
@@ -1247,3 +1328,417 @@
       entity_id:
       - timer.upstairs_hallway
   mode: single
+- id: '1636575316569'
+  alias: '[Loren''s Bathroom] Turn on Lights'
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 790219bc34a1c3b38c2f482e5a22d249
+    entity_id: binary_sensor.lorens_bathroom_motion_sensor
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: light.lorens_bathroom
+  mode: single
+- id: '1636575417616'
+  alias: '[Office] Turn on Lights'
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 40f7edfa06e94383d38b44769d1f34d4
+    entity_id: binary_sensor.office_motion_sensor
+    domain: binary_sensor
+  condition:
+  - condition: state
+    entity_id: input_boolean.office_motion_sensor_override
+    state: 'off'
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: group.office_lights
+  mode: single
+- id: '1637216334207'
+  alias: '[Office] Increase auto-off timer'
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 40f7edfa06e94383d38b44769d1f34d4
+    entity_id: binary_sensor.office_motion_sensor
+    domain: binary_sensor
+  - platform: state
+    entity_id: group.office_lights
+    to: 'on'
+  condition: []
+  action:
+  - service: timer.start
+    data:
+      duration: 00:15:00
+    target:
+      entity_id: timer.office
+  mode: single
+- id: '1637216405992'
+  alias: '[Office] Turned off'
+  description: Run actions after the room has turned off
+  trigger:
+  - platform: state
+    entity_id: group.office_lights
+    to: 'off'
+  condition: []
+  action:
+  - service: timer.cancel
+    target:
+      entity_id: timer.office
+  - service: homeassistant.turn_off
+    target:
+      entity_id: input_boolean.office_energy_saver_override
+  mode: single
+- id: '1637216520777'
+  alias: '[Office] Auto Turn off Lights'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.office
+  condition:
+  - condition: state
+    entity_id: binary_sensor.office_occupancy_aggregate
+    state: 'off'
+  - condition: state
+    entity_id: input_boolean.office_energy_saver_override
+    state: 'off'
+  action:
+  - service: homeassistant.turn_off
+    target:
+      entity_id: group.office_lights
+  mode: single
+- id: '1638054145974'
+  alias: '[Loren''s bathroom] Increase auto-off timer'
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 790219bc34a1c3b38c2f482e5a22d249
+    entity_id: binary_sensor.lorens_bathroom_motion_sensor
+    domain: binary_sensor
+  - platform: state
+    entity_id: group.lorens_bathroom_lights
+    to: 'on'
+  condition: []
+  action:
+  - service: timer.start
+    data:
+      duration: 00:30:00
+    target:
+      entity_id: timer.lorens_bathroom
+  mode: single
+- id: '1638054192266'
+  alias: '[Loren''s Bathroom] Auto Turn off Lights'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.lorens_bathroom
+  condition:
+  - condition: state
+    entity_id: binary_sensor.lorens_bathroom_occupancy_aggregate
+    state: 'off'
+  - condition: state
+    entity_id: input_boolean.lorens_bathroom_energy_saver_override
+    state: 'off'
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: group.lorens_bathroom_lights
+  mode: single
+- id: '1640418325367'
+  alias: '[Family Room] Clear motion sensor override when lights turn on'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.family_room_lights
+    to: 'on'
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.family_room_bedtime
+      - input_boolean.family_room_motion_sensor_override
+  mode: single
+- id: '1640671669596'
+  alias: '[Global] Turn off Heat at Night'
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:00:00
+  condition:
+  - condition: state
+    entity_id: climate.kitchen
+    state: heat
+  action:
+  - service: climate.turn_off
+    target:
+      entity_id: climate.kitchen
+  mode: single
+- id: '1640671808535'
+  alias: '[Global] Turn on Heat in the Morning'
+  description: ''
+  trigger:
+  - platform: time
+    at: 07:00:00
+  condition:
+  - condition: state
+    entity_id: climate.kitchen
+    state: 'off'
+  action:
+  - service: climate.turn_on
+    target:
+      entity_id: climate.kitchen
+  mode: single
+- id: '1640917095036'
+  alias: '[Kitchen] Hue Dimmer Switch'
+  description: ''
+  use_blueprint:
+    path: sbyx/deconz-hue-dimmer-switch.yaml
+    input:
+      on_press:
+      - type: turn_on
+        device_id: 98041c5e6c6347526426d347983dc442
+        entity_id: light.kitchen
+        domain: light
+      up_press:
+      - device_id: 98041c5e6c6347526426d347983dc442
+        domain: light
+        entity_id: light.kitchen
+        type: brightness_increase
+      off_press:
+      - type: turn_off
+        device_id: 98041c5e6c6347526426d347983dc442
+        entity_id: light.kitchen
+        domain: light
+      down_press:
+      - device_id: 98041c5e6c6347526426d347983dc442
+        domain: light
+        entity_id: light.kitchen
+        type: brightness_decrease
+      remote: 08e47301c1ac3f9685baf9005dd15205
+      down_hold:
+      - device_id: 98041c5e6c6347526426d347983dc442
+        domain: light
+        entity_id: light.kitchen
+        type: brightness_decrease
+      up_hold:
+      - device_id: 98041c5e6c6347526426d347983dc442
+        domain: light
+        entity_id: light.kitchen
+        type: brightness_increase
+      on_hold:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.kitchen_bright
+- id: '1640919928207'
+  alias: '[Global] Dim lights after 2AM'
+  description: ''
+  trigger:
+  - platform: time
+    at: 02:00:00
+  condition: []
+  action:
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.global_dimmer
+  mode: single
+- id: '1640919994164'
+  alias: '[Global] Disable Global Dimmer at Sunrise'
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: -00:30:00
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.global_dimmer
+  mode: single
+- id: '1640920542032'
+  alias: '[Kitchen] Clear motion sensor override when lights turn on'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.family_room_lights
+    to: 'on'
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.kitchen_motion_sensor_override
+  mode: single
+- id: '1641113926397'
+  alias: '[Loren’s Bathroom] Turned off'
+  description: Run actions after the room has turned off
+  trigger:
+  - platform: state
+    entity_id: group.lorens_bathroom_lights
+    to: 'off'
+  condition: []
+  action:
+  - service: timer.cancel
+    target:
+      entity_id: timer.lorens_bathroom
+  - service: homeassistant.turn_off
+    target:
+      entity_id: input_boolean.lorens_bathroom_energy_saver_override
+  mode: single
+- id: '1642358022565'
+  alias: '[Office] Snake Light Smart Switch'
+  description: ''
+  use_blueprint:
+    path: sp3cialck/deconz-xiaomi-aqara-wxkg11lm-smart-wireless-mini-switch.yaml
+    input:
+      remote: feef9e5ef2e80fa4acbbfe82d4652ac9
+      button_press_in:
+      - service: homeassistant.toggle
+        data: {}
+        target:
+          entity_id: light.snake_lights
+      button_hold: []
+- id: '1642358049572'
+  alias: '[Simulator] Smart Switch'
+  description: ''
+  use_blueprint:
+    path: sp3cialck/deconz-xiaomi-aqara-wxkg11lm-smart-wireless-mini-switch.yaml
+    input:
+      remote: 180d178f3d8a55c9c559e62908d9ba73
+      button_press_in:
+      - service: homeassistant.toggle
+        data: {}
+        target:
+          entity_id: group.simulator_lights
+      button_hold: []
+- id: '1642358832561'
+  alias: '[Office] Smart Switch'
+  description: ''
+  use_blueprint:
+    path: sp3cialck/deconz-xiaomi-aqara-wxkg11lm-smart-wireless-mini-switch.yaml
+    input:
+      button_press_in:
+      - service: homeassistant.toggle
+        data: {}
+        target:
+          entity_id: group.office_lights
+      button_hold: []
+      remote: 191af9702f55a885d4ee3704e1f4a65e
+- id: '1642358863185'
+  alias: '[Loren''s Room] Smart Switch'
+  description: ''
+  use_blueprint:
+    path: sp3cialck/deconz-xiaomi-aqara-wxkg11lm-smart-wireless-mini-switch.yaml
+    input:
+      button_press_in:
+      - service: homeassistant.toggle
+        data: {}
+        target:
+          entity_id: light.lorens_room
+      button_hold: []
+      remote: 5758ccb4c86c5aeded2c55c5f004b09d
+- id: '1642358882023'
+  alias: '[Jordan''s Room] Smart Switch'
+  description: ''
+  use_blueprint:
+    path: sp3cialck/deconz-xiaomi-aqara-wxkg11lm-smart-wireless-mini-switch.yaml
+    input:
+      button_press_in:
+      - service: homeassistant.toggle
+        data: {}
+        target:
+          entity_id: light.jordans_room
+      button_hold: []
+      remote: 23228ff974664cc6a444a6720a65ce26
+- id: '1653974257995'
+  alias: '[Simulator] Turn on Lights'
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 6276098476a118e410bba40b07cf05c9
+    entity_id: binary_sensor.presence_80
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: group.simulator_lights
+  mode: single
+- id: '1653974388428'
+  alias: '[Simulator] Auto Turn off Lights'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.simulator
+  condition:
+  - condition: state
+    entity_id: binary_sensor.simulator_occupancy_aggregate
+    state: 'off'
+  - condition: state
+    entity_id: input_boolean.simulator_energy_saver_override
+    state: 'off'
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: group.simulator_lights
+  mode: single
+- id: '1653974815947'
+  alias: '[Simulator] Increase auto-off timer'
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 6276098476a118e410bba40b07cf05c9
+    entity_id: binary_sensor.simulator_motion_sensor
+    domain: binary_sensor
+  - platform: state
+    entity_id: group.simulator_lights
+    to: 'on'
+  condition: []
+  action:
+  - service: timer.start
+    data:
+      duration: 00:15:00
+    target:
+      entity_id: timer.simulator
+  mode: single
+- id: '1654133833563'
+  alias: '[Living Room] Smart Switch'
+  description: ''
+  use_blueprint:
+    path: sp3cialck/deconz-xiaomi-aqara-wxkg11lm-smart-wireless-mini-switch.yaml
+    input:
+      button_press_in:
+      - service: homeassistant.toggle
+        data: {}
+        target:
+          entity_id: group.living_room_lights
+      button_hold:
+      - service: homeassistant.turn_off
+        target:
+          entity_id:
+          - group.living_room_lights
+      - service: homeassistant.turn_on
+        target:
+          entity_id: input_boolean.living_room_motion_sensor_override
+      remote: 8d1a78e59d258c33a82f5e043d5b512d

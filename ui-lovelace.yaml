@@ -1,0 +1,2577 @@
+swipe_nav:
+  wrap: true
+  animate: fade
+  prevent_default: true
+  swipe_amount: 10
+background: var(--background-image)
+title: Trenton
+views:
+  - panel: false
+    title: Home
+    badges: []
+    cards:
+      - type: custom:button-card
+        color_type: label-card
+        name: Global Controls
+      - type: vertical-stack
+        cards:
+          - type: grid
+            columns: 4
+            square: true
+            cards:
+              - type: custom:button-card
+                entity: group.house_lights
+                aspect_ratio: 1/1
+                show_name: false
+                icon: mdi:home
+                confirmation:
+                  text: |
+                    [[[
+                      if (entity.state == 'on')
+                        return "Are you sure you want to turn off the house?";
+                      else
+                        return "Are you sure you want to turn on the house?";
+                    ]]]
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.house_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 25%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 14px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  icon:
+                    - height: 60px
+                  custom_fields:
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 28%
+                      - top: 70%
+              - type: custom:button-card
+                entity: cover.garage_door_2
+                name: Garage
+                aspect_ratio: 1/1
+                icon: mdi:garage-open
+                show_name: false
+                confirmation:
+                  text: |
+                    [[[
+                      if (entity.state == 'open')
+                        return "Are you sure you want to close the garage?";
+                      else
+                        return "Are you sure you want to open the garage?";
+                    ]]]
+                tap_action:
+                  action: call-service
+                  service: cover.toggle
+                  service_data:
+                    entity_id: cover.garage_door_2
+                state:
+                  - value: closed
+                    icon: mdi:garage
+                styles:
+                  icon:
+                    - height: 150px
+              - type: custom:button-card
+                entity: input_boolean.global_dimmer
+                aspect_ratio: 1/1
+                state:
+                  - value: 'off'
+                    icon: mdi:brightness-7
+                  - value: 'on'
+                    icon: mdi:brightness-6
+                show_name: false
+                show_state: false
+                custom_fields:
+                styles:
+                  icon:
+                    - height: 60px
+              - type: custom:button-card
+                entity: alarm_control_panel.ha_alarm
+                aspect_ratio: 1/1
+                state:
+                - value: disarmed
+                  color: '#5CDF64'
+                - value: armed_home
+                  color: '#FFC300'
+                show_name: false
+                show_state: false
+                styles:
+                  icon:
+                    - height: 60px
+              - type: custom:button-card
+                entity: alarm_control_panel.aarlo_smarhub
+                aspect_ratio: 1/1
+                icon: mdi:cctv
+                state:
+                - value: armed_home
+                  color: '#5CDF64'
+                - value: Home-Rain
+                  color: '#33D4FF'
+                - value: Away-Night
+                  color: '#FFC300'
+                - value: Away-Night-Rain
+                  color: '#33D4FF'
+                show_name: false
+                show_state: false  
+                styles:
+                  icon:
+                    - height: 60px
+                  custom_fields:
+              - type: custom:button-card
+                entity: climate.kitchen
+                aspect_ratio: 1/1
+                icon: mdi:thermostat
+                state:
+                - value: heat
+                  color: '#F89A30'
+                - value: off
+                  color: var(--disabled-text-color)
+                show_name: false
+                custom_fields:
+                  thermostat:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.climate_kitchen_target_temperature
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 25%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 14px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  icon:
+                    - height: 60px
+                  custom_fields:
+                    thermostat:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 28%
+                      - top: 70%
+          - type: custom:button-card
+            color_type: label-card
+            name: Rooms
+          - type: grid
+            columns: 3
+            cards:
+              - type: custom:button-card
+                entity: group.living_room_lights
+                name: Livingroom
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/living-room
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.livingroom_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  auto-on:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.living_room_motion_sensor_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:motion-sensor-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:motion-sensor
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  energy-saver:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.living_room_energy_saver_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:leaf-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:leaf
+                          color: '#0EF421'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.living_room_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                  neon-light:
+                    card:
+                      type: custom:button-card
+                      entity: switch.neon_light
+                      icon: mdi:television-ambient-light
+                      show_name: false
+                      size: 60%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                        - value: 'on'
+                          color: '#FFF581'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    auto-on:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 25%
+                    energy-saver:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 45%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+                    neon-light:
+                      - border-radius: 50%
+                      - position: absolute
+                      - right: 75%
+                      - top: 5%
+              - type: custom:button-card
+                entity: group.family_room_lights
+                name: Family Room
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/family-room
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.family_room_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  auto-on:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.family_room_motion_sensor_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:motion-sensor-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:motion-sensor
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  energy-saver:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.family_room_energy_saver_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:leaf-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:leaf
+                          color: '#0EF421'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.family_room_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    auto-on:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 25%
+                    energy-saver:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 45%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: group.kitchen_lights
+                name: Kitchen
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/kitchen
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.kitchen_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  auto-on:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.kitchen_motion_sensor_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:motion-sensor-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:motion-sensor
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  energy-saver:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.kitchen_energy_saver_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:leaf-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:leaf
+                          color: '#0EF421'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.kitchen_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    auto-on:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 25%
+                    energy-saver:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 45%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: group.garage_lights
+                name: Garage
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/garage
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.garage_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  auto-on:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.garage_motion_sensor_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:motion-sensor-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:motion-sensor
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  energy-saver:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.garage_energy_saver_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:leaf-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:leaf
+                          color: '#0EF421'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.garage_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    auto-on:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 25%
+                    energy-saver:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 45%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: group.backyard_lights
+                name: Backyard
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/backyard
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.backyard_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: group.hallway_lights
+                name: Hallway
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/hallway
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.hallway_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  auto-on:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.hallway_motion_sensor_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:motion-sensor-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:motion-sensor
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  energy-saver:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.hallway_energy_saver_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:leaf-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:leaf
+                          color: '#0EF421'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.hallway_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    auto-on:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 25%
+                    energy-saver:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 45%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: group.upstairs_hallway_lights
+                name: Upstairs Hallway
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/upstairs-hallway
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.upstairs_hallway_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  auto-on:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.upstairs_hallway_motion_sensor_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:motion-sensor-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:motion-sensor
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  energy-saver:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.upstairs_hallway_energy_saver_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:leaf-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:leaf
+                          color: '#0EF421'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.upstairs_hallway_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    auto-on:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 25%
+                    energy-saver:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 45%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: group.ryans_room_lights
+                name: Ryan's Room
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/ryans-room
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.ryans_room_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  auto-on:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.ryans_room_motion_sensor_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:motion-sensor-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:motion-sensor
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  energy-saver:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.ryans_room_energy_saver_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:leaf-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:leaf
+                          color: '#0EF421'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  desk:
+                    card:
+                      type: custom:button-card
+                      entity: switch.ryans_desk_pm
+                      icon: mdi:desk
+                      show_name: false
+                      size: 60%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                        - value: 'on'
+                          color: '#FFF581'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.ryans_room_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    desk:
+                      - border-radius: 50%
+                      - position: absolute
+                      - right: 75%
+                      - top: 5%
+                    auto-on:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 25%
+                    energy-saver:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 45%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: group.ryans_bathroom_lights
+                name: Ryan's Bathroom
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/ryans-bathroom
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.ryans_bathroom_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  energy-saver:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.ryans_bathroom_energy_saver_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:leaf-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:leaf
+                          color: '#0EF421'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  auto-on:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.ryans_bathroom_motion_sensor_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:motion-sensor-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:motion-sensor
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.ryans_bathroom_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    auto-on:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 25%
+                    energy-saver:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 45%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: group.lorens_room_lights
+                name: Loren's Room
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/lorens-room
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.lorens_room_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.lorens_room_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: switch.lorens_bathroom_lights
+                icon: mdi:toilet
+                name: Loren's Bathroom
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/lorens-bathroom
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.lorens_bathroom_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  energy-saver:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.lorens_bathroom_energy_saver_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:leaf-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:leaf
+                          color: '#0EF421'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  fan:
+                    card:
+                      type: custom:button-card
+                      entity: switch.lorens_bathroom_fan
+                      icon: mdi:fan
+                      show_name: false
+                      size: 60%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                        - value: 'on'
+                          color: '#FFF581'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.lorens_bathroom_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    energy-saver:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 45%
+                    fan:
+                      - border-radius: 50%
+                      - position: absolute
+                      - right: 75%
+                      - top: 5%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: group.jordans_room_lights
+                name: Jordan’s Room
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/jordans-room
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.jordans_room_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                        }
+                styles:
+                  custom_fields:
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: group.simulator_lights
+                name: Simulator
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/simulator
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.simulator_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.simulator_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+              - type: custom:button-card
+                entity: group.office_lights
+                name: Office
+                aspect_ratio: 1/1
+                hold_action:
+                  action: navigate
+                  navigation_path: /lovelace-rooms/office
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                  - value: 'on'
+                    color: '#FFF581'
+                custom_fields:
+                  occupancy:
+                    card:
+                      type: custom:button-card
+                      entity: binary_sensor.office_occupancy_aggregate
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  auto-on:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.office_motion_sensor_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:motion-sensor-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:motion-sensor
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  energy-saver:
+                    card:
+                      type: custom:button-card
+                      entity: input_boolean.office_energy_saver_override
+                      show_name: false
+                      size: 50%
+                      state:
+                        - value: 'on'
+                          icon: mdi:leaf-off
+                          color: var(--disabled-text-color)
+                        - value: 'off'
+                          icon: mdi:leaf
+                          color: '#0EF421'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  snakes:
+                    card:
+                      type: custom:button-card
+                      entity: light.snake_lights
+                      icon: mdi:snake
+                      show_name: false
+                      size: 60%
+                      state:
+                        - value: 'off'
+                          color: var(--disabled-text-color)
+                        - value: 'on'
+                          color: '#5CDF64'
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                        }
+                  temp:
+                    card:
+                      type: custom:button-card
+                      entity: sensor.office_temperature_aggregate
+                      show_state: true
+                      show_icon: false
+                      show_name: false
+                      size: 50%
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background-color: transparent !important;
+                          font-size: 12px !important;
+                          font-weight: bold !important;
+                        }
+                styles:
+                  custom_fields:
+                    occupancy:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 5%
+                    auto-on:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 25%
+                    energy-saver:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 75%
+                      - top: 45%
+                    snakes:
+                      - border-radius: 50%
+                      - position: absolute
+                      - right: 75%
+                      - top: 5%
+                    temp:
+                      - border-radius: 50%
+                      - position: absolute
+                      - left: 38%
+                      - top: 62%
+          - type: custom:button-card
+            color_type: label-card
+            font-weight: bold
+            color: auto
+            name: Scenes
+          - type: grid
+            columns: 4
+            cards:
+              - type: custom:button-card
+                name: Movie
+                aspect_ratio: 1/1
+                icon: mdi:movie-open
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.movie
+                style: |
+                  ha-card {
+                  font-size: 0.8rem !important;
+                  }
+                  .ellipsis {
+                    text-overflow: unset;
+                  }
+                haptic: success
+              - type: custom:button-card
+                name: Livingroom Bright
+                aspect_ratio: 1/1
+                icon: mdi:lightbulb-on
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.living_room_bright
+                style: |
+                  ha-card {
+                  font-size: 0.8rem !important;
+                  }
+                  .ellipsis {
+                    text-overflow: unset;
+                  }
+                haptic: success
+              - type: custom:button-card
+                name: Kitchen Bright
+                aspect_ratio: 1/1
+                icon: mdi:lightbulb-on
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.kitchen_bright
+                style: |
+                  ha-card {
+                  font-size: 0.8rem !important;
+                  }
+                  .ellipsis {
+                    text-overflow: unset;
+                  }
+                haptic: success
+              - type: custom:button-card
+                name: Family Room Bright
+                aspect_ratio: 1/1
+                icon: mdi:lightbulb-on
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.family_room_bright
+                style: |
+                  ha-card {
+                  font-size: 0.8rem !important;
+                  }
+                  .ellipsis {
+                    text-overflow: unset;
+                  }
+                haptic: success
+              - type: custom:button-card
+                name: House Off
+                aspect_ratio: 1/1
+                icon: mdi:lightbulb-on
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.house_off
+                style: |
+                  ha-card {
+                  font-size: 0.8rem !important;
+                  }
+                  .ellipsis {
+                    text-overflow: unset;
+                  }
+                haptic: success
+          - type: custom:button-card
+            color_type: label-card
+            name: Media Players
+          - type: grid
+            columns: 3
+            square: true
+            cards:
+              - type: custom:button-card
+                entity: media_player.oled77
+                name: OLED 77
+                aspect_ratio: 1/1
+                tap_action:
+                  action: call-service
+                  service: media_player.toggle
+                  service_data:
+                    entity_id: media_player.oled77
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                    icon: mdi:television
+                  - value: 'on'
+                    color: '#FFF581'
+                    icon: mdi:television-shimmer
+              - type: custom:button-card
+                entity: media_player.oled65
+                name: OLED 65
+                aspect_ratio: 1/1
+                tap_action:
+                  action: call-service
+                  service: media_player.toggle
+                  service_data:
+                    entity_id: media_player.oled65
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                    icon: mdi:television
+                  - value: 'on'
+                    color: '#FFF581'
+                    icon: mdi:television-shimmer
+              - type: custom:button-card
+                entity: media_player.samsung_9_series_65
+                name: Samsung TV
+                aspect_ratio: 1/1
+                tap_action:
+                  action: call-service
+                  service: media_player.toggle
+                  service_data:
+                    entity_id: media_player.samsung_9_series_65
+                haptic: success
+                state:
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                    icon: mdi:television
+                  - value: 'on'
+                    color: '#FFF581'
+                    icon: mdi:television-shimmer
+      - type: vertical-stack
+        cards:
+          - type: custom:button-card
+            color_type: label-card
+            name: House Metrics
+          - type: custom:auto-entities
+            card:
+              type: grid
+              columns: 3
+            card_param: cards
+            filter:
+              include:
+                - entity_id: sensor.house_temperature_aggregate
+                  options:
+                    type: custom:button-card
+                    aspect_ratio: 1/1
+                    name: Inside Temp
+                    icon: none
+                    show_state: true
+                    styles:
+                      state:
+                        - padding-bottom: 40px
+                        - font-size: 30px
+                        - font-weight: bold
+                        - overflow: unset
+                - entity_id: sensor.outside_temperature_aggregate
+                  options:
+                    type: custom:button-card
+                    aspect_ratio: 1/1
+                    name: Outside Temp
+                    icon: none
+                    show_state: true
+                    styles:
+                      state:
+                        - padding-bottom: 40px
+                        - font-size: 30px
+                        - font-weight: bold
+                        - overflow: unset
+                - entity_id: sensor.humidity_aggregate
+                  options:
+                    type: custom:button-card
+                    aspect_ratio: 1/1
+                    name: Inside Humdity
+                    icon: none
+                    show_state: true
+                    styles:
+                      state:
+                        - padding-bottom: 40px
+                        - font-size: 30px
+                        - font-weight: bold
+                        - overflow: unset
+                - entity_id: sensor.house_air_quality
+                  options:
+                    type: custom:button-card
+                    aspect_ratio: 1/1
+                    name: Air Quality
+                    icon: none
+                    show_state: true
+                    styles:
+                      state:
+                        - padding-bottom: 40px
+                        - font-size: 30px
+                        - font-weight: bold
+                        - overflow: unset
+                - entity_id: sensor.energy_usage
+                  options:
+                    type: custom:button-card
+                    aspect_ratio: 1/1
+                    name: Energy Usage
+                    icon: none
+                    show_state: true
+                    styles:
+                      state:
+                        - padding-bottom: 40px
+                        - font-size: 30px
+                        - font-weight: bold
+                        - overflow: unset
+                    hold_action:
+                      action: url
+                      url_path: shortcuts://run-shortcut?name=sense
+                - entity_id: sensor.energy_production
+                  options:
+                    type: custom:button-card
+                    aspect_ratio: 1/1
+                    name: Energy Production
+                    icon: none
+                    show_state: true
+                    styles:
+                      state:
+                        - padding-bottom: 40px
+                        - font-size: 30px
+                        - font-weight: bold
+                        - overflow: unset
+                    hold_action:
+                      action: url
+                      url_path: shortcuts://run-shortcut?name=sense
+          - type: custom:auto-entities
+            card:
+              type: glance
+              title: Devices using energy
+            filter:
+              include:
+                - domain: sensor
+                  state: '>0'
+                  attributes:
+                    device_class: power
+                    unit_of_measurement: W
+          - type: custom:auto-entities
+            card:
+              type: glance
+              title: Devices currently on
+              show_state: false
+            filter:
+              include:
+                - domain: light
+                  state: 'on'
+                  options:
+                    tap_action:
+                      action: toggle
+                - domain: media_player
+                  state: 'on'
+                  options:
+                    tap_action:
+                      action: toggle
+                - domain: fan
+                  state: 'on'
+                  options:
+                    tap_action:
+                      action: toggle
+                - entity_id: switch.*
+                  state: 'on'
+              exclude:
+                - group: group.grouped_lights
+                - group: group.switches_converted_to_lights
+                - group: group.bluetooth_scanners
+                - entity_id: light.livingroom
+          - type: custom:auto-entities
+            card:
+              type: glance
+              title: Open Doors
+              show_state: false
+            filter:
+              include:
+                - entity_id: binary_sensor.*door_sensor
+                  state: 'on'
+          - type: custom:auto-entities
+            card:
+              type: entities
+              title: Timers
+              show_state: false
+            filter:
+              include:
+                - entity_id: timer*
+              exclude:
+                - state: idle
+          - type: custom:auto-entities
+            card:
+              type: entities
+              title: Devices with Low Battery
+              show_state: true
+            filter:
+              include:
+                - entity_id: sensor.*battery*
+                  state: '<50'
+      - type: vertical-stack
+        cards:
+          - type: weather-forecast
+            entity: weather.kitchen
+            secondary_info_attribute: wind_speed
+          - type: horizontal-stack
+            cards:
+              - type: custom:purifier-card
+                entity: fan.ryans_room
+                aqi:
+                  entity_id: air_quality.ryans_room_air_quality
+                  unit: level
+                stats:
+                  - entity_id: sensor.ryans_room_filter_life
+                    unit: '%'
+                    subtitle: Filter Remaining
+                actions:
+                  - name: speed up
+                    icon: mdi:arrow-up-bold
+                    service: script.fan_speed_up
+                    service_data:
+                      entity_id: fan.ryans_room
+                  - name: speed down
+                    icon: mdi:arrow-down-bold
+                    service: script.fan_speed_down
+                    service_data:
+                      entity_id: fan.ryans_room
+                  - name: toggle oscillation
+                    icon: mdi:cached
+                    service: script.fan_toggle_oscillation
+                    service_data:
+                      entity_id: fan.ryans_room
+              - type: custom:purifier-card
+                entity: fan.lorens_room
+                aqi:
+                  entity_id: air_quality.ryans_room_air_quality
+                  unit: level
+                stats:
+                  - entity_id: sensor.lorens_room_filter_life
+                    unit: '%'
+                    subtitle: Filter Remaining
+                actions:
+                  - name: speed up
+                    icon: mdi:arrow-up-bold
+                    service: script.fan_speed_up
+                    service_data:
+                      entity_id: fan.lorens_room
+                  - name: speed down
+                    icon: mdi:arrow-down-bold
+                    service: script.fan_speed_down
+                    service_data:
+                      entity_id: fan.lorens_room
+                  - name: toggle oscillation
+                    icon: mdi:cached
+                    service: script.fan_toggle_oscillation
+                    service_data:
+                      entity_id: fan.lorens_room
+          - type: vertical-stack
+            cards:
+              - type: custom:xiaomi-vacuum-card
+                entity: vacuum.xiaomi_vacuum_cleaner
+                map_image: /local/lovelace-xiaomi-vacuum-card/img/vacuum.png
+                name: Roborock
+                vendor: xiaomi
+  - title: Living Room
+    path: living-room
+    panel: false
+    badges: []
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            color_type: label-card
+            name: Living Room
+          - type: custom:button-card
+            icon: mdi:home
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace-rooms/home
+            styles:
+              card:
+                - width: 60px
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Sensors
+        card_param: cards
+        filter:
+          include:
+            - group: group.living_room_sensors
+              domain: sensor
+              options:
+                type: sensor
+                aspect_ratio: 1/1
+                graph: line
+                detail: 2
+                name: null
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+        card_param: cards
+        filter:
+          include:
+            - group: group.living_room_sensors
+              domain: binary_sensor
+              options:
+                type: button
+                show_state: true
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Scenes
+        card_param: cards
+        filter:
+          include:
+            - domain: scene
+              options:
+                type: custom:button-card
+                show_state: false
+                aspect_ratio: 2/1
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Lights
+        card_param: cards
+        filter:
+          include:
+            - group: group.living_room_lights
+              options:
+                type: custom:button-card
+                aspect_ratio: 1/1
+                state:
+                  - value: 'on'
+                    color: var(--button-card-light-color)
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                hold_action:
+                  action: more-info
+                haptic: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Other Devices
+        filter:
+          include:
+            - area: Living Room
+          exclude:
+            - group: group.living_room_lights
+            - group: group.living_room_sensors
+            - group: group.grouped_lights
+  - title: Family Room
+    path: family-room
+    panel: false
+    badges: []
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Sensors
+        card_param: cards
+        filter:
+          include:
+            - group: group.family_room_sensors
+              domain: sensor
+              options:
+                type: sensor
+                aspect_ratio: 1/1
+                graph: line
+                detail: 2
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+        card_param: cards
+        filter:
+          include:
+            - group: group.family_room_sensors
+              domain: binary_sensor
+              options:
+                type: button
+                show_state: true
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Lights
+        card_param: cards
+        filter:
+          include:
+            - group: group.family_room_lights
+              options:
+                type: custom:button-card
+                aspect_ratio: 1/1
+                state:
+                  - value: 'on'
+                    color: var(--button-card-light-color)
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                hold_action:
+                  action: more-info
+                haptic: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Other Devices
+        filter:
+          include:
+            - area: Family Room
+          exclude:
+            - group: group.family_room_lights
+            - group: group.family_room_sensors
+            - group: group.grouped_lights
+  - title: Kitchen
+    path: kitchen
+    panel: false
+    badges: []
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Sensors
+        card_param: cards
+        filter:
+          include:
+            - group: group.kitchen_sensors
+              domain: sensor
+              options:
+                type: sensor
+                aspect_ratio: 1/1
+                graph: line
+                detail: 2
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+        card_param: cards
+        filter:
+          include:
+            - group: group.kitchen_sensors
+              domain: binary_sensor
+              options:
+                type: button
+                show_state: true
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Lights
+        card_param: cards
+        filter:
+          include:
+            - group: group.kitchen_lights
+              options:
+                type: custom:button-card
+                aspect_ratio: 1/1
+                state:
+                  - value: 'on'
+                    color: var(--button-card-light-color)
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                hold_action:
+                  action: more-info
+                haptic: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Other Devices
+        filter:
+          include:
+            - area: Kitchen
+          exclude:
+            - group: group.kitchen_lights
+            - group: group.kitchen_sensors
+            - group: group.grouped_lights
+  - title: Garage
+    path: garage
+    panel: false
+    badges: []
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Sensors
+        card_param: cards
+        filter:
+          include:
+            - group: group.garage_sensors
+              domain: sensor
+              options:
+                type: sensor
+                aspect_ratio: 1/1
+                graph: line
+                detail: 2
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+        card_param: cards
+        filter:
+          include:
+            - group: group.garage_sensors
+              domain: binary_sensor
+              options:
+                type: button
+                show_state: true
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Lights
+        card_param: cards
+        filter:
+          include:
+            - group: group.garage_lights
+              options:
+                type: custom:button-card
+                aspect_ratio: 1/1
+                state:
+                  - value: 'on'
+                    color: var(--button-card-light-color)
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                hold_action:
+                  action: more-info
+                haptic: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Other Devices
+        filter:
+          include:
+            - area: Garage
+          exclude:
+            - group: group.garage_lights
+            - group: group.garage_sensors
+            - group: group.grouped_lights
+  - title: Backyard
+    path: backyard
+    panel: false
+    badges: []
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Sensors
+        card_param: cards
+        filter:
+          include:
+            - group: group.backyard_sensors
+              domain: sensor
+              options:
+                type: sensor
+                aspect_ratio: 1/1
+                graph: line
+                detail: 2
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+        card_param: cards
+        filter:
+          include:
+            - group: group.backyard_sensors
+              domain: binary_sensor
+              options:
+                type: button
+                show_state: true
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Lights
+        card_param: cards
+        filter:
+          include:
+            - group: group.backyard_lights
+              options:
+                type: custom:button-card
+                aspect_ratio: 1/1
+                state:
+                  - value: 'on'
+                    color: var(--button-card-light-color)
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                hold_action:
+                  action: more-info
+                haptic: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Other Devices
+        filter:
+          include:
+            - area: Backyard
+          exclude:
+            - group: group.backyard_lights
+            - group: group.backyard_sensors
+            - group: group.grouped_lights
+  - title: Hallway
+    path: hallway
+    panel: false
+    badges: []
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Sensors
+        card_param: cards
+        filter:
+          include:
+            - group: group.hallway_sensors
+              domain: sensor
+              options:
+                type: sensor
+                aspect_ratio: 1/1
+                graph: line
+                detail: 2
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+        card_param: cards
+        filter:
+          include:
+            - group: group.hallway_sensors
+              domain: binary_sensor
+              options:
+                type: button
+                show_state: true
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Lights
+        card_param: cards
+        filter:
+          include:
+            - group: group.hallway_lights
+              options:
+                type: custom:button-card
+                aspect_ratio: 1/1
+                state:
+                  - value: 'on'
+                    color: var(--button-card-light-color)
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                hold_action:
+                  action: more-info
+                haptic: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Other Devices
+        filter:
+          include:
+            - area: Hallway
+          exclude:
+            - group: group.hallway_lights
+            - group: group.hallway_sensors
+            - group: group.grouped_lights
+  - title: Upstairs Hallway
+    path: upstairs-hallway
+    panel: false
+    badges: []
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Sensors
+        card_param: cards
+        filter:
+          include:
+            - group: group.upstairs_hallway_sensors
+              domain: sensor
+              options:
+                type: sensor
+                aspect_ratio: 1/1
+                graph: line
+                detail: 2
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+        card_param: cards
+        filter:
+          include:
+            - group: group.upstairs_hallway_sensors
+              domain: binary_sensor
+              options:
+                type: button
+                show_state: true
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Lights
+        card_param: cards
+        filter:
+          include:
+            - group: group.upstairs_hallway_lights
+              options:
+                type: custom:button-card
+                aspect_ratio: 1/1
+                state:
+                  - value: 'on'
+                    color: var(--button-card-light-color)
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                hold_action:
+                  action: more-info
+                haptic: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Other Devices
+        filter:
+          include:
+            - area: Upstairs Hallway
+          exclude:
+            - group: group.upstairs_hallway_lights
+            - group: group.upstairs_hallway_sensors
+            - group: group.grouped_lights
+  - title: Ryan's Room
+    path: ryans-room
+    panel: false
+    badges: []
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Sensors
+        card_param: cards
+        filter:
+          include:
+            - group: group.ryans_room_sensors
+              domain: sensor
+              options:
+                type: sensor
+                aspect_ratio: 1/1
+                graph: line
+                detail: 2
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+        card_param: cards
+        filter:
+          include:
+            - group: group.ryans_room_sensors
+              domain: binary_sensor
+              options:
+                type: button
+                show_state: true
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Lights
+        card_param: cards
+        filter:
+          include:
+            - group: group.ryans_room_lights
+              options:
+                type: custom:button-card
+                aspect_ratio: 1/1
+                state:
+                  - value: 'on'
+                    color: var(--button-card-light-color)
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                hold_action:
+                  action: more-info
+                haptic: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Other Devices
+        filter:
+          include:
+            - area: Ryan's Room
+          exclude:
+            - group: group.ryans_room_lights
+            - group: group.ryans_room_sensors
+            - group: group.grouped_lights
+  - title: Ryan's Bathroom
+    path: ryans-bathroom
+    panel: false
+    badges: []
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Sensors
+        card_param: cards
+        filter:
+          include:
+            - group: group.ryans_bathroom_sensors
+              domain: sensor
+              options:
+                type: sensor
+                aspect_ratio: 1/1
+                graph: line
+                detail: 2
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+        card_param: cards
+        filter:
+          include:
+            - group: group.ryans_bathroom_sensors
+              domain: binary_sensor
+              options:
+                type: button
+                show_state: true
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Lights
+        card_param: cards
+        filter:
+          include:
+            - group: group.ryans_bathroom_lights
+              options:
+                type: custom:button-card
+                aspect_ratio: 1/1
+                state:
+                  - value: 'on'
+                    color: var(--button-card-light-color)
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                hold_action:
+                  action: more-info
+                haptic: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Other Devices
+        filter:
+          include:
+            - area: Ryan's Bathroom
+          exclude:
+            - group: group.ryans_bathroom_lights
+            - group: group.ryans_bathroom_sensors
+            - group: group.grouped_lights
+  - title: Loren's Room
+    path: lorens-room
+    panel: false
+    badges: []
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Sensors
+        card_param: cards
+        filter:
+          include:
+            - group: group.lorens_room_sensors
+              domain: sensor
+              options:
+                type: sensor
+                aspect_ratio: 1/1
+                graph: line
+                detail: 2
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+        card_param: cards
+        filter:
+          include:
+            - group: group.lorens_room_sensors
+              domain: binary_sensor
+              options:
+                type: button
+                show_state: true
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Lights
+        card_param: cards
+        filter:
+          include:
+            - group: group.lorens_room_lights
+              options:
+                type: custom:button-card
+                aspect_ratio: 1/1
+                state:
+                  - value: 'on'
+                    color: var(--button-card-light-color)
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                hold_action:
+                  action: more-info
+                haptic: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Other Devices
+        filter:
+          include:
+            - area: Loren's Room
+          exclude:
+            - group: group.lorens_room_lights
+            - group: group.lorens_room_sensors
+            - group: group.grouped_lights
+  - title: Jordan's Room
+    path: jordans-room
+    panel: false
+    badges: []
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Sensors
+        card_param: cards
+        filter:
+          include:
+            - group: group.jordans_room_sensors
+              domain: sensor
+              options:
+                type: sensor
+                aspect_ratio: 1/1
+                graph: line
+                detail: 2
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+        card_param: cards
+        filter:
+          include:
+            - group: group.jordans_room_sensors
+              domain: binary_sensor
+              options:
+                type: button
+                show_state: true
+                show_name: false
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 3
+          square: true
+          title: Lights
+        card_param: cards
+        filter:
+          include:
+            - group: group.jordans_room_lights
+              options:
+                type: custom:button-card
+                aspect_ratio: 1/1
+                state:
+                  - value: 'on'
+                    color: var(--button-card-light-color)
+                  - value: 'off'
+                    color: var(--disabled-text-color)
+                hold_action:
+                  action: more-info
+                haptic: true
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Other Devices
+        filter:
+          include:
+            - area: Jordan's Room
+          exclude:
+            - group: group.jordans_room_lights
+            - group: group.jordans_room_sensors
+            - group: group.grouped_lights

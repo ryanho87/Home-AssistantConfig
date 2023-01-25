@@ -1,0 +1,6 @@
+trusted_proxies:
+  - 10.0.0.7
+  - 127.0.0.1
+  - ::1
+  - 172.17.0.1
+use_x_forwarded_for: true

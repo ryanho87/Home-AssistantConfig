@@ -2,3 +2,5 @@ title: Home
 resources:
   - url: /local/button-card.js
     type: module
+  - url: /local/aarlo-glance.js
+    type: module

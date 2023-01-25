@@ -3,6 +3,7 @@
 #
 # iOS Light Mode Theme - dark-green
 #
+
 ios-light-mode-dark-green-alternative:
   # Global
   background-image: "center / cover no-repeat fixed url('/local/themes/ios-themes/homekit-bg-dark-green.jpg')"
@@ -1213,6 +1214,7 @@ ios-light-mode-blue-red-alternative:
   secondary-background-color: rgba(255, 255, 255, 0.9)
   divider-color: "#8e8e93"  # from Apple systemGray light mode
   accent-color: rgba(255, 159, 9, 1)
+
   # Text
   primary-text-color: "#464a47"
   secondary-text-color: "#000000"
@@ -1363,6 +1365,15 @@ ios-dark-mode-blue-red-alternative:
   secondary-background-color: rgba(25, 25, 25, 0.9)
   divider-color: "#98989d"  # from Apple systemGray dark mode
   accent-color: rgba(255, 159, 9, 1)
+  
+  card-mod-theme: ios-dark-mode-blue-red-alternative
+  card-mod-root-yaml: |
+    .: |
+      ha-app-layout {
+        --ha-card-border-width: 0px;
+        --ha-card-border-radius: 1px
+      }
+
   # Text
   primary-text-color: "#FFF"
   secondary-text-color: "#d3d3d3"

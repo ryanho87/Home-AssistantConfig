@@ -1,12 +1,94 @@
+global_dimmer:
+  name: Dim Lights
+
 ###################################
 ##### Motion Sensor Overrides #####
 ###################################
 
-living_room_on_motion_sensor_override:
-  name: Disable Living Room auto-on Motion Sensor
+living_room_motion_sensor_override:
+  name: Disable Living Room auto-on
+  icon: mdi:motion-sensor-off
 
-family_room_on_motion_sensor_override:
-  name: Disable Family Room auto-on Motion Sensor
+family_room_motion_sensor_override:
+  name: Disable Family Room auto-on
+  icon: mdi:motion-sensor-off
 
-ryans_room_on_motion_sensor_override:
-  name: Disable Ryan's Room auto-on Motion Sensor
+kitchen_motion_sensor_override:
+  name: Disable Kitchen auto-on
+  icon: mdi:motion-sensor-off
+
+garage_motion_sensor_override:
+  name: Disable Garage auto-on
+  icon: mdi:motion-sensor-off
+
+ryans_room_motion_sensor_override:
+  name: Disable Ryan's Room auto-on
+  icon: mdi:motion-sensor-off
+
+ryans_bathroom_motion_sensor_override:
+  name: Disable Ryan's Bathroom auto-on
+  icon: mdi:motion-sensor-off
+
+office_motion_sensor_override:
+  name: Disable Office auto-on
+  icon: mdi:motion-sensor-off
+
+simulator_motion_sensor_override:
+  name: Disable Simulator auto-on
+  icon: mdi:motion-sensor-off
+
+hallway_motion_sensor_override:
+  name: Disable Hallway auto-on
+  icon: mdi:motion-sensor-off
+
+upstairs_hallway_motion_sensor_override:
+  name: Disable Upstairs Hallway auto-on
+  icon: mdi:motion-sensor-off  
+
+##################################
+##### Energy Saver Overrides #####
+##################################
+
+living_room_energy_saver_override:
+  name: Disable Living Room auto-off
+  icon: mdi:leaf-off
+
+family_room_energy_saver_override:
+  name: Disable Family Room auto-off
+  icon: mdi:leaf-off
+
+kitchen_energy_saver_override:
+  name: Disable Kitchen Room auto-off
+  icon: mdi:leaf-off
+
+garage_energy_saver_override:
+  name: Disable Garage Room auto-off
+  icon: mdi:leaf-off
+
+hallway_energy_saver_override:
+  name: Disable Hallway auto-off
+  icon: mdi:leaf-off
+
+upstairs_hallway_energy_saver_override:
+  name: Disable Upstairs Hallway auto-off
+  icon: mdi:leaf-off
+
+ryans_room_energy_saver_override:
+  name: Disable Ryan's Room auto-off
+  icon: mdi:leaf-off
+
+ryans_bathroom_energy_saver_override:
+  name: Disable Ryan's Bathroom auto-off
+  icon: mdi:leaf-off
+
+lorens_bathroom_energy_saver_override:
+  name: Disable Loren's Bathroom auto-off
+  icon: mdi:leaf-off
+
+office_energy_saver_override:
+  name: Disable Office auto-off
+  icon: mdi:leaf-off
+
+simulator_energy_saver_override:
+  name: Disable Simulator auto-off
+  icon: mdi:leaf-off

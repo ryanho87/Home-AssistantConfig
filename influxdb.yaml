@@ -1,6 +1,6 @@
 api_version: 2
 ssl: false
-host: 10.0.0.92
+host: https://influx.orb-ranch.com
 port: 8086
 bucket: !secret influxdb_bucket
 token: !secret influxdb_token

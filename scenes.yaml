@@ -1,61 +1,39 @@
 - id: '1609990592091'
   name: Movie
   entities:
-    light.glass_light:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      supported_color_modes:
-      - color_temp
-      - hs
-      - xy
-      color_mode: color_temp
-      brightness: 51
-      color_temp: 428
-      entity_id:
-      - light.glass_light_1
-      - light.glass_light_2
-      friendly_name: Glass Light
-      icon: mdi:lightbulb-group
-      supported_features: 44
-      state: 'on'
-    light.pyramid_light:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      supported_color_modes:
-      - color_temp
-      - hs
-      - xy
-      color_mode: color_temp
-      brightness: 51
-      color_temp: 474
-      is_deconz_group: false
-      friendly_name: Pyramid Light
-      supported_features: 44
-      state: 'on'
     group.kitchen_lights:
       entity_id:
-      - light.kitchen_light_north
-      - light.kitchen_light_south
-      order: 12
+      - light.kitchen_templated
+      order: 15
       friendly_name: Kitchen
       icon: mdi:stove
       state: 'off'
     group.hallway_lights:
       entity_id:
-      - light.hallway_light_north
-      - light.hallway_light_south
-      order: 20
+      - light.hallway_templated
+      order: 23
       friendly_name: Hallway
       icon: mdi:ceiling-light
       state: 'off'
-    input_boolean.living_room_on_motion_sensor_override:
-      editable: false
-      friendly_name: Disable Living Room auto-on Motion Sensor
+    group.living_room_lights:
+      entity_id:
+      - light.living_room_templated
+      - light.oled_left
+      - light.oled_right
+      order: 13
+      friendly_name: Living Room
+      icon: mdi:sofa
       state: 'off'
+    input_boolean.living_room_motion_sensor_override:
+      editable: false
+      icon: mdi:motion-sensor-off
+      friendly_name: Disable Living Room auto-on
+      state: 'on'
+    input_boolean.kitchen_motion_sensor_override:
+      editable: false
+      icon: mdi:motion-sensor-off
+      friendly_name: Disable Kitchen auto-on
+      state: 'on'
   icon: mdi:movie-open
 - id: '1609990833034'
   name: Living Room Bright
@@ -65,30 +43,65 @@
       max_mireds: 500
       effect_list:
       - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      - xy
+      color_mode: color_temp
       brightness: 254
       color_temp: 301
+      hs_color:
+      - 27.369
+      - 48.786
+      rgb_color:
+      - 255
+      - 187
+      - 130
+      xy_color:
+      - 0.468
+      - 0.377
       is_deconz_group: false
       friendly_name: Pyramid Light
-      supported_features: 63
-      state: 'on'
-    light.ceiling_light:
-      brightness: 255
-      friendly_name: Ceiling Light
-      supported_features: 33
+      supported_features: 44
       state: 'on'
     light.glass_light:
       min_mireds: 153
       max_mireds: 500
       effect_list:
       - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      - xy
+      color_mode: color_temp
       brightness: 254
-      color_temp: 300
+      color_temp: 345
+      hs_color:
+      - 28.002
+      - 59.739
+      rgb_color:
+      - 255
+      - 173
+      - 102
+      xy_color:
+      - 0.507
+      - 0.384
       entity_id:
       - light.glass_light_1
       - light.glass_light_2
       friendly_name: Glass Light
       icon: mdi:lightbulb-group
-      supported_features: 63
+      supported_features: 44
+      state: 'on'
+    switch.lorens_floor_lamp:
+      friendly_name: Lorens Floor Lamp
+      state: 'on'
+    light.ceiling_lights:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+      friendly_name: Ceiling Lights
+      supported_features: 0
       state: 'on'
   icon: mdi:lightbulb-on
 - id: '1610082210028'
@@ -99,28 +112,61 @@
       max_mireds: 500
       effect_list:
       - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      - xy
+      color_mode: color_temp
       brightness: 254
       color_temp: 365
+      hs_color:
+      - 28.312
+      - 64.491
+      rgb_color:
+      - 255
+      - 168
+      - 90
+      xy_color:
+      - 0.522
+      - 0.387
       entity_id:
       - light.kitchen_light_north_1
       - light.kitchen_light_north_2
       friendly_name: Kitchen Light North
       icon: mdi:lightbulb-group
-      supported_features: 63
+      supported_features: 44
       state: 'on'
     light.kitchen_light_south:
       min_mireds: 153
       max_mireds: 500
       effect_list:
       - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      - xy
+      color_mode: color_temp
       brightness: 254
       color_temp: 366
+      hs_color:
+      - 28.327
+      - 64.71
+      rgb_color:
+      - 255
+      - 167
+      - 89
+      xy_color:
+      - 0.524
+      - 0.387
       entity_id:
       - light.kitchen_light_south_1
       - light.kitchen_light_south_2
       friendly_name: Kitchen Light South
       icon: mdi:lightbulb-group
-      supported_features: 63
+      supported_features: 44
+      state: 'on'
+    switch.kitchen_lamp:
+      friendly_name: Kitchen Lamp
       state: 'on'
   icon: mdi:lightbulb-on
 - id: '1610084359048'
@@ -174,4 +220,67 @@
       order: 14
       friendly_name: Family Room
       icon: mdi:table-chair
+      state: 'off'
+- id: '1641191569251'
+  name: Family Room Bedtime
+  entities:
+    input_boolean.family_room_motion_sensor_override:
+      editable: false
+      friendly_name: Disable Family Room auto-on
+      icon: mdi:motion-sensor-off
+      state: 'on'
+    group.family_room_lights:
+      entity_id:
+      - light.family_room_templated
+      order: 19
+      friendly_name: Family Room
+      icon: mdi:table-chair
+      state: 'off'
+  icon: mdi:moon-waning-crescent
+- id: '1641191660295'
+  name: Living Room Bedtime
+  entities:
+    group.living_room_lights:
+      entity_id:
+      - light.living_room_templated
+      - light.oled_left
+      - light.oled_right
+      order: 13
+      friendly_name: Living Room
+      icon: mdi:sofa
+      state: 'off'
+    input_boolean.living_room_motion_sensor_override:
+      editable: false
+      friendly_name: Disable Living Room auto-on
+      icon: mdi:motion-sensor-off
+      state: 'on'
+  icon: mdi:moon-waning-crescent
+- id: '1641191744882'
+  name: Ryan's Bedtime
+  entities:
+    group.ryans_room_lights:
+      entity_id:
+      - light.ryans_room_templated
+      order: 0
+      icon: mdi:bed
+      friendly_name: Ryan's Room
+      state: 'off'
+    group.ryans_bathroom_lights:
+      entity_id:
+      - light.ryans_bathroom_templated
+      order: 2
+      icon: mdi:toilet
+      friendly_name: Ryan's Bathroom
+      state: 'off'
+    input_boolean.ryans_room_motion_sensor_override:
+      editable: false
+      icon: mdi:motion-sensor-off
+      friendly_name: Disable Ryan's Room auto-on
+      state: 'on'
+    switch.ryans_desk_pm:
+      friendly_name: Ryans Desk (PM)
+      state: 'off'
+    switch.ryans_desk_pm_led:
+      icon: mdi:led-off
+      friendly_name: Ryans Desk (PM) LED
       state: 'off'

@@ -95,6 +95,8 @@
     - sensor.living_room_temperature                  #ecobee
     - sensor.living_room_motion_sensor_temperature    #aqara
     - sensor.living_room_motion_sensor_temperature_2  #aqara
+    - sensor.living_room_motion_sensor_temperature_3  #aquare
+    - sensor.backyard_door_sensor_temperature
 
 - platform: min_max
   name: "Livingroom Humidity Aggregate"
@@ -119,7 +121,10 @@
   round_digits: 1
   type: mean
   entity_ids:
-   - sensor.family_room_temperature
+   - sensor.family_room_temperature                 #aqara
+   - sensor.family_room_motion_sensor_temperature   #aqara
+   - sensor.family_room_motion_sensor_temperature_2 #aqara
+   - sensor.front_door_sensor_temperature           #aqara
 
 - platform: min_max
   name: "Family Room Humidity Aggregate"
@@ -137,7 +142,9 @@
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.kitchen_temperature
+    - sensor.kitchen_temperature                  #ecobee
+    - sensor.kitchen_motion_sensor_temperature    #aquara
+    - sensor.kitchen_motion_sensor_temperature_2  #aqara
 
 - platform: min_max
   name: "Kitchen Humidity Aggregate"
@@ -155,7 +162,10 @@
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.garage_temperature #This is the value converted from sensor.temp1
+    - sensor.garage_temperature                   #ecowitt -- converted from sensor.temp1
+    - sensor.garage_motion_sensor_temperature     #aqara
+    - sensor.garage_door_sensor_temperature       #aqara
+    - sensor.garage_side_door_sensor_temperature  #aqara
 
 - platform: min_max
   name: "Garage Humidity Aggregate"
@@ -173,7 +183,7 @@
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.temp
+    - sensor.temp                         #ecowitt
 
 
 - platform: min_max
@@ -196,7 +206,7 @@
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.hallway_temperature
+    - sensor.hallway_motion_sensor_temperature
 
 # - platform: min_max
 #  name: "Hallway Humidity Aggregate"
@@ -214,7 +224,7 @@
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.upstairs_hallway_temperature
+    - sensor.upstairs_hallway_motion_sensor_temperature
 
 # - platform: min_max
 #  name: "Upstairs Hallway Humidity Aggregate"
@@ -232,8 +242,8 @@
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.ryans_room_temperature_doorway
-    - sensor.ryans_room_temperature
+    - sensor.ryans_room_motion_sensor_temperature   #hue
+    - sensor.ryans_room_motion_sensor_temperature_2 #aqara
     - sensor.ryans_room_temperature_dyson
 
 - platform: min_max
@@ -252,7 +262,7 @@
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.ryans_bathroom_temperature
+    - sensor.ryans_bathroom_motion_sensor_temperature #aqara
 
 # - platform: min_max
 #  name: "Ryans Bathroom Humidity Aggregate"
@@ -270,7 +280,7 @@
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.lorens_room_temperature
+    - sensor.lorens_room_temperature  #aqara
 
 - platform: min_max
   name: "Lorens Room Humidity Aggregate"
@@ -278,6 +288,24 @@
   type: mean
   entity_ids:
     - sensor.lorens_room_humidity
+
+######################################
+###### Loren's Bathroom Sensors ######
+######################################
+
+- platform: min_max
+  name: "Lorens Bathroom Temperature Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.lorens_bathroom_motion_sensor_temperature   #aqara
+
+- platform: min_max
+  name: "Lorens Bathroom Humidity Aggregate"
+  round_digits: 1
+  type: mean
+  entity_ids:
+    - sensor.lorens_bathroom_humidity
 
 ###################################
 ###### Jordan's Room Sensors ######
@@ -288,7 +316,7 @@
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.jordans_room_temperature
+    - sensor.jordans_room_temperature     #aqara
 
 - platform: min_max
   name: "Jordans Room Humidity Aggregate"
@@ -297,23 +325,23 @@
   entity_ids:
     - sensor.jordans_room_humidity
 
-################################
-###### Snake Room Sensors ######
-################################
+###############################
+###### Simulator Sensors ######
+###############################
 
 - platform: min_max
-  name: "Snake Room Temperature Aggregate"
+  name: "Simulator Temperature Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.snake_room_temperature
+    - sensor.simulator_temperature   #aqara
 
 - platform: min_max
-  name: "Snake Room Humidity Aggregate"
+  name: "Simulator Humidity Aggregate"
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.snake_room_humidity
+    - sensor.simulator_humidity
 
 ############################
 ###### Office Sensors ######
@@ -324,7 +352,7 @@
   round_digits: 1
   type: mean
   entity_ids:
-    - sensor.office_temperature
+    - sensor.office_motion_sensor_temperature   #aqara
 
 - platform: min_max
   name: "Office Humidity Aggregate"
@@ -332,15 +360,6 @@
   type: mean
   entity_ids:
     - sensor.office_humidity
-
-
-
-
-
-
-
-
-
 
 #  Utilities #
 
@@ -377,6 +396,28 @@
       unit_of_measurement: '%'
       value_template: "{{ states('sensor.soilmoisture2') }}"
 
+    climate_kitchen_target_temperature:
+      friendly_name: "Kitchen Thermostat Target Temperature"
+      unit_of_measurement: '°F'
+      value_template: "{{ state_attr('climate.kitchen', 'temperature') }}"
+
+    global_dimmer_state:
+          friendly_name: "Global Dimmer State"
+          value_template: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              Dim
+            {% else %}
+              Bright
+            {% endif %}
+
+    home_alarm_state:
+          friendly_name: "Home Alarm State"
+          value_template: "{{ states('alarm_control_panel.ha_alarm') }}"
+
+    arlo_alarm_state:
+          friendly_name: "Home Alarm State"
+          value_template: "{{ states('alarm_control_panel.aarlo_smarhub') }}"
+
 #########################
 ##### Other Sensors #####
 #########################
@@ -392,3 +433,6 @@
   - battery_level
   - signal_strength
 
+- platform: mqtt_room
+  device_id: 123testid
+  state_topic: "room-assistant/mqtt-room"

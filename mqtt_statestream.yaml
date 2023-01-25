@@ -1,0 +1,9 @@
+  base_topic: homeassistant_states
+  publish_attributes: true
+  publish_timestamps: true
+  include:
+    entities:
+      - sensor.energy_production
+      - sensor.energy_usage
+    entity_globs:
+      - sensor.*aggregate

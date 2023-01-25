@@ -1,6 +1,8 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
+http: !include http.yaml
+
 homeassistant:
   latitude: !secret latitude
   longitude: !secret longitude
@@ -9,6 +11,7 @@ homeassistant:
   temperature_unit: F
   time_zone: America/Los_Angeles
   unit_system: imperial
+  country: US
   customize: !include customize.yaml
 
 lovelace: !include lovelace.yaml
@@ -20,9 +23,13 @@ frontend:
 tts:
   - platform: google_translate
 
+ffmpeg:
+
 intent:
 
 python_script:
+
+mqtt_statestream: !include mqtt_statestream.yaml
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -76,7 +83,7 @@ ecobee:
 #  username: !secret eufy_user
 #  password: !secret eufy_password
 
-  #influxdb: !include influxdb.yaml
+influxdb: !include influxdb.yaml
 
 webostv: !include webostv.yaml
 
@@ -107,3 +114,7 @@ logger:
     custom_components.aarlo.sensor: debug
     custom_components.aarlo.switch: debug
     pyaarlo: debug
+    libdyson: debug
+    custom_components.dyson_local: debug
+    custom_components.dyson_cloud: debug
+

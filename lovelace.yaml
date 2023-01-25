@@ -1,4 +1,24 @@
-#resources:
-#  - url: /local/xiaomi-vacuum-card.js?v=4.1.0
-#    type: module
-
+mode: yaml
+resources:
+  - url: /hacsfiles/lovelace-thermostat-dark-card/thermostat-dark-card.js?hacstag=139634406005
+    type: module
+  - url: /hacsfiles/purifier-card/purifier-card.js?hacstag=2747389250130
+    type: module
+  - url: /hacsfiles/simple-thermostat/simple-thermostat.js?hacstag=158654878242
+    type: module
+  - url: /local/aarlo-glance.js
+    type: module
+  - url: /local/button-card.js
+    type: module
+  - url: /local/custom_lovelace/xiaomi_vacuum_map_card/xiaomi-vacuum-map-card.js
+    type: module
+  - url: /local/lovelace-auto-entities/auto-entities.js?v=1
+    type: module
+  - url: /local/lovelace-card-mod/card-mod.js?v=1
+    type: module
+  - url: /local/lovelace-card-tools/card-tools.js?v=1
+    type: module
+  - url: /local/lovelace-swipe-navigation/swipe-navigation.js?v=1.0.0
+    type: module
+  - url: /local/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js
+    type: module

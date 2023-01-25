@@ -4,10 +4,19 @@ family_room:
   name: Family Room time to Auto Shutoff
 garage:
   name: Garage time to Auto Shutoff
+kitchen:
+  name: Kitchen time to Auto Shutoff
+hallway:
+  name: Hallway time to Auto Shutoff
+upstairs_hallway:
+  name: Upstairs Hallway time to Auto Shutoff
 ryans_room:
   name: Ryan's Room time to Auto Shutoff
 ryans_bathroom:
   name: Ryan's Bathroom time to Auto Shutoff
-kitchen:
-  name: Kitchen time to Auto Shutoff
-
+office:
+  name: Office time to Auto Shutoff
+lorens_bathroom:
+  name: Loren's Bathroom time to Auto Shutoff
+simulator:
+  name: Simulator time to Auto Shutoff

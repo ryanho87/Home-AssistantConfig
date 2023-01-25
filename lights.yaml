@@ -2,11 +2,252 @@
 ##### Light Platforms #####
 ###########################
 
-#- platform: decora_wifi
-#  username: !secret leviton_user
-#  password: !secret leviton_password
-
 - platform: aarlo
+
+###########################
+##### Template Lights #####
+###########################
+
+- platform: template
+  lights:
+    living_room_templated:
+      friendly_name: "Living Room Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.livingroom
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.livingroom
+    family_room_templated:
+      friendly_name: "Family Room Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.family_room
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.family_room
+    kitchen_templated:
+      friendly_name: "Kitchen Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.kitchen
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.kitchen
+    garage_templated:
+      friendly_name: "Garage Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.garage
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.garage
+    backyard_templated:
+      friendly_name: "Backyard Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.backyard
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.backyard
+    hallway_templated:
+      friendly_name: "Hallway Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.hallway
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.hallway
+    upstairs_hallway_templated:
+      friendly_name: "Upstairs Hallway Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.upstairs_hallway
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.upstairs_hallway
+    ryans_room_templated:
+      friendly_name: "Ryan's Room Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.ryans_room
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.ryans_room
+    ryans_bathroom_templated:
+      friendly_name: "Ryan's Bathroom Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.ryans_bathroom
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.ryans_bathroom
+    lorens_room_templated:
+      friendly_name: "Loren's Room Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.lorens_room
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.lorens_room
+    lorens_bathroom_templated:
+      friendly_name: "Loren's Bathroom Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.lorens_bathroom
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.lorens_bathroom
+    jordans_room_templated:
+      friendly_name: "Jordan's Room Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.jordans_room
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.jordans_room
+    office_templated:
+      friendly_name: "Office Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.office
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.office
+    simulator_templated:
+      friendly_name: "Simulator Lights Templated"
+      turn_on:
+        service: light.turn_on
+        target:
+          entity_id: light.simulator
+        data_template:
+          brightness: >-
+            {% if is_state('input_boolean.global_dimmer', 'on') %}
+              50
+            {% else %}
+              255
+            {% endif %}
+      turn_off:
+        service: light.turn_off
+        target:
+          entity_id: light.simulator
 
 ########################
 ##### Light Groups #####
@@ -50,8 +291,12 @@
 ##############################
 
 - platform: switch
+  name: Backyard Wall Lights
+  entity_id: switch.backyard_wall_lights
+
+- platform: switch
   name: Backyard Lights 1
-  entity_id: switch.backyard_lights
+  entity_id: switch.backyard_lights_1
 
 - platform: switch
   name: Backyard Lights 2
@@ -62,8 +307,8 @@
   entity_id: switch.ryans_floor_lamp
 
 - platform: switch
-  name: Family Room Spotlight
-  entity_id: switch.family_room_spotlight
+  name: Spotlight
+  entity_id: switch.spotlight
 
 - platform: switch
   name: Loren's Floor Lamp
@@ -74,16 +319,8 @@
   entity_id: switch.ryans_desk_lamp
 
 - platform: switch
-  name: Loren's Shop Light
-  entity_id: switch.lorens_shop_light
-
-- platform: switch
-  name: Loren's Bathroom Lights 1
-  entity_id: switch.lorens_bathroom_lights_1
-
-- platform: switch
-  name: Loren's Bathroom Lights 2
-  entity_id: switch.lorens_bathroom_lights_2
+  name: Simulator Shop Light
+  entity_id: switch.simulator_shop_light
 
 - platform: switch
   name: Garage Lights
@@ -94,20 +331,12 @@
   entity_id: switch.jordans_shop_light
 
 - platform: switch
-  name: Family Room Shop Light
-  entity_id: switch.family_room_shop_light
+  name: Family Room Floor Lamp
+  entity_id: switch.family_room_floor_lamp
 
 - platform: switch
   name: Snake Lights
   entity_id: switch.snake_lights
-
-- platform: switch
-  name: Backyard Wall Light 1
-  entity_id: switch.backyard_wall_light_1
-
-- platform: switch
-  name: Backyard Wall Light 2
-  entity_id: switch.backyard_wall_light_2
 
 - platform: switch
   name: Ceiling Lights
@@ -116,3 +345,15 @@
 - platform: switch
   name: Office Desk Lamp
   entity_id: switch.office_desk_lamp
+
+- platform: switch
+  name: Kitchen Lamp
+  entity_id: switch.kitchen_lamp
+
+- platform: switch
+  name: Cabana
+  entity_id: switch.cabana
+
+- platform: switch
+  name: Stair Light
+  entity_id: switch.stair_light
