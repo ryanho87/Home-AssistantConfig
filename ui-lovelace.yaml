@@ -1708,6 +1708,7 @@ views:
                 - group: group.switches_converted_to_lights
                 - group: group.bluetooth_scanners
                 - entity_id: light.livingroom
+                - entity_id: switch.*_led
           - type: custom:auto-entities
             card:
               type: glance

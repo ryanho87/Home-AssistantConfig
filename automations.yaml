@@ -1342,7 +1342,7 @@
   - service: homeassistant.turn_on
     data: {}
     target:
-      entity_id: light.lorens_bathroom
+      entity_id: switch.lorens_bathroom_lights
   mode: single
 - id: '1636575417616'
   alias: '[Office] Turn on Lights'
@@ -1458,7 +1458,9 @@
   - service: homeassistant.turn_off
     data: {}
     target:
-      entity_id: group.lorens_bathroom_lights
+      entity_id:
+      - switch.lorens_bathroom_fan
+      - switch.lorens_bathroom_lights
   mode: single
 - id: '1640418325367'
   alias: '[Family Room] Clear motion sensor override when lights turn on'
