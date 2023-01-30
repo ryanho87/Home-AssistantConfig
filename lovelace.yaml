@@ -22,3 +22,10 @@ resources:
     type: module
   - url: /local/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js
     type: module
+dashboards:
+  security-yaml:
+    mode: yaml
+    filename: dashboard-security.yaml
+    title: Security
+    icon: mdi:lock
+    show_in_sidebar: true

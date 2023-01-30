@@ -1,0 +1,289 @@
+views:
+  - title: default
+    path: default
+    badges: []
+    cards:
+    - type: vertical-stack
+      cards:
+        - type: custom:button-card
+          color_type: label-card
+          name: Controls
+        - type: custom:button-card
+          entity: alarm_control_panel.ha_alarm
+          name: Home Alarm
+          layout: icon_name_state
+          show_state: true
+          aspect_ratio: 4/1
+          state:
+            - value: disarmed
+              color: '#5CDF64'
+            - value: armed_home
+              color: '#FFC300'
+          custom_fields:
+            armed:
+              card:
+                type: custom:button-card
+                icon: mdi:shield-check
+                size: 30%
+                tap_action:
+                  action: call-service
+                  service: alarm_control_panel.alarm_arm_home
+                  service_data:
+                    entity_id: alarm_control_panel.ha_alarm
+                haptic: success
+                style: |
+                  ha-card {
+                    box-shadow: none;
+                  }
+            disarmed:
+              card:
+                type: custom:button-card
+                icon: mdi:shield-outline
+                size: 30%
+                tap_action:
+                  action: call-service
+                  service: alarm_control_panel.alarm_disarm
+                  service_data:
+                    entity_id: alarm_control_panel.ha_alarm
+                haptic: success
+                style: |
+                  ha-card {
+                    box-shadow: none;
+                  }
+          styles:
+            custom_fields:
+              armed:
+                - position: absolute
+                - left: 65%
+                - top: 70%
+                - height: 50px
+                - width: 50px
+              disarmed:
+                - position: absolute
+                - left: 50%
+                - top: 70%
+                - height: 50px
+                - width: 50px
+        - type: custom:button-card
+          entity: alarm_control_panel.aarlo_smarhub
+          icon: mdi:cctv
+          name: Arlo SmartHub
+          layout: icon_name_state
+          show_state: true
+          aspect_ratio: 4/1
+          state:
+            - value: armed_home
+              color: '#5CDF64'
+            - value: Home-Rain
+              color: '#33D4FF'
+            - value: Away-Night
+              color: '#FFC300'
+            - value: Away-Night-Rain
+              color: '#33D4FF'
+          custom_fields:
+            home:
+              card:
+                type: custom:button-card
+                icon: mdi:home
+                size: 30%
+                tap_action:
+                  action: call-service
+                  service: aarlo.alarm_set_mode
+                  service_data:
+                    entity_id: alarm_control_panel.aarlo_smarhub
+                    mode: home
+                haptic: success
+                style: |
+                  ha-card {
+                    box-shadow: none;
+                  }
+            away_night:
+              card:
+                type: custom:button-card
+                icon: mdi:bed
+                size: 30%
+                tap_action:
+                  action: call-service
+                  service: aarlo.alarm_set_mode
+                  service_data:
+                    entity_id: alarm_control_panel.aarlo_smarhub
+                    mode: away-night
+                haptic: success
+                style: |
+                  ha-card {
+                    box-shadow: none;
+                  }
+            rain:
+              card:
+                type: custom:button-card
+                icon: mdi:weather-rainy
+                size: 30%
+                tap_action:
+                  action: call-service
+                  service: script.toggle_rain_mode
+                  service_data:
+                    alarm: alarm_control_panel.aarlo_smarhub
+                haptic: success
+                style: |
+                  ha-card {
+                    box-shadow: none;
+                  }
+          styles:
+            custom_fields:
+              home:
+                - position: absolute
+                - left: 50%
+                - top: 70%
+                - height: 50px
+                - width: 50px
+              away_night:
+                - position: absolute
+                - left: 65%
+                - top: 70%
+                - height: 50px
+                - width: 50px
+              rain:
+                - position: absolute
+                - left: 80%
+                - top: 70%
+                - height: 50px
+                - width: 50px
+        - type: custom:auto-entities
+          card:
+            type: grid
+            columns: 3
+          card_param: cards
+          filter:
+            include:
+              - entity_id: light.aarlo*
+                options:
+                  type: custom:button-card
+                  aspect_ratio: 1/1
+                  haptic: success
+                  state:
+                    - value: 'off'
+                      color: var(--disabled-text-color)
+                    - value: 'on'
+                      color: '#FFF581'
+                  icon: mdi:flashlight
+    - type: custom:button-card
+      color_type: label-card
+      name: Outdoor Cameras                  
+    - type: vertical-stack
+      cards:
+      - type: custom:aarlo-glance
+        entity: camera.aarlo_backyard
+        name: Backyard
+        image_view: direct
+        image_top: name,status
+        image_bottom: motion,library,stream,snapshot,battery
+        image_click: recordings
+        library_sizes: 3,4,2
+        show:
+          - motion
+          - sound
+          - snapshot
+          - battery_level
+          - signal_strength
+          - captured_today
+          - image_date
+      - type: custom:aarlo-glance
+        entity: camera.aarlo_front_door
+        name: Front Door
+        image_view: direct
+        image_top: name,status
+        image_bottom: motion,library,stream,snapshot,battery
+        image_click: recordings
+        library_sizes: 3,4,2
+        show:
+          - motion
+          - sound
+          - snapshot
+          - battery_level
+          - signal_strength
+          - captured_today
+          - image_date
+      - type: custom:aarlo-glance
+        entity: camera.aarlo_garage
+        name: Garage
+        image_view: direct
+        image_top: name,status
+        image_bottom: motion,library,stream,snapshot,battery
+        image_click: recordings
+        library_sizes: 3,4,2
+        show:
+          - motion
+          - sound
+          - snapshot
+          - battery_level
+          - signal_strength
+          - captured_today
+          - image_date
+      - type: custom:aarlo-glance
+        entity: camera.aarlo_front_yard
+        name: Front Yard
+        image_view: direct
+        image_top: name,status
+        image_bottom: motion,library,stream,snapshot,battery
+        image_click: recordings
+        library_sizes: 3,4,2
+        show:
+          - motion
+          - sound
+          - snapshot
+          - battery_level
+          - signal_strength
+          - captured_today
+          - image_date
+      - type: custom:aarlo-glance
+        entity: camera.aarlo_driveway_floodlight
+        name: Driveway Floodlight
+        image_view: direct
+        image_top: name,status
+        image_bottom: motion,library,stream,snapshot,battery
+        image_click: recordings
+        library_sizes: 3,4,2
+        show:
+          - motion
+          - sound
+          - snapshot
+          - battery_level
+          - signal_strength
+          - captured_today
+          - image_date
+      - type: custom:aarlo-glance
+        entity: camera.aarlo_side_yard
+        name: Sideyard
+        image_view: direct
+        image_top: name,status
+        image_bottom: motion,library,stream,snapshot,battery
+        image_click: recordings
+        library_sizes: 3,4,2
+        show:
+          - motion
+          - sound
+          - snapshot
+          - battery_level
+          - signal_strength
+          - captured_today
+          - image_date
+    - type: custom:button-card
+      color_type: label-card
+      name: Indoor Cameras
+    - type: vertical-stack
+      cards:
+      - type: custom:webrtc-camera
+        url: rtsp://Ny9N44OhEdVO:Wy6KVb4JUS2a@10.0.0.40/live0
+        ui: true
+        title: Family Room Camera
+        mode: webrtc
+      - type: custom:webrtc-camera
+        url: rtsp://Nr7m2Htm7MYv:Vh4bSpSIfsm3@10.0.0.46/live0
+        ui: true
+        title: Livingroom Camera
+        mode: webrtc
+      - type: custom:webrtc-camera
+        url: rtsp://Trenton:Ba2gwo82@10.0.0.81/live
+        ui: true
+        title: Ryan's Room Camera
+        mode: webrtc
